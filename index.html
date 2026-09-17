@@ -3,31 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebCraft AI — Restaurant Website Template Showcase</title>
+  <title>WebCraft AI — Next-Gen AI Website Builder</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ==========================================================================
-       GLOBAL SAAS & RESTAURANT VARIABLES
+       1. MODERN SAAS DESIGN SYSTEM & COLOR TOKENS
        ========================================================================== */
     :root {
       --bg-dark: #07090e;
-      --bg-surface: #0f131d;
-      --bg-surface-elevated: #161c2b;
+      --bg-surface: #0e131f;
+      --bg-surface-elevated: #151b2c;
+      --bg-card: rgba(16, 22, 36, 0.75);
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: #e5b85c;
+      --border-glow: rgba(99, 102, 241, 0.35);
 
-      --gold: #e5b85c;
-      --gold-light: #fbe6a2;
-      --gold-dark: #9e782f;
-      --gold-gradient: linear-gradient(135deg, #fbe6a2 0%, #e5b85c 50%, #9e782f 100%);
-      
-      --accent-crimson: #c83232;
+      /* Multi-Color Palette */
+      --brand-indigo: #6366f1;
+      --brand-purple: #a855f7;
+      --brand-pink: #ec4899;
+      --gold: #f59e0b;
+      --gold-light: #fde68a;
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       --accent-emerald: #10b981;
+      --accent-crimson: #f43f5e;
       --accent-blue: #38bdf8;
 
       --text-main: #f8fafc;
@@ -40,12 +43,12 @@
       --font-royal: 'Cinzel', serif;
 
       --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
       --radius-full: 9999px;
 
-      --shadow-3d: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 25px rgba(229, 184, 92, 0.15);
-      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-3d: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(99, 102, 241, 0.15);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     *, *::before, *::after {
@@ -54,9 +57,7 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font-body);
@@ -68,17 +69,9 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-      cursor: pointer;
-      border: none;
-      outline: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+    input, select, textarea { font-family: inherit; }
 
     .container {
       width: 100%;
@@ -87,24 +80,33 @@
       padding: 0 24px;
     }
 
-    /* Ambient Background Glow */
+    /* Ambient Dynamic SaaS Glow */
     .ambient-glow {
       position: fixed;
-      width: 600px;
-      height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(229, 184, 92, 0.07) 0%, transparent 70%);
-      top: -150px;
-      right: -100px;
+      filter: blur(140px);
       z-index: -1;
       pointer-events: none;
+      opacity: 0.35;
+    }
+    .glow-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+    .glow-2 {
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+      bottom: 50px;
+      left: -120px;
     }
 
-    /* ==========================================================================
-       WEBCRAFT AI PORTAL BAR
-       ========================================================================== */
+    /* Top WebCraft Nav */
     .portal-bar {
-      background: rgba(7, 9, 14, 0.95);
+      background: rgba(7, 9, 14, 0.88);
       border-bottom: 1px solid var(--border-subtle);
       padding: 14px 0;
       position: sticky;
@@ -126,146 +128,274 @@
       font-size: 1.25rem;
     }
     .portal-icon {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-sm);
-      background: var(--gold-gradient);
+      background: linear-gradient(135deg, #6366f1, #a855f7);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #07090e;
+      color: #fff;
       font-weight: 900;
       font-size: 1.1rem;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
     }
-    .portal-tag {
+    .portal-badge {
       font-size: 0.75rem;
-      background: rgba(229, 184, 92, 0.12);
-      color: var(--gold);
-      border: 1px solid rgba(229, 184, 92, 0.25);
-      padding: 4px 10px;
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--accent-blue);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      padding: 4px 12px;
       border-radius: var(--radius-full);
       font-weight: 600;
     }
-    .portal-btn {
-      background: var(--gold-gradient);
-      color: #07090e;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 8px 18px;
-      border-radius: var(--radius-full);
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+
+    /* ==========================================================================
+       2. CREATION MODES SECTION (SIDE-BY-SIDE 4 CARDS, PRICING/SAAS STYLE)
+       ========================================================================== */
+    .creation-modes-sec {
+      padding: 40px 0 28px;
     }
-    .portal-btn:hover {
+    .sec-head {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .sec-head h2 {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .sec-head p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .modes-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .mode-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+    }
+    .mode-card.locked {
+      opacity: 0.55;
+      cursor: not-allowed;
+      filter: grayscale(15%);
+    }
+    .mode-card.active-mode {
+      border: 2px solid var(--brand-indigo);
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, rgba(14, 19, 31, 0.95) 100%);
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
       transform: translateY(-2px);
-      box-shadow: 0 4px 18px rgba(229, 184, 92, 0.4);
+    }
+    .mode-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .mode-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.05em;
+    }
+    .tag-coming {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-dim);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .tag-active {
+      background: var(--brand-indigo);
+      color: #fff;
+    }
+    .mode-icon {
+      font-size: 1.3rem;
+    }
+    .mode-title {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .mode-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .mode-btn {
+      width: 100%;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: var(--transition);
+      text-align: center;
+    }
+    .btn-locked {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-dim);
+      cursor: not-allowed;
+    }
+    .btn-active-glow {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+    .btn-active-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
     }
 
     /* ==========================================================================
-       HOMEPAGE CREATION MODES SECTION (MODES 1-3 LOCKED, 4 ACTIVE)
+       3. READY-MADE TEMPLATE SELECTOR (10 CARDS)
        ========================================================================== */
-    .portal-modes-strip {
-      padding: 30px 0 20px;
-      background: #090c13;
-      border-bottom: 1px solid var(--border-subtle);
+    .template-selector-sec {
+      padding: 10px 0 40px;
+      border-top: 1px solid var(--border-subtle);
     }
-    .modes-header-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-    }
-    .modes-grid {
+    .templates-grid-10 {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 16px;
+      margin-top: 18px;
     }
-    .mode-card {
+    .tmpl-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 16px;
-      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       transition: var(--transition);
+      position: relative;
     }
-    .mode-card.locked {
-      opacity: 0.45;
-      filter: grayscale(40%);
+    .tmpl-card.locked {
+      opacity: 0.55;
       cursor: not-allowed;
     }
-    .mode-card.active-mode {
+    .tmpl-card.available {
       border: 2px solid var(--gold);
-      background: linear-gradient(180deg, rgba(229, 184, 92, 0.08) 0%, rgba(15, 19, 29, 0.9) 100%);
-      box-shadow: 0 0 20px rgba(229, 184, 92, 0.15);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(14, 19, 31, 0.95) 100%);
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
-    .mode-pill {
-      font-size: 0.7rem;
+    .tmpl-card.available:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(245, 158, 11, 0.25);
+    }
+    .tmpl-thumb {
+      height: 110px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    .tmpl-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       padding: 2px 8px;
       border-radius: var(--radius-full);
-      display: inline-block;
-      margin-bottom: 6px;
     }
-    .pill-lock {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-dim);
-    }
-    .pill-active {
+    .badge-avail {
       background: var(--gold);
       color: #07090e;
     }
-    .mode-card-title {
-      font-size: 0.95rem;
+    .badge-soon {
+      background: rgba(0, 0, 0, 0.7);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .tmpl-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .tmpl-title {
+      font-size: 0.9rem;
       font-weight: 700;
       margin-bottom: 4px;
     }
-    .mode-card-desc {
-      font-size: 0.78rem;
+    .tmpl-desc {
+      font-size: 0.74rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      flex-grow: 1;
+    }
+    .btn-use-tmpl {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      text-align: center;
+      background: var(--gold-gradient);
+      color: #07090e;
     }
 
     /* ==========================================================================
-       DEMO RESTAURANT STYLES (CINEMATIC LUXURY 3D DESIGN)
+       4. RESTAURANT DEMO SHOWCASE STYLES
        ========================================================================== */
-    .demo-restaurant-wrap {
+    .demo-showcase-wrap {
       background: #08080a;
       color: #edecec;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
     }
 
     /* Sticky Restaurant Navigation */
     .rest-nav {
       position: sticky;
-      top: 63px;
+      top: 64px;
       z-index: 90;
-      background: rgba(8, 8, 10, 0.92);
+      background: rgba(8, 8, 10, 0.94);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      transition: var(--transition);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
     .rest-nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 76px;
+      height: 72px;
     }
-    .rest-brand {
+    .rest-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .rest-logo-img {
+      max-height: 40px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+    .rest-brand-text {
       display: flex;
       flex-direction: column;
     }
     .rest-name {
       font-family: var(--font-royal);
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       color: #fff;
     }
     .rest-tagline {
@@ -273,38 +403,29 @@
       font-family: var(--font-serif);
       font-style: italic;
       color: var(--gold);
-      letter-spacing: 0.04em;
     }
     .rest-links {
       display: flex;
-      gap: 26px;
+      gap: 22px;
       list-style: none;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       font-weight: 600;
       color: #aaa;
     }
-    .rest-links a:hover {
-      color: var(--gold);
-    }
-    .rest-nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .rest-links a:hover { color: var(--gold); }
 
-    /* Sticky CTA Buttons */
     .btn-gold {
       background: var(--gold-gradient);
       color: #07090e;
       font-weight: 700;
       padding: 10px 22px;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      box-shadow: 0 4px 15px rgba(229, 184, 92, 0.3);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
       transition: var(--transition);
       display: inline-flex;
       align-items: center;
@@ -312,115 +433,110 @@
     }
     .btn-gold:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(229, 184, 92, 0.5);
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.55);
     }
     .btn-outline-gold {
       background: transparent;
       border: 1px solid var(--gold);
       color: var(--gold);
       font-weight: 600;
-      padding: 10px 20px;
+      padding: 9px 18px;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       transition: var(--transition);
     }
     .btn-outline-gold:hover {
-      background: rgba(229, 184, 92, 0.1);
+      background: rgba(245, 158, 11, 0.12);
     }
 
-    /* Cinematic 3D Hero */
+    /* Cinematic Hero */
     .rest-hero {
       position: relative;
-      min-height: 88vh;
+      min-height: 84vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 24px;
+      padding: 70px 24px;
       background: linear-gradient(rgba(8, 8, 10, 0.65), rgba(8, 8, 10, 0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
       perspective: 1200px;
-      overflow: hidden;
     }
     .rest-hero-card {
-      max-width: 860px;
+      max-width: 840px;
       text-align: center;
-      background: rgba(15, 19, 29, 0.65);
-      border: 1px solid rgba(229, 184, 92, 0.25);
+      background: rgba(14, 19, 31, 0.72);
+      border: 1px solid rgba(245, 158, 11, 0.25);
       border-radius: var(--radius-lg);
-      padding: 56px 40px;
+      padding: 50px 36px;
       backdrop-filter: blur(20px);
-      box-shadow: var(--shadow-3d);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
       transform: rotateX(2deg);
-      transition: transform 0.6s ease;
+      transition: transform 0.5s ease;
     }
-    .rest-hero-card:hover {
-      transform: rotateX(0deg) translateY(-4px);
-    }
+    .rest-hero-card:hover { transform: rotateX(0deg) translateY(-4px); }
     .hero-eyebrow {
       font-family: var(--font-royal);
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.2em;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: block;
     }
     .hero-heading {
       font-family: var(--font-serif);
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
       font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 20px;
+      line-height: 1.12;
+      margin-bottom: 18px;
       color: #fff;
     }
     .hero-subtext {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: #ccc;
-      max-width: 620px;
-      margin: 0 auto 34px;
+      max-width: 600px;
+      margin: 0 auto 30px;
       font-weight: 300;
     }
     .hero-cta-group {
       display: flex;
       justify-content: center;
-      align-items: center;
       gap: 16px;
       flex-wrap: wrap;
     }
 
-    /* Section Foundations */
+    /* Common Section */
     .rest-section {
-      padding: 96px 0;
+      padding: 85px 0;
       position: relative;
     }
     .section-head {
       text-align: center;
       max-width: 680px;
-      margin: 0 auto 56px;
+      margin: 0 auto 46px;
     }
     .section-eyebrow {
       font-family: var(--font-royal);
       color: var(--gold);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .section-title {
       font-family: var(--font-serif);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
       color: #fff;
       font-weight: 700;
-      line-height: 1.2;
     }
 
     /* 3D About Section */
     .about-3d-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 50px;
       align-items: center;
     }
     .about-visual {
@@ -429,52 +545,33 @@
     }
     .about-main-img {
       width: 100%;
-      height: 440px;
+      height: 420px;
       object-fit: cover;
       border-radius: var(--radius-md);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      transform: rotateY(-5deg);
+      transform: rotateY(-4deg);
       transition: transform 0.5s ease;
     }
-    .about-visual:hover .about-main-img {
-      transform: rotateY(0deg);
-    }
-    .floating-accent-card {
-      position: absolute;
-      bottom: -25px;
-      right: -25px;
-      background: rgba(15, 19, 29, 0.85);
-      border: 1px solid var(--gold);
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    }
-    .floating-accent-card strong {
-      display: block;
-      font-size: 1.8rem;
-      font-family: var(--font-royal);
-      color: var(--gold);
-    }
+    .about-visual:hover .about-main-img { transform: rotateY(0deg); }
     .about-content h3 {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2rem;
       line-height: 1.3;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       color: #fff;
     }
     .about-content p {
       color: #aaa;
-      margin-bottom: 20px;
-      font-size: 1.05rem;
+      margin-bottom: 18px;
+      font-size: 1.02rem;
     }
 
-    /* Signature Dishes (CSS 3D Depth Cards) */
+    /* Signature Dishes (3D hover depth) */
     .dishes-3d-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      gap: 24px;
     }
     .dish-card-3d {
       background: #11141e;
@@ -485,12 +582,12 @@
       transform-style: preserve-3d;
     }
     .dish-card-3d:hover {
-      transform: translateY(-8px) rotateX(4deg);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 184, 92, 0.2);
-      border-color: rgba(229, 184, 92, 0.4);
+      transform: translateY(-8px) rotateX(3deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.4);
     }
     .dish-img-wrap {
-      height: 230px;
+      height: 220px;
       overflow: hidden;
       position: relative;
     }
@@ -500,35 +597,31 @@
       object-fit: cover;
       transition: transform 0.5s ease;
     }
-    .dish-card-3d:hover .dish-img-wrap img {
-      transform: scale(1.08);
-    }
+    .dish-card-3d:hover .dish-img-wrap img { transform: scale(1.08); }
     .dish-tag {
       position: absolute;
-      top: 14px;
-      right: 14px;
+      top: 12px;
+      right: 12px;
       background: rgba(8, 8, 10, 0.85);
       border: 1px solid var(--gold);
       color: var(--gold);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: var(--radius-full);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .dish-info {
-      padding: 24px;
-    }
+    .dish-info { padding: 22px; }
     .dish-title-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .dish-name {
       font-family: var(--font-serif);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
     }
@@ -536,28 +629,25 @@
       font-family: var(--font-royal);
       color: var(--gold);
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
     }
-    .dish-desc {
-      color: #8f95a5;
-      font-size: 0.88rem;
-    }
+    .dish-desc { color: #8f95a5; font-size: 0.86rem; }
 
     /* Full Menu & Category Tabs */
     .menu-tabs {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 48px;
+      gap: 10px;
+      margin-bottom: 40px;
       flex-wrap: wrap;
     }
     .menu-tab-btn {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border-subtle);
       color: #aaa;
-      padding: 10px 22px;
+      padding: 9px 20px;
       border-radius: var(--radius-full);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
       transition: var(--transition);
     }
@@ -569,11 +659,11 @@
     .menu-split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px 56px;
+      gap: 28px 50px;
     }
     .menu-entry {
       border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
-      padding-bottom: 16px;
+      padding-bottom: 14px;
       display: flex;
       flex-direction: column;
     }
@@ -585,173 +675,159 @@
     }
     .menu-entry-name {
       font-family: var(--font-serif);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #fff;
     }
     .menu-entry-price {
       font-family: var(--font-royal);
       color: var(--gold);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
     }
-    .menu-entry-desc {
-      color: #888;
-      font-size: 0.88rem;
+    .menu-entry-desc { color: #888; font-size: 0.85rem; }
+    .dish-chips {
+      display: flex;
+      gap: 6px;
+      margin-top: 5px;
     }
+    .chip {
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .chip-veg { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .chip-nonveg { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+    .chip-bestseller { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
 
-    /* Why Choose Us 3D Strip */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-    .feature-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 30px 22px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .feature-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-5px);
-    }
-    .feature-icon {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    .feature-title {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-    .feature-desc {
-      font-size: 0.85rem;
-      color: #9499aa;
-    }
-
-    /* Gallery Grid */
+    /* Gallery */
     .gallery-masonry {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 16px;
     }
     .gallery-item {
-      height: 260px;
+      height: 240px;
       border-radius: var(--radius-md);
       overflow: hidden;
-      position: relative;
     }
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.4s ease;
     }
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
+    .gallery-item:hover img { transform: scale(1.06); }
 
-    /* Testimonials Carousel / Grid */
+    /* Testimonials */
     .testi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
     .testi-card {
       background: #11141f;
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: var(--radius-md);
-      padding: 32px 26px;
-      position: relative;
+      padding: 28px 22px;
     }
     .testi-quote {
       font-family: var(--font-serif);
       font-style: italic;
       color: #ddd;
-      font-size: 1.05rem;
-      margin-bottom: 18px;
+      font-size: 1rem;
+      margin-bottom: 14px;
     }
     .testi-author {
-      font-family: var(--font-body);
       font-weight: 700;
       color: var(--gold);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
-    .testi-role {
-      font-size: 0.75rem;
-      color: #777;
-    }
+    .testi-role { font-size: 0.74rem; color: #777; }
 
     /* Hours & Location Cards */
     .hours-location-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      gap: 28px;
     }
     .info-box-3d {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 36px;
+      padding: 30px;
     }
     .info-box-3d h3 {
       font-family: var(--font-serif);
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--gold);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .info-row {
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 12px 0;
-      font-size: 0.95rem;
+      padding: 10px 0;
+      font-size: 0.92rem;
     }
 
-    /* Big Bottom Purchase Banner */
+    /* FAQ Section */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 18px 22px;
+    }
+    .faq-q { font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 0.95rem; }
+    .faq-a { color: var(--text-muted); font-size: 0.88rem; }
+
+    /* Bottom "Buy This Website" Banner */
     .purchase-banner {
-      background: linear-gradient(135deg, rgba(229, 184, 92, 0.12) 0%, rgba(15, 19, 29, 0.95) 100%);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(14, 19, 31, 0.95) 100%);
       border: 2px solid var(--gold);
       border-radius: var(--radius-lg);
-      padding: 60px 30px;
+      padding: 50px 24px;
       text-align: center;
-      box-shadow: var(--shadow-3d);
-      margin: 40px auto;
+      margin: 30px auto 50px;
+      max-width: 900px;
     }
     .purchase-banner h2 {
       font-family: var(--font-serif);
-      font-size: 2.5rem;
-      margin-bottom: 12px;
+      font-size: 2.3rem;
+      margin-bottom: 10px;
       color: #fff;
     }
     .purchase-banner p {
       color: #ccc;
-      max-width: 540px;
-      margin: 0 auto 30px;
-      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 26px;
+      font-size: 1rem;
     }
 
     /* Footer */
     .rest-footer {
       background: #040507;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 60px 0 30px;
+      padding: 50px 0 30px;
       text-align: center;
     }
     .footer-social-row {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      margin: 20px 0;
+      gap: 14px;
+      margin: 18px 0;
     }
     .social-circle {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-subtle);
@@ -760,16 +836,13 @@
       justify-content: center;
       color: var(--gold);
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       transition: var(--transition);
     }
-    .social-circle:hover {
-      background: var(--gold);
-      color: #000;
-    }
+    .social-circle:hover { background: var(--gold); color: #000; }
 
     /* ==========================================================================
-       BUY THIS WEBSITE MODAL (QUESTIONNAIRE OVERLAY)
+       5. BUY MODAL & GROUPED FORM UX
        ========================================================================== */
     .buy-modal-overlay {
       position: fixed;
@@ -779,9 +852,7 @@
       overflow-y: auto;
       display: none;
     }
-    .buy-modal-overlay.active {
-      display: block;
-    }
+    .buy-modal-overlay.active { display: block; }
     .buy-header {
       position: sticky;
       top: 0;
@@ -791,11 +862,11 @@
       z-index: 20;
     }
     .buy-header-inner {
-      height: 74px;
+      height: 70px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -803,169 +874,189 @@
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border-subtle);
       color: #fff;
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       transition: var(--transition);
     }
-    .close-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
+    .close-btn:hover { background: rgba(255, 255, 255, 0.15); }
 
     .form-wrap {
-      max-width: 860px;
-      margin: 40px auto 100px;
+      max-width: 900px;
+      margin: 30px auto 90px;
       padding: 0 24px;
     }
-    .form-card-step {
+
+    /* Accordion / Grouped Sections */
+    .acc-group {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 32px;
-      margin-bottom: 28px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: var(--transition);
     }
-    .form-step-title {
+    .acc-group.open {
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+    .acc-header {
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .acc-title {
       font-family: var(--font-display);
-      font-size: 1.3rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      margin-bottom: 6px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .acc-chevron {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      transition: transform 0.25s ease;
+    }
+    .acc-group.open .acc-chevron {
+      transform: rotate(180deg);
       color: var(--gold);
     }
-    .form-step-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
+    .acc-body {
+      padding: 22px;
+      border-top: 1px solid var(--border-subtle);
+      display: none;
     }
-    .form-group {
-      margin-bottom: 20px;
+    .acc-group.open .acc-body {
+      display: block;
+      animation: fadeIn 0.2s ease;
     }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Controls */
+    .form-group { margin-bottom: 18px; }
     .form-label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #fff;
     }
-    .form-label .req {
-      color: var(--accent-crimson);
-    }
+    .form-label .req { color: var(--accent-crimson); }
     .form-input, .form-textarea, .form-select {
       width: 100%;
       background: #080a10;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm);
-      padding: 14px 16px;
+      padding: 12px 14px;
       color: #fff;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       transition: var(--transition);
     }
     .form-input:focus, .form-textarea:focus, .form-select:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(229, 184, 92, 0.15);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
       outline: none;
     }
-    .form-input.input-error {
-      border-color: var(--accent-crimson);
-    }
+    .form-input.input-error { border-color: var(--accent-crimson); }
     .field-error {
       color: var(--accent-crimson);
-      font-size: 0.78rem;
-      margin-top: 5px;
+      font-size: 0.75rem;
+      margin-top: 4px;
       display: none;
     }
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     .form-row-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     .checkbox-label {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.88rem;
+      gap: 8px;
+      font-size: 0.84rem;
       cursor: pointer;
       color: var(--text-muted);
       user-select: none;
     }
-    .checkbox-label input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--gold);
-    }
+    .checkbox-label input { width: 16px; height: 16px; accent-color: var(--gold); }
 
     /* Dynamic Menu Builder */
     .menu-cat-card {
       background: #090c13;
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      margin-bottom: 20px;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 14px;
     }
     .menu-cat-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
     .dish-row-builder {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm);
-      padding: 14px;
-      margin-bottom: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
       display: grid;
       grid-template-columns: 2fr 1fr auto;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
     }
     .btn-delete {
-      background: rgba(200, 50, 50, 0.1);
-      border: 1px solid rgba(200, 50, 50, 0.3);
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
       color: #ff6b6b;
-      padding: 8px 14px;
+      padding: 6px 12px;
       border-radius: var(--radius-sm);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
       transition: var(--transition);
     }
-    .btn-delete:hover {
-      background: rgba(200, 50, 50, 0.2);
-    }
+    .btn-delete:hover { background: rgba(244, 63, 94, 0.2); }
 
     /* Image Preview Thumbnails */
     .upload-zone {
       border: 2px dashed var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 30px;
+      padding: 24px;
       text-align: center;
       cursor: pointer;
       background: #080a10;
       transition: var(--transition);
     }
-    .upload-zone:hover {
-      border-color: var(--gold);
-    }
+    .upload-zone:hover { border-color: var(--gold); }
     .thumbs-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 16px;
+      gap: 10px;
+      margin-top: 14px;
     }
     .thumb-item {
       position: relative;
-      height: 110px;
+      height: 95px;
       border-radius: var(--radius-sm);
       overflow: hidden;
       border: 1px solid var(--border-subtle);
@@ -977,46 +1068,60 @@
     }
     .thumb-del {
       position: absolute;
-      top: 6px;
-      right: 6px;
+      top: 5px;
+      right: 5px;
       background: rgba(0, 0, 0, 0.75);
       color: #fff;
       border-radius: 50%;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       cursor: pointer;
     }
 
-    /* Submit CTA */
-    .submit-cta-box {
-      text-align: center;
-      margin-top: 36px;
+    /* Final Review Box */
+    .review-summary-card {
+      background: #090c13;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
     }
-    .btn-submit-large {
+    .rev-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+    }
+    .rev-row:last-child { border-bottom: none; }
+    .rev-label { color: var(--text-muted); }
+    .rev-val { font-weight: 600; text-align: right; max-width: 65%; }
+
+    .btn-finalize {
       background: var(--gold-gradient);
       color: #07090e;
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 800;
-      padding: 18px 48px;
-      border-radius: var(--radius-md);
-      box-shadow: 0 10px 30px rgba(229, 184, 92, 0.4);
+      padding: 16px 36px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
       transition: var(--transition);
       display: inline-flex;
       align-items: center;
       gap: 10px;
     }
-    .btn-submit-large:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(229, 184, 92, 0.6);
+    .btn-finalize:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(245, 158, 11, 0.6);
     }
 
     /* ==========================================================================
-       TRANSITION SPINNER OVERLAY (SHORT 500-800ms)
+       6. SHORT 0.5-1s TRANSITION LOADER
        ========================================================================== */
     .fast-loader-overlay {
       position: fixed;
@@ -1030,24 +1135,20 @@
       text-align: center;
       backdrop-filter: blur(12px);
     }
-    .fast-loader-overlay.active {
-      display: flex;
-    }
+    .fast-loader-overlay.active { display: flex; }
     .pulse-gold-ring {
-      width: 64px;
-      height: 64px;
-      border: 4px solid rgba(229, 184, 92, 0.2);
+      width: 54px;
+      height: 54px;
+      border: 3px solid rgba(245, 158, 11, 0.2);
       border-top-color: var(--gold);
       border-radius: 50%;
       animation: spinRing 0.7s linear infinite;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
-    @keyframes spinRing {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
 
     /* ==========================================================================
-       FINAL CUSTOMER WEBSITE PREVIEW BAR
+       7. FINAL CUSTOMER SITE TOOLBAR & VIEWPORT
        ========================================================================== */
     .final-toolbar {
       position: sticky;
@@ -1060,23 +1161,13 @@
       justify-content: space-between;
       align-items: center;
     }
-    .final-toolbar.active {
-      display: flex;
-    }
-    .final-status-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      color: #fff;
-      font-size: 0.95rem;
-    }
+    .final-toolbar.active { display: flex; }
     .status-dot {
       width: 10px;
       height: 10px;
       background: var(--accent-emerald);
       border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
     }
     .viewport-btn-group {
       display: flex;
@@ -1088,9 +1179,9 @@
     .vp-btn {
       background: transparent;
       color: var(--text-muted);
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 4px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       transition: var(--transition);
     }
@@ -1103,46 +1194,106 @@
       display: flex;
       justify-content: center;
       background: #030406;
-      min-height: calc(100vh - 65px);
+      min-height: calc(100vh - 60px);
       transition: var(--transition);
     }
     .canvas-desktop { width: 100%; }
     .canvas-tablet {
       width: 768px;
-      margin: 30px auto;
+      margin: 24px auto;
       border: 8px solid #1a1a24;
-      border-radius: 28px;
+      border-radius: 24px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.9);
       overflow: hidden;
     }
     .canvas-mobile {
       width: 380px;
-      margin: 30px auto;
+      margin: 24px auto;
       border: 8px solid #1a1a24;
-      border-radius: 32px;
+      border-radius: 28px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.9);
       overflow: hidden;
     }
 
-    /* Final Bottom Bar */
-    .final-bottom-bar {
-      background: #07090e;
-      border-top: 1px solid var(--border-subtle);
-      padding: 40px 24px;
+    /* ==========================================================================
+       8. DOMAIN / PAYMENT FLOW MODALS
+       ========================================================================== */
+    .flow-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(14px);
+      z-index: 2500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .flow-modal.active { display: flex; }
+    .flow-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      max-width: 500px;
+      width: 100%;
+      padding: 32px;
       text-align: center;
+      position: relative;
+    }
+    .flow-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .flow-box p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    /* Progress Countdown in Domain Simulation */
+    .progress-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6366f1, #10b981);
+      transition: width 0.3s linear;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-surface-elevated);
+      color: #fff;
+      border: 1px solid var(--border-subtle);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 4000;
+      display: none;
     }
 
     /* Responsiveness */
     @media (max-width: 1024px) {
-      .modes-grid { grid-template-columns: repeat(2, 1fr); }
+      .modes-row { grid-template-columns: repeat(2, 1fr); }
+      .templates-grid-10 { grid-template-columns: repeat(3, 1fr); }
       .about-3d-grid, .menu-split-grid, .hours-location-wrap { grid-template-columns: 1fr; }
-      .dishes-3d-grid, .testi-grid, .features-grid { grid-template-columns: 1fr; }
-      .gallery-masonry { grid-template-columns: repeat(2, 1fr); }
+      .dishes-3d-grid, .testi-grid, .gallery-masonry { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
-      .modes-grid { grid-template-columns: 1fr; }
+      .modes-row { grid-template-columns: 1fr; }
+      .templates-grid-10 { grid-template-columns: repeat(2, 1fr); }
       .form-row, .form-row-3 { grid-template-columns: 1fr; }
-      .thumbs-grid { grid-template-columns: repeat(2, 1fr); }
       .rest-links { display: none; }
       .dish-row-builder { grid-template-columns: 1fr; }
     }
@@ -1150,10 +1301,11 @@
 </head>
 <body>
 
-  <div class="ambient-glow"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
 
   <!-- ==========================================================================
-       TOP WEBCRAFT AI PORTAL NAVIGATION
+       TOP WEBCRAFT AI PORTAL BAR
        ========================================================================== -->
   <div class="portal-bar" id="portalBar">
     <div class="container portal-inner">
@@ -1161,64 +1313,205 @@
         <div class="portal-icon">W</div>
         <span>WebCraft AI</span>
       </div>
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <span class="portal-tag">Live Template Demonstration</span>
-        <button class="portal-btn" onclick="openBuyModal()">
-          <span>Buy This Website</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="portal-badge">Templates Mode Active</span>
+        <button class="btn-gold" onclick="openBuyModal()" style="padding: 8px 18px; font-size: 0.8rem;">
+          Buy This Website
         </button>
       </div>
     </div>
   </div>
 
   <!-- ==========================================================================
-       CREATION MODES BAR (MODES 1-3 LOCKED, 4 ACTIVE)
-       ========================================================================== */
-  <div class="portal-modes-strip" id="modesStrip">
+       1. CREATION MODES SECTION (SIDE-BY-SIDE 4 CARDS)
+       ========================================================================== -->
+  <section class="creation-modes-sec" id="modesSection">
     <div class="container">
-      <div class="modes-header-title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        <span>Creation Modes</span>
+      <div class="sec-head">
+        <h2>Choose How You Want to Build</h2>
+        <p>Pick from detailed customization, single-sentence prompts, modular options, or ready-made templates.</p>
       </div>
-      <div class="modes-grid">
-        <!-- 1. Full Details (Locked) -->
+
+      <div class="modes-row">
+        <!-- Card 1: Full Details (Locked) -->
         <div class="mode-card locked" title="Coming soon">
-          <span class="mode-pill pill-lock">🔒 Coming Soon</span>
-          <div class="mode-card-title">Full Details</div>
-          <div class="mode-card-desc">Detailed step-by-step custom wizard.</div>
+          <div class="mode-top">
+            <span class="mode-tag tag-coming">🔒 Coming Soon</span>
+            <span class="mode-icon">📋</span>
+          </div>
+          <div class="mode-title">Full Details</div>
+          <div class="mode-desc">Step-by-step custom wizard for full granular website setup.</div>
+          <button class="mode-btn btn-locked" disabled>Coming Soon</button>
         </div>
 
-        <!-- 2. Single Line (Locked) -->
+        <!-- Card 2: Single Line (Locked) -->
         <div class="mode-card locked" title="Coming soon">
-          <span class="mode-pill pill-lock">🔒 Coming Soon</span>
-          <div class="mode-card-title">Single Line</div>
-          <div class="mode-card-desc">AI sentence prompt generation.</div>
+          <div class="mode-top">
+            <span class="mode-tag tag-coming">🔒 Coming Soon</span>
+            <span class="mode-icon">⚡</span>
+          </div>
+          <div class="mode-title">Single Line</div>
+          <div class="mode-desc">Describe your website in one sentence with AI extraction.</div>
+          <button class="mode-btn btn-locked" disabled>Coming Soon</button>
         </div>
 
-        <!-- 3. Build with Options (Locked) -->
+        <!-- Card 3: Build with Options (Locked) -->
         <div class="mode-card locked" title="Coming soon">
-          <span class="mode-pill pill-lock">🔒 Coming Soon</span>
-          <div class="mode-card-title">Build with Options</div>
-          <div class="mode-card-desc">Pick custom modular sections.</div>
+          <div class="mode-top">
+            <span class="mode-tag tag-coming">🔒 Coming Soon</span>
+            <span class="mode-icon">🎛️</span>
+          </div>
+          <div class="mode-title">Build with Options</div>
+          <div class="mode-desc">Modular selector to pick custom sections and assets.</div>
+          <button class="mode-btn btn-locked" disabled>Coming Soon</button>
         </div>
 
-        <!-- 4. Ready-Made Templates (Active) -->
+        <!-- Card 4: Ready-Made Templates (Active) -->
         <div class="mode-card active-mode">
-          <span class="mode-pill pill-active">Active Showcase</span>
-          <div class="mode-card-title">Ready-Made Templates</div>
-          <div class="mode-card-desc">Modern Restaurant Live Showcase.</div>
+          <div class="mode-top">
+            <span class="mode-tag tag-active">Active Experience</span>
+            <span class="mode-icon">🏛️</span>
+          </div>
+          <div class="mode-title">Ready-Made Templates</div>
+          <div class="mode-desc">Professionally crafted industry designs customized instantly.</div>
+          <button class="mode-btn btn-active-glow" onclick="scrollToTemplateSelector()">Choose Template &darr;</button>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ==========================================================================
-       FINAL CUSTOMER SITE TOOLBAR (HIDDEN UNTIL INSTANT CREATION)
+       2. READY-MADE TEMPLATE SELECTION (10 CARDS)
+       ========================================================================== -->
+  <section class="template-selector-sec" id="templateSelectorSec">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px;">
+        <h3 style="font-family: var(--font-display); font-size: 1.3rem;">Explore 10 Industry Templates</h3>
+        <span style="font-size: 0.8rem; color: var(--gold);">Restaurant Template Available</span>
+      </div>
+
+      <div class="templates-grid-10">
+        <!-- 1. Restaurant (AVAILABLE) -->
+        <div class="tmpl-card available" onclick="scrollToShowcase()">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-avail">Available</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">1. Restaurant</div>
+            <div class="tmpl-desc">Luxury dining showcase, menu & reservations.</div>
+            <div class="btn-use-tmpl">View Live Demo &rarr;</div>
+          </div>
+        </div>
+
+        <!-- 2. Photographer (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">2. Photographer</div>
+            <div class="tmpl-desc">Visual portfolio & booking client gallery.</div>
+          </div>
+        </div>
+
+        <!-- 3. Bakery (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">3. Bakery</div>
+            <div class="tmpl-desc">Artisan breads, custom cakes & ordering.</div>
+          </div>
+        </div>
+
+        <!-- 4. College / Institute (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">4. College / Institute</div>
+            <div class="tmpl-desc">Academics, admissions & campus tour.</div>
+          </div>
+        </div>
+
+        <!-- 5. Business / Company (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">5. Business / Company</div>
+            <div class="tmpl-desc">Corporate services, teams & case studies.</div>
+          </div>
+        </div>
+
+        <!-- 6. Salon (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">6. Salon</div>
+            <div class="tmpl-desc">Hair, spa styling & appointment schedules.</div>
+          </div>
+        </div>
+
+        <!-- 7. Hotel / Resort (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">7. Hotel / Resort</div>
+            <div class="tmpl-desc">Suites, amenities & room reservations.</div>
+          </div>
+        </div>
+
+        <!-- 8. Clinic / Doctor (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">8. Clinic / Doctor</div>
+            <div class="tmpl-desc">Healthcare consultations & doctor timings.</div>
+          </div>
+        </div>
+
+        <!-- 9. Portfolio / Freelancer (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">9. Portfolio</div>
+            <div class="tmpl-desc">Developer & designer personal showcases.</div>
+          </div>
+        </div>
+
+        <!-- 10. Shop / Boutique (Locked) -->
+        <div class="tmpl-card locked">
+          <div class="tmpl-thumb" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=500&q=80');">
+            <span class="tmpl-badge badge-soon">Coming Soon</span>
+          </div>
+          <div class="tmpl-body">
+            <div class="tmpl-title">10. Shop / Boutique</div>
+            <div class="tmpl-desc">Retail storefront catalog & inquiry cart.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FINAL CUSTOMER SITE TOOLBAR (ACTIVE AFTER GENERATION)
        ========================================================================== -->
   <div class="final-toolbar" id="finalToolbar">
-    <div class="final-status-badge">
+    <div style="display: flex; align-items: center; gap: 10px;">
       <div class="status-dot"></div>
-      <span>Your Website Is Ready</span>
+      <span style="font-weight: 700; color: #fff; font-size: 0.92rem;">Your Website Is Ready</span>
     </div>
 
     <div class="viewport-btn-group">
@@ -1228,227 +1521,384 @@
     </div>
 
     <div>
-      <button class="btn-outline-gold" onclick="openBuyModal()" style="padding: 6px 14px; font-size: 0.8rem;">Edit Details</button>
+      <button class="btn-outline-gold" onclick="openBuyModal()" style="padding: 6px 14px; font-size: 0.78rem;">Edit Details</button>
     </div>
   </div>
 
   <!-- ==========================================================================
-       MAIN RESTAURANT WEBSITE SHOWCASE CONTAINER
+       CANVAS WRAPPER (FOR DEMO OR CUSTOMER WEBSITE)
        ========================================================================== -->
   <div class="viewport-canvas-wrap" id="viewportWrap">
     <div class="canvas-desktop" id="siteCanvas">
-      <!-- RESTAURANT WEBSITE INJECTED HERE (DEMO OR CUSTOMER DATA) -->
-      <div class="demo-restaurant-wrap" id="restaurantMount"></div>
+      <div class="demo-showcase-wrap" id="restaurantMount">
+        <!-- Rendered restaurant showcase dynamically injected here -->
+      </div>
     </div>
   </div>
 
   <!-- ==========================================================================
-       BUY THIS WEBSITE MODAL (FULL-SCREEN FOCUSED QUESTIONNAIRE)
+       5. BUY MODAL (GROUPED ACCORDION FORM WITH ZERO PRELOADED CUSTOMER DATA)
        ========================================================================== -->
   <div class="buy-modal-overlay" id="buyModalOverlay">
     <div class="buy-header">
       <div class="buy-header-inner">
         <div>
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem;">Make This Restaurant Website Yours</h3>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">Enter your details and we'll instantly replace the demo content with your information.</p>
+          <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">Make This Restaurant Website Yours</h3>
+          <p style="font-size: 0.78rem; color: var(--text-muted);">Enter your restaurant details. We'll replace the demo content with your information.</p>
         </div>
         <button class="close-btn" onclick="closeBuyModal()">&times;</button>
       </div>
     </div>
 
     <div class="form-wrap">
-      <form id="customerForm" onsubmit="handleCustomerFormSubmit(event)">
-        
-        <!-- STEP 1 — BUSINESS DETAILS -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 1 — Business Details</div>
-          <div class="form-step-sub">Provide your brand identity.</div>
+      <form id="customerForm" onsubmit="handleFormSubmit(event)">
 
-          <div class="form-group">
-            <label class="form-label">Restaurant / Business Name <span class="req">*</span></label>
-            <input type="text" id="cust_name" class="form-input" placeholder="e.g. Royal Spice Restaurant" />
-            <div class="field-error" id="err_cust_name">Business name is required.</div>
+        <!-- Group 1: Business Details -->
+        <div class="acc-group open" id="grp1">
+          <div class="acc-header" onclick="toggleAccordion('grp1')">
+            <span class="acc-title">1. Business Details</span>
+            <span class="acc-chevron">&#9660;</span>
           </div>
-
-          <div class="form-group">
-            <label class="form-label">Tagline</label>
-            <input type="text" id="cust_tagline" class="form-input" placeholder="e.g. Experience royal flavours and artisanal perfection." />
-          </div>
-
-          <div class="form-row">
+          <div class="acc-body">
             <div class="form-group">
-              <label class="form-label">Restaurant Type</label>
-              <select id="cust_type" class="form-select">
-                <option value="Fine Dining">Fine Dining</option>
-                <option value="Casual Dining">Casual Dining</option>
-                <option value="Bistro & Cafe">Bistro & Cafe</option>
-                <option value="Bar & Grill">Bar & Grill</option>
-                <option value="Bakery & Confectionery">Bakery & Confectionery</option>
-                <option value="Family Restaurant">Family Restaurant</option>
-              </select>
+              <label class="form-label">Restaurant / Business Name <span class="req">*</span></label>
+              <input type="text" id="cust_name" class="form-input" placeholder="e.g. Royal Spice Restaurant" />
+              <div class="field-error" id="err_cust_name">Business name is required.</div>
             </div>
+
             <div class="form-group">
-              <label class="form-label">Cuisine Type</label>
-              <input type="text" id="cust_cuisine" class="form-input" placeholder="e.g. North Indian & Mughlai" />
+              <label class="form-label">Tagline</label>
+              <input type="text" id="cust_tagline" class="form-input" placeholder="e.g. Taste the Royal Heritage." />
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label class="form-label">Restaurant Type</label>
+                <select id="cust_type" class="form-select">
+                  <option value="">Select Restaurant Type</option>
+                  <option value="Fine Dining">Fine Dining</option>
+                  <option value="Casual Dining">Casual Dining</option>
+                  <option value="Bistro & Cafe">Bistro & Cafe</option>
+                  <option value="Bar & Grill">Bar & Grill</option>
+                  <option value="Bakery & Patisserie">Bakery & Patisserie</option>
+                  <option value="Family Restaurant">Family Restaurant</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cuisine Type</label>
+                <input type="text" id="cust_cuisine" class="form-input" placeholder="e.g. Hyderabadi & North Indian" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Established Year</label>
+                <input type="text" id="cust_est" class="form-input" placeholder="e.g. 2014" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Culinary Specialty</label>
+              <input type="text" id="cust_specialty" class="form-input" placeholder="e.g. Authentic Dum Biryani & Charcoal Kebabs" />
             </div>
           </div>
         </div>
 
-        <!-- STEP 2 — CONTACT DETAILS -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 2 — Contact Details</div>
-          <div class="form-step-sub">Ways for guests to reach and reserve.</div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Mobile Number</label>
-              <input type="tel" id="cust_phone" class="form-input" placeholder="e.g. 9849012345" oninput="syncWhatsAppPhone()" />
-              <div class="field-error" id="err_cust_phone">Please enter a valid phone number.</div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">WhatsApp Number</label>
-              <input type="tel" id="cust_whatsapp" class="form-input" placeholder="e.g. 9849012345" />
-            </div>
+        <!-- Group 2: Contact Details -->
+        <div class="acc-group" id="grp2">
+          <div class="acc-header" onclick="toggleAccordion('grp2')">
+            <span class="acc-title">2. Contact Details</span>
+            <span class="acc-chevron">&#9660;</span>
           </div>
-
-          <div class="form-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="cust_same_wa" onchange="toggleSamePhoneCheckbox()" />
-              <span>WhatsApp number is same as mobile</span>
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" id="cust_email" class="form-input" placeholder="e.g. info@royalspice.com" />
-            <div class="field-error" id="err_cust_email">Please enter a valid email address.</div>
-          </div>
-        </div>
-
-        <!-- STEP 3 — LOCATION -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 3 — Location</div>
-          <div class="form-step-sub">Where customers can dine with you.</div>
-
-          <div class="form-group">
-            <label class="form-label">Location / Address <span class="req">*</span></label>
-            <input type="text" id="cust_address" class="form-input" placeholder="e.g. Shop 12, High Street, Near Clock Tower" />
-            <div class="field-error" id="err_cust_address">Location / Address is required.</div>
-          </div>
-
-          <div class="form-row-3">
-            <div class="form-group">
-              <label class="form-label">City</label>
-              <input type="text" id="cust_city" class="form-input" placeholder="e.g. Narayanpet" />
+          <div class="acc-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Mobile Number</label>
+                <input type="tel" id="cust_phone" class="form-input" placeholder="e.g. +91 98765 43210" oninput="syncWhatsApp()" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp Number</label>
+                <input type="tel" id="cust_whatsapp" class="form-input" placeholder="e.g. 9876543210" />
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">State</label>
-              <input type="text" id="cust_state" class="form-input" placeholder="e.g. Telangana" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">PIN Code</label>
-              <input type="text" id="cust_pincode" class="form-input" placeholder="e.g. 509210" />
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label class="form-label">Google Maps Link</label>
-            <input type="url" id="cust_maps" class="form-input" placeholder="e.g. https://maps.google.com/..." />
-            <div class="field-error" id="err_cust_maps">Please enter a valid URL.</div>
-          </div>
-        </div>
-
-        <!-- STEP 4 — BUSINESS INFORMATION -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 4 — Business Information</div>
-          <div class="form-step-sub">Timings and restaurant story.</div>
-
-          <div class="form-group">
-            <label class="form-label">About Restaurant</label>
-            <textarea id="cust_about" class="form-textarea" rows="4" placeholder="Tell visitors about your dining philosophy, culinary background, and heritage..."></textarea>
-          </div>
-
-          <div class="form-row-3">
             <div class="form-group">
-              <label class="form-label">Opening Time</label>
-              <input type="text" id="cust_open_time" class="form-input" placeholder="e.g. 11:30 AM" />
+              <label class="checkbox-label">
+                <input type="checkbox" id="cust_same_wa" onchange="toggleSameWhatsApp()" />
+                <span>WhatsApp number is same as mobile</span>
+              </label>
             </div>
-            <div class="form-group">
-              <label class="form-label">Closing Time</label>
-              <input type="text" id="cust_close_time" class="form-input" placeholder="e.g. 11:00 PM" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Working Days</label>
-              <input type="text" id="cust_working_days" class="form-input" placeholder="e.g. Tuesday – Sunday" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="cust_email" class="form-input" placeholder="e.g. contact@royalspice.in" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Telephone / Landline</label>
+                <input type="text" id="cust_telephone" class="form-input" placeholder="e.g. 040-2345678" />
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- STEP 5 — MENU -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 5 — Menu</div>
-          <div class="form-step-sub">Build your food categories and dishes. (Starts empty, no dummy data).</div>
-
-          <div id="dynamicMenuBuilder"></div>
-
-          <button type="button" class="btn-outline-gold" onclick="addNewCategoryForm()" style="width: 100%; border-style: dashed; padding: 14px; margin-top: 10px;">
-            + Add Category
-          </button>
-        </div>
-
-        <!-- STEP 6 — IMAGES -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 6 — Images</div>
-          <div class="form-step-sub">Upload your official restaurant photos (Max 12 images).</div>
-
-          <div class="form-group">
-            <label class="form-label">Restaurant Logo</label>
-            <input type="file" id="custLogoInput" accept="image/*" class="form-input" onchange="handleLogoChange(this)" />
-            <div id="logoThumbPreview" style="margin-top: 10px; display: none;">
-              <img id="logoThumbImg" src="" style="height: 50px; border-radius: 6px; object-fit: contain;" alt="Logo" />
-            </div>
+        <!-- Group 3: Location -->
+        <div class="acc-group" id="grp3">
+          <div class="acc-header" onclick="toggleAccordion('grp3')">
+            <span class="acc-title">3. Location</span>
+            <span class="acc-chevron">&#9660;</span>
           </div>
-
-          <div class="form-group">
-            <label class="form-label">Gallery Photos</label>
-            <div class="upload-zone" onclick="document.getElementById('custGalleryInput').click()">
-              <div style="font-size: 2rem; margin-bottom: 6px;">📸</div>
-              <strong>Click to upload your restaurant photos</strong>
-              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">PNG, JPG, WEBP up to 12 files</div>
-            </div>
-            <input type="file" id="custGalleryInput" accept="image/*" multiple style="display: none;" onchange="handleGalleryChange(this)" />
-            <div class="thumbs-grid" id="galleryThumbsGrid"></div>
-          </div>
-        </div>
-
-        <!-- STEP 7 — SOCIAL LINKS -->
-        <div class="form-card-step">
-          <div class="form-step-title">Step 7 — Social Links</div>
-          <div class="form-step-sub">Optional social platforms.</div>
-
-          <div class="form-row-3">
+          <div class="acc-body">
             <div class="form-group">
-              <label class="form-label">Instagram</label>
-              <input type="url" id="cust_insta" class="form-input" placeholder="https://instagram.com/..." />
+              <label class="form-label">Address <span class="req">*</span></label>
+              <input type="text" id="cust_address" class="form-input" placeholder="e.g. Plot 42, Road 36, Jubilee Hills" />
+              <div class="field-error" id="err_cust_address">Address is required.</div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Facebook</label>
-              <input type="url" id="cust_fb" class="form-input" placeholder="https://facebook.com/..." />
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label class="form-label">City</label>
+                <input type="text" id="cust_city" class="form-input" placeholder="e.g. Hyderabad" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">State</label>
+                <input type="text" id="cust_state" class="form-input" placeholder="e.g. Telangana" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">PIN Code</label>
+                <input type="text" id="cust_pincode" class="form-input" placeholder="e.g. 500033" />
+              </div>
             </div>
+
             <div class="form-group">
-              <label class="form-label">YouTube</label>
-              <input type="url" id="cust_yt" class="form-input" placeholder="https://youtube.com/..." />
+              <label class="form-label">Google Maps Link</label>
+              <input type="url" id="cust_maps" class="form-input" placeholder="https://maps.google.com/..." />
             </div>
           </div>
         </div>
 
-        <!-- SUBMIT CTA -->
-        <div class="submit-cta-box">
-          <button type="submit" class="btn-submit-large">
-            <span>Create My Website</span>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">No coding required. Instant live rendering.</div>
+        <!-- Group 4: Hours & Schedule -->
+        <div class="acc-group" id="grp4">
+          <div class="acc-header" onclick="toggleAccordion('grp4')">
+            <span class="acc-title">4. Hours & Working Days</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-row-3">
+              <div class="form-group">
+                <label class="form-label">Working Days</label>
+                <input type="text" id="cust_working_days" class="form-input" placeholder="e.g. Tuesday – Sunday (Closed Mondays)" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Opening Time</label>
+                <input type="text" id="cust_open_time" class="form-input" placeholder="e.g. 11:30 AM" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Closing Time</label>
+                <input type="text" id="cust_close_time" class="form-input" placeholder="e.g. 11:00 PM" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 5: About & Story -->
+        <div class="acc-group" id="grp5">
+          <div class="acc-header" onclick="toggleAccordion('grp5')">
+            <span class="acc-title">5. About & Story</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-group">
+              <label class="form-label">About Restaurant / Brand Story</label>
+              <textarea id="cust_about" class="form-textarea" rows="4" placeholder="Tell visitors about your culinary heritage, clay oven recipes and dining experience..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 6: Dynamic Menu Builder -->
+        <div class="acc-group" id="grp6">
+          <div class="acc-header" onclick="toggleAccordion('grp6')">
+            <span class="acc-title">6. Menu Builder</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Add your food categories and dishes. Starts empty; only your entries appear on the website.</div>
+            <div id="menuBuilderList"></div>
+            <button type="button" class="btn-outline-gold" onclick="addMenuCategoryForm()" style="width: 100%; border-style: dashed; padding: 12px; margin-top: 6px;">
+              + Add Category
+            </button>
+          </div>
+        </div>
+
+        <!-- Group 7: Ordering & Reservation -->
+        <div class="acc-group" id="grp7">
+          <div class="acc-header" onclick="toggleAccordion('grp7')">
+            <span class="acc-title">7. Ordering & Reservation</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Online Order / Delivery Link (Zomato/Swiggy/Website)</label>
+                <input type="url" id="cust_order_url" class="form-input" placeholder="https://..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Reservation Booking Phone or Link</label>
+                <input type="text" id="cust_res_link" class="form-input" placeholder="e.g. +91 98765 43210 or https://..." />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Reservation Note</label>
+              <input type="text" id="cust_res_note" class="form-input" placeholder="e.g. Table reservations recommended 2 hours in advance." />
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 8: Images & Logo -->
+        <div class="acc-group" id="grp8">
+          <div class="acc-header" onclick="toggleAccordion('grp8')">
+            <span class="acc-title">8. Images & Gallery</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-group">
+              <label class="form-label">Restaurant Logo</label>
+              <input type="file" id="logoUpload" accept="image/*" class="form-input" onchange="handleLogoUpload(this)" />
+              <div id="logoPreviewWrap" style="margin-top: 8px; display: none;">
+                <img id="logoPreviewImg" src="" style="height: 48px; border-radius: 6px; object-fit: contain;" alt="Logo" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Gallery Images (Up to 12 photos)</label>
+              <div class="upload-zone" onclick="document.getElementById('galleryUpload').click()">
+                <div style="font-size: 1.8rem; margin-bottom: 4px;">📷</div>
+                <strong style="font-size: 0.9rem;">Click to upload restaurant images</strong>
+                <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 4px;">PNG, JPG, WEBP (Saved locally in session)</div>
+              </div>
+              <input type="file" id="galleryUpload" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(this)" />
+              <div class="thumbs-grid" id="galleryThumbs"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 9: Offers -->
+        <div class="acc-group" id="grp9">
+          <div class="acc-header" onclick="toggleAccordion('grp9')">
+            <span class="acc-title">9. Special Offers & Discounts</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Offer Headline</label>
+                <input type="text" id="cust_offer_title" class="form-input" placeholder="e.g. Flat 15% Off On Weekend Dine-in" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Coupon Code / Validity</label>
+                <input type="text" id="cust_offer_code" class="form-input" placeholder="e.g. CODE: ROYAL15 (Valid till Sunday)" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 10: Testimonials -->
+        <div class="acc-group" id="grp10">
+          <div class="acc-header" onclick="toggleAccordion('grp10')">
+            <span class="acc-title">10. Customer Testimonials</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-group">
+              <label class="form-label">Testimonial 1 Quote</label>
+              <textarea id="cust_testi_q" class="form-textarea" rows="2" placeholder="e.g. The best Biryani in Hyderabad! Flavourful and tender mutton."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Customer Name</label>
+                <input type="text" id="cust_testi_name" class="form-input" placeholder="e.g. Ramesh Chandra" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Rating / Source</label>
+                <input type="text" id="cust_testi_role" class="form-input" placeholder="e.g. 5 Stars &bull; Google Review" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 11: FAQ -->
+        <div class="acc-group" id="grp11">
+          <div class="acc-header" onclick="toggleAccordion('grp11')">
+            <span class="acc-title">11. FAQ (Frequently Asked Questions)</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-group">
+              <label class="form-label">Question</label>
+              <input type="text" id="cust_faq_q" class="form-input" placeholder="e.g. Is valet parking available?" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Answer</label>
+              <input type="text" id="cust_faq_a" class="form-input" placeholder="e.g. Yes, complimentary valet parking is provided." />
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 12: Social Links -->
+        <div class="acc-group" id="grp12">
+          <div class="acc-header" onclick="toggleAccordion('grp12')">
+            <span class="acc-title">12. Social Links</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-row-3">
+              <div class="form-group">
+                <label class="form-label">Instagram Link</label>
+                <input type="url" id="cust_insta" class="form-input" placeholder="https://instagram.com/..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Facebook Link</label>
+                <input type="url" id="cust_fb" class="form-input" placeholder="https://facebook.com/..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">YouTube Link</label>
+                <input type="url" id="cust_yt" class="form-input" placeholder="https://youtube.com/..." />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 13: SEO & Other -->
+        <div class="acc-group" id="grp13">
+          <div class="acc-header" onclick="toggleAccordion('grp13')">
+            <span class="acc-title">13. SEO & Page Title</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-group">
+              <label class="form-label">Browser Title / SEO Title</label>
+              <input type="text" id="cust_seo_title" class="form-input" placeholder="e.g. Royal Spice Restaurant | Best Biryani in Hyderabad" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 14: Final Review -->
+        <div class="acc-group open" id="grp14">
+          <div class="acc-header" onclick="toggleAccordion('grp14')">
+            <span class="acc-title">14. Final Review</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="review-summary-card" id="reviewSummaryCard">
+              <div style="color: var(--text-muted); font-size: 0.88rem;">Fill in your details above. Required: Business Name & Address.</div>
+            </div>
+
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <button type="button" class="btn-outline-gold" onclick="updateReviewSummary()" style="padding: 14px 20px;">
+                Refresh Summary
+              </button>
+              <button type="submit" class="btn-finalize" style="flex-grow: 1; justify-content: center;">
+                FINALIZE WEBSITE
+              </button>
+            </div>
+          </div>
         </div>
 
       </form>
@@ -1456,163 +1906,297 @@
   </div>
 
   <!-- ==========================================================================
-       FAST TRANSITION LOADER (500–800ms)
+       6. SHORT 0.5-1s TRANSITION SPINNER
        ========================================================================== -->
   <div class="fast-loader-overlay" id="fastLoader">
     <div class="pulse-gold-ring"></div>
-    <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 6px; color: #fff;">Preparing your website...</h3>
-    <p style="color: var(--text-muted); font-size: 0.88rem;">Applying your custom brand and restructuring elements.</p>
+    <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 6px;">Preparing your website...</h3>
+    <p style="color: var(--text-muted); font-size: 0.86rem;">Rendering your custom brand layout.</p>
   </div>
 
   <!-- ==========================================================================
-       JAVASCRIPT ARCHITECTURE
+       8. DOMAIN FLOW MODAL (SIMULATION DEMO)
+       ========================================================================== -->
+  <div class="flow-modal" id="domainChoiceModal">
+    <div class="flow-box">
+      <h3>Add a Custom Domain?</h3>
+      <p>Would you like to connect your own domain (e.g. yourrestaurant.com) or continue using WebCraft's free URL?</p>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn-gold" style="justify-content: center;" onclick="handleDomainDecision(true)">YES, ADD DOMAIN</button>
+        <button class="btn-outline-gold" style="justify-content: center;" onclick="handleDomainDecision(false)">NO, CONTINUE WITHOUT DOMAIN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Domain Input Modal -->
+  <div class="flow-modal" id="domainInputModal">
+    <div class="flow-box">
+      <h3>Enter Your Domain Name</h3>
+      <p>Enter the domain name you own or wish to connect.</p>
+      <div class="form-group" style="text-align: left;">
+        <input type="text" id="customDomainInput" class="form-input" placeholder="e.g. royalspicerestaurant.com" />
+      </div>
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); padding: 12px; border-radius: 6px; font-size: 0.82rem; color: #fbbf24; margin-bottom: 18px;">
+        Domain setup may take approximately 20 minutes to propagate.
+      </div>
+      <button class="btn-gold" style="width: 100%; justify-content: center;" onclick="startDomainSetupProgress()">
+        OK, START DOMAIN SETUP
+      </button>
+    </div>
+  </div>
+
+  <!-- Domain Progress Countdown Simulation -->
+  <div class="flow-modal" id="domainProgressModal">
+    <div class="flow-box">
+      <div style="font-size: 2rem; margin-bottom: 8px;">⏳</div>
+      <h3 id="domainProgressHeading">Domain Setup in Progress</h3>
+      <p id="domainProgressSub">Configuring DNS zone and SSL certificate...</p>
+      <div style="font-family: monospace; font-size: 1.1rem; color: var(--gold); font-weight: 700;" id="domainTargetDisplay">domain.com</div>
+      
+      <div class="progress-track">
+        <div class="progress-fill" id="domainProgressBar"></div>
+      </div>
+
+      <div style="font-size: 0.85rem; color: var(--text-muted);" id="domainCountdownText">
+        Estimated remaining time: ~19 minutes
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Checkout / Payment Placeholder Modal -->
+  <div class="flow-modal" id="checkoutModal">
+    <div class="flow-box">
+      <div style="font-size: 2.2rem; margin-bottom: 6px;">🎉</div>
+      <h3 id="checkoutTitle">Website Ready for Download</h3>
+      <p id="checkoutSubtitle">Review final package and proceed to download your code.</p>
+
+      <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: left;">
+        <div class="rev-row">
+          <span class="rev-label">Website Setup & License</span>
+          <span class="rev-val" id="priceWebsite">₹2,999</span>
+        </div>
+        <div class="rev-row" id="domainRowPrice" style="display: none;">
+          <span class="rev-label">Custom Domain (1 Year DNS & SSL)</span>
+          <span class="rev-val" id="priceDomain">₹899</span>
+        </div>
+        <div class="rev-row" style="font-weight: 700; font-size: 1.05rem; color: var(--gold); margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px;">
+          <span>Total Amount</span>
+          <span id="priceTotal">₹2,999</span>
+        </div>
+      </div>
+
+      <button class="btn-gold" style="width: 100%; justify-content: center; font-size: 1rem; padding: 14px;" onclick="handlePaymentDownload()">
+        PAY & DOWNLOAD
+      </button>
+      <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 10px;">
+        (Secure payment gateway and file bundler placeholder)
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastMsg"></div>
+
+  <!-- ==========================================================================
+       9. JAVASCRIPT LOGIC & ARCHITECTURE
        ========================================================================== -->
   <script>
     /* ==========================================================================
-       1. DATA ARCHITECTURE: DEMO DATA VS CUSTOMER DATA
+       DATA ARCHITECTURE: STRICT SEPARATION OF DEMO DATA & CUSTOMER DATA
        ========================================================================== */
     const restaurantDemoData = {
       isDemo: true,
       name: "La Bella Kitchen",
       tagline: "Authentic Taste. Beautifully Served.",
-      type: "Luxury Fine Dining",
+      type: "Fine Dining",
       cuisine: "Contemporary Italian & Mediterranean",
+      est: "2014",
+      specialty: "Handmade Pasta & Oak-Fired Steaks",
       phone: "+91 98765 43210",
       whatsapp: "+91 98765 43210",
+      telephone: "040-2345678",
       email: "hello@labellakitchen.example",
-      address: "Plot 42, Road No. 36, Jubilee Hills, Hyderabad, Telangana 500033",
+      address: "Plot 42, Road No. 36, Jubilee Hills",
       city: "Hyderabad",
+      state: "Telangana",
+      pincode: "500033",
       maps: "https://maps.google.com",
-      about: "Crafted with passion, La Bella Kitchen brings timeless European culinary artistry to life with farm-to-table organic produce, handmade pasta, and aged steaks grilled over oak embers. Every meal is a symphony of flavor and ambiance.",
+      workingDays: "Monday – Sunday",
       openTime: "12:00 PM",
       closeTime: "11:30 PM",
-      workingDays: "Monday – Sunday (All Days)",
+      about: "Crafted with unwavering dedication, La Bella Kitchen brings European culinary artistry to life with organic farm produce, hand-rolled pasta, and prime steaks flame-kissed over aged oak.",
+      orderUrl: "https://swiggy.com",
+      resLink: "+91 98765 43210",
+      resNote: "Table reservations recommended 24 hours in advance.",
+      logoUrl: "",
       heroImg: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80",
       aboutImg: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+      offerTitle: "15% Off On Weekend Dinners",
+      offerCode: "CODE: BELLA15",
+      testiQuote: "The black truffle tagliatelle and tranquil ambiance made our anniversary unforgettable.",
+      testiName: "Priya & Rajesh S.",
+      testiRole: "Verified Patrons &bull; 5 Stars",
+      faqQ: "Is valet parking available?",
+      faqA: "Yes, complimentary valet parking is provided right at our porch entrance.",
       social: {
         instagram: "https://instagram.com",
         facebook: "https://facebook.com",
         youtube: "https://youtube.com"
       },
       signatureDishes: [
-        { name: "Flame-Grilled Chilean Seabass", price: "₹1,250", desc: "Saffron broth, wilted sea greens, caper emulsion", tag: "Chef Special", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80" },
-        { name: "Truffle Herb Arancini", price: "₹450", desc: "Crispy risotto spheres with 24-month aged parmesan", tag: "Artisanal", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=80" },
-        { name: "Slow-Roasted Oak Rack of Lamb", price: "₹1,450", desc: "Rosemary glaze with charred heirloom root vegetables", tag: "Signature", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=700&q=80" }
+        { name: "Flame-Grilled Chilean Seabass", price: "₹1,250", desc: "Saffron broth, sea greens, caper emulsion", tag: "Signature", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80" },
+        { name: "Truffle Herb Arancini", price: "₹480", desc: "Crispy risotto spheres with aged parmesan dip", tag: "Artisanal", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=80" },
+        { name: "Slow-Roasted Oak Lamb Rack", price: "₹1,450", desc: "Rosemary glaze with charred baby carrots", tag: "Chef Special", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=700&q=80" }
       ],
       menuCategories: [
         {
-          name: "Antipasti & Starters",
+          name: "Starters & Antipasti",
           items: [
-            { name: "Burrata Pugliese", price: "₹550", desc: "Heirloom tomatoes, balsamic reduction, basil oil" },
-            { name: "Calamari Fritti", price: "₹620", desc: "Crispy squid with citrus garlic aioli" },
-            { name: "Tuscan Garlic Crostini", price: "₹380", desc: "Roasted garlic purée with melted fontina" }
+            { name: "Burrata Pugliese", price: "₹550", desc: "Heirloom tomatoes, balsamic glaze, fresh basil" },
+            { name: "Calamari Fritti", price: "₹620", desc: "Golden fried baby squid with lemon garlic dip" }
           ]
         },
         {
-          name: "Handcrafted Pasta",
+          name: "Handmade Pasta",
           items: [
-            { name: "Wild Forest Gnocchi", price: "₹680", desc: "Potato pillows in brown butter and sage" },
-            { name: "Tagliatelle al Tartufo", price: "₹850", desc: "Black truffle cream with aged pecorino" },
-            { name: "Lobster Ravioli", price: "₹920", desc: "Squid ink pasta with saffron bisque" }
+            { name: "Tagliatelle al Tartufo", price: "₹850", desc: "Fresh egg pasta in rich black truffle cream" },
+            { name: "Wild Forest Gnocchi", price: "₹680", desc: "Potato pillows in sage brown butter sauce" }
           ]
         },
         {
           name: "Oak-Fired Mains",
           items: [
-            { name: "Prime Black Angus Ribeye", price: "₹1,650", desc: "Truffle mash, peppercorn jus, charred shallots" },
-            { name: "Wood-Fired Neapolitan Pizza", price: "₹720", desc: "San Marzano tomatoes, buffalo mozzarella, fresh basil" },
-            { name: "Pan-Seared Salmon Fillet", price: "₹1,150", desc: "Asparagus spears, lemon dill beurre blanc" }
-          ]
-        },
-        {
-          name: "Dolci & Desserts",
-          items: [
-            { name: "Classic Espresso Tiramisu", price: "₹420", desc: "Savoiardi soaked in espresso with mascarpone cream" },
-            { name: "Belgian Fondant Cake", price: "₹460", desc: "Warm molten chocolate with bourbon vanilla bean gelato" }
+            { name: "Black Angus Ribeye Steak", price: "₹1,650", desc: "Truffle mash, peppercorn jus, charred shallots" },
+            { name: "Wood-Fired Pizza Margherita", price: "₹720", desc: "San Marzano tomatoes, fresh mozzarella, basil" }
           ]
         }
       ],
-      gallery: [
+      galleryImages: [
         "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=800&q=80"
-      ],
-      testimonials: [
-        { quote: "The charcoal grill experience and tranquil ambiance made our anniversary truly unforgettable.", author: "Rajesh & Priya V.", role: "Gourmet Society" },
-        { quote: "Every course was exceptional. The wine curation and handmade pasta rival the best in Italy.", author: "Sophia Martinez", role: "Culinary Critic" },
-        { quote: "A masterpiece of luxury dining in Jubilee Hills. Impeccable service and rich, authentic flavors.", author: "Dr. Vikram K.", role: "Verified Patron" }
       ]
     };
 
-    // User's data model starts strictly empty (zero fabrication)
+    // Customer Data starts 100% EMPTY. NEVER PRE-POPULATED.
     let restaurantCustomerData = {
       isDemo: false,
       name: "",
       tagline: "",
       type: "",
       cuisine: "",
+      est: "",
+      specialty: "",
       phone: "",
       whatsapp: "",
+      telephone: "",
       email: "",
       address: "",
       city: "",
       state: "",
       pincode: "",
       maps: "",
-      about: "",
+      workingDays: "",
       openTime: "",
       closeTime: "",
-      workingDays: "",
+      about: "",
+      orderUrl: "",
+      resLink: "",
+      resNote: "",
       logoUrl: "",
       galleryImages: [],
       menuCategories: [],
+      offerTitle: "",
+      offerCode: "",
+      testiQuote: "",
+      testiName: "",
+      testiRole: "",
+      faqQ: "",
+      faqA: "",
       social: {
         instagram: "",
         facebook: "",
         youtube: ""
-      }
+      },
+      seoTitle: "",
+      customDomain: ""
     };
 
     let activeMenuTab = 0;
 
     /* ==========================================================================
-       2. INITIALIZATION
+       INITIALIZATION
        ========================================================================== */
     document.addEventListener("DOMContentLoaded", () => {
-      // Render the demo restaurant on load
+      // Load demo restaurant website
       renderRestaurant(restaurantDemoData);
     });
 
     /* ==========================================================================
-       3. RENDER ENGINE: RENDERS EITHER DEMO OR CUSTOMER DATA (NO FABRICATION)
+       SCROLL & SECTION NAVIGATION
+       ========================================================================== */
+    function scrollToTemplateSelector() {
+      document.getElementById("templateSelectorSec").scrollIntoView({ behavior: "smooth" });
+    }
+    function scrollToShowcase() {
+      document.getElementById("restaurantMount").scrollIntoView({ behavior: "smooth" });
+    }
+
+    /* ==========================================================================
+       RESTAURANT RENDER ENGINE (DYNAMIC & CONDITIONALLY FILTERED)
        ========================================================================== */
     function renderRestaurant(data) {
       const mount = document.getElementById("restaurantMount");
       const isDemo = !!data.isDemo;
 
-      // Safe clean text getters
+      // Safe Extraction
       const name = data.name || (isDemo ? "La Bella Kitchen" : "");
       const tagline = data.tagline || "";
       const type = data.type || "";
       const cuisine = data.cuisine || "";
+      const specialty = data.specialty || "";
+      const est = data.est || "";
+
       const phone = data.phone || "";
       const whatsapp = data.whatsapp || "";
+      const telephone = data.telephone || "";
       const email = data.email || "";
-      const address = data.address ? `${data.address}${data.city ? ', ' + data.city : ''}${data.state ? ', ' + data.state : ''}` : "";
+
+      const address = data.address ? `${data.address}${data.city ? ', ' + data.city : ''}${data.state ? ', ' + data.state : ''}${data.pincode ? ' - ' + data.pincode : ''}` : "";
       const maps = data.maps || "";
-      const about = data.about || "";
+
+      const workingDays = data.workingDays || "";
       const openTime = data.openTime || "";
       const closeTime = data.closeTime || "";
-      const workingDays = data.workingDays || "";
       const hoursText = (openTime && closeTime) ? `${openTime} – ${closeTime}` : "";
 
-      const heroImg = (data.galleryImages && data.galleryImages[0]) ? data.galleryImages[0] : (isDemo ? restaurantDemoData.heroImg : "");
-      const aboutImg = (data.galleryImages && data.galleryImages[1]) ? data.galleryImages[1] : (isDemo ? restaurantDemoData.aboutImg : "");
-      const galleryPhotos = isDemo ? restaurantDemoData.gallery : (data.galleryImages || []);
-      const signatureDishes = isDemo ? restaurantDemoData.signatureDishes : [];
+      const about = data.about || "";
+      const orderUrl = data.orderUrl || "";
+      const resLink = data.resLink || "";
+      const resNote = data.resNote || "";
+
+      const offerTitle = data.offerTitle || "";
+      const offerCode = data.offerCode || "";
+
+      const testiQuote = data.testiQuote || "";
+      const testiName = data.testiName || "";
+      const testiRole = data.testiRole || "";
+
+      const faqQ = data.faqQ || "";
+      const faqA = data.faqA || "";
+
+      const logoUrl = data.logoUrl || "";
+      const galleryPhotos = data.galleryImages || [];
+      const menuCats = (data.menuCategories || []).filter(c => c && c.items && c.items.length > 0);
+
+      const heroBg = (galleryPhotos && galleryPhotos[0]) ? galleryPhotos[0] : (isDemo ? restaurantDemoData.heroImg : "");
+      const aboutBg = (galleryPhotos && galleryPhotos[1]) ? galleryPhotos[1] : (isDemo ? restaurantDemoData.aboutImg : "");
+
+      const social = data.social || {};
+      const hasSocial = social.instagram || social.facebook || social.youtube;
 
       let html = "";
 
@@ -1620,66 +2204,70 @@
       html += `
         <nav class="rest-nav">
           <div class="container rest-nav-inner">
-            <div class="rest-brand">
-              <span class="rest-name">${escapeHtml(name)}</span>
-              ${tagline ? `<span class="rest-tagline">${escapeHtml(tagline)}</span>` : ''}
+            <div class="rest-brand-group">
+              ${logoUrl ? `<img src="${logoUrl}" class="rest-logo-img" alt="Logo" />` : ''}
+              <div class="rest-brand-text">
+                <span class="rest-name">${escapeHtml(name)}</span>
+                ${tagline ? `<span class="rest-tagline">${escapeHtml(tagline)}</span>` : ''}
+              </div>
             </div>
 
             <ul class="rest-links">
               ${about ? `<li><a href="#about-sec">About</a></li>` : ''}
-              <li><a href="#menu-sec">Menu</a></li>
+              ${menuCats.length > 0 ? `<li><a href="#menu-sec">Menu</a></li>` : ''}
               ${galleryPhotos.length > 0 ? `<li><a href="#gallery-sec">Gallery</a></li>` : ''}
-              ${(hoursText || address) ? `<li><a href="#location-sec">Location</a></li>` : ''}
+              ${(hoursText || address) ? `<li><a href="#location-sec">Visit</a></li>` : ''}
+              ${(faqQ && faqA) ? `<li><a href="#faq-sec">FAQ</a></li>` : ''}
             </ul>
 
-            <div class="rest-nav-actions">
-              ${whatsapp ? `<a href="https://wa.me/${cleanPhone(whatsapp)}" target="_blank" class="btn-outline-gold" style="padding: 8px 16px; font-size: 0.78rem;">WhatsApp</a>` : ''}
+            <div style="display: flex; align-items: center; gap: 10px;">
+              ${whatsapp ? `<a href="https://wa.me/${cleanPhone(whatsapp)}" target="_blank" class="btn-outline-gold" style="padding: 7px 14px; font-size: 0.78rem;">WhatsApp</a>` : ''}
               ${isDemo ? `
-                <button class="btn-gold" onclick="openBuyModal()">Buy This Website</button>
+                <button class="btn-gold" onclick="openBuyModal()" style="padding: 8px 18px; font-size: 0.8rem;">Buy This Website</button>
               ` : (phone ? `<a href="tel:${cleanPhone(phone)}" class="btn-gold" style="padding: 8px 18px; font-size: 0.8rem;">Call: ${escapeHtml(phone)}</a>` : '')}
             </div>
           </div>
         </nav>
       `;
 
-      // 2. CINEMATIC HERO SECTION
+      // 2. HERO SECTION
       html += `
-        <header class="rest-hero" style="${heroImg ? `background: linear-gradient(rgba(8, 8, 10, 0.65), rgba(8, 8, 10, 0.85)), url('${heroImg}') center/cover no-repeat;` : ''}">
+        <header class="rest-hero" style="${heroBg ? `background: linear-gradient(rgba(8, 8, 10, 0.65), rgba(8, 8, 10, 0.85)), url('${heroBg}') center/cover no-repeat;` : ''}">
           <div class="rest-hero-card">
-            ${(type || cuisine) ? `<span class="hero-eyebrow">${escapeHtml(type || cuisine)}</span>` : ''}
+            ${(type || cuisine) ? `<span class="hero-eyebrow">${escapeHtml(type ? type : '')}${type && cuisine ? ' &bull; ' : ''}${escapeHtml(cuisine ? cuisine : '')}</span>` : ''}
             <h1 class="hero-heading">${escapeHtml(name)}</h1>
             ${tagline ? `<p class="hero-subtext">${escapeHtml(tagline)}</p>` : ''}
-            
+
             <div class="hero-cta-group">
-              <a href="#menu-sec" class="btn-outline-gold" style="padding: 12px 28px;">Explore Menu</a>
+              ${menuCats.length > 0 ? `<a href="#menu-sec" class="btn-outline-gold">Explore Menu</a>` : ''}
+              ${orderUrl ? `<a href="${escapeHtml(orderUrl)}" target="_blank" class="btn-gold">Order Online</a>` : ''}
               ${isDemo ? `
-                <button class="btn-gold" onclick="openBuyModal()" style="padding: 12px 30px;">Buy This Website</button>
-              ` : (whatsapp ? `<a href="https://wa.me/${cleanPhone(whatsapp)}" target="_blank" class="btn-gold" style="padding: 12px 30px;">WhatsApp Orders</a>` : '')}
+                <button class="btn-gold" onclick="openBuyModal()">Buy This Website</button>
+              ` : (whatsapp ? `<a href="https://wa.me/${cleanPhone(whatsapp)}" target="_blank" class="btn-gold">WhatsApp Orders</a>` : '')}
             </div>
           </div>
         </header>
       `;
 
-      // 3. ABOUT SECTION (Only if entered or demo)
+      // 3. ABOUT SECTION (Conditionally rendered)
       if (about) {
         html += `
           <section class="rest-section" id="about-sec">
             <div class="container">
               <div class="about-3d-grid">
-                ${aboutImg ? `
+                ${aboutBg ? `
                   <div class="about-visual">
-                    <img src="${aboutImg}" class="about-main-img" alt="Dining Ambiance" />
-                    <div class="floating-accent-card">
-                      <strong>Artisanal</strong>
-                      <span style="font-size: 0.8rem; color: #bbb;">Fresh & Handcrafted</span>
-                    </div>
+                    <img src="${aboutBg}" class="about-main-img" alt="Ambiance" />
                   </div>
                 ` : ''}
                 <div class="about-content">
-                  <span class="section-eyebrow">Our Philosophy</span>
-                  <h3>Dedicated to Gastronomic Perfection</h3>
+                  <span class="section-eyebrow">Our Story</span>
+                  <h3>A Culinary Journey of Flavor</h3>
                   <p>${escapeHtml(about)}</p>
-                  ${(type || cuisine) ? `<div style="font-family: var(--font-serif); color: var(--gold); font-size: 1.1rem; font-style: italic;">Specializing in ${escapeHtml(type || cuisine)}</div>` : ''}
+                  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    ${est ? `<div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 8px 14px; border-radius: 6px; font-size: 0.82rem;"><span style="color:var(--gold);">Est.</span> ${escapeHtml(est)}</div>` : ''}
+                    ${specialty ? `<div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 8px 14px; border-radius: 6px; font-size: 0.82rem;"><span style="color:var(--gold);">Specialty:</span> ${escapeHtml(specialty)}</div>` : ''}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1687,28 +2275,41 @@
         `;
       }
 
-      // 4. SIGNATURE DISHES (Shown in demo only)
-      if (isDemo && signatureDishes.length > 0) {
+      // 4. SPECIAL OFFERS (Conditionally rendered)
+      if (offerTitle) {
         html += `
-          <section class="rest-section" style="background: #0b0d14;">
+          <section style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(245, 158, 11, 0.12)); padding: 32px 0; border-y: 1px solid var(--border-subtle);">
+            <div class="container" style="text-align: center;">
+              <span class="section-eyebrow" style="color: var(--accent-blue);">Exclusive Deal</span>
+              <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 4px 0 8px;">${escapeHtml(offerTitle)}</h3>
+              ${offerCode ? `<div style="font-family: monospace; font-size: 0.95rem; color: var(--gold); font-weight: 700;">${escapeHtml(offerCode)}</div>` : ''}
+            </div>
+          </section>
+        `;
+      }
+
+      // 5. SIGNATURE DISHES (Demo only)
+      if (isDemo && data.signatureDishes && data.signatureDishes.length > 0) {
+        html += `
+          <section class="rest-section" style="background: #090c13;">
             <div class="container">
               <div class="section-head">
-                <span class="section-eyebrow">Culinary Masterpieces</span>
+                <span class="section-eyebrow">Chef Signatures</span>
                 <h2 class="section-title">Signature Dishes</h2>
               </div>
               <div class="dishes-3d-grid">
-                ${signatureDishes.map(dish => `
+                ${data.signatureDishes.map(d => `
                   <div class="dish-card-3d">
                     <div class="dish-img-wrap">
-                      <img src="${dish.img}" alt="${dish.name}" />
-                      <span class="dish-tag">${dish.tag}</span>
+                      <img src="${d.img}" alt="${d.name}" />
+                      <span class="dish-tag">${d.tag}</span>
                     </div>
                     <div class="dish-info">
                       <div class="dish-title-row">
-                        <span class="dish-name">${dish.name}</span>
-                        <span class="dish-price">${dish.price}</span>
+                        <span class="dish-name">${d.name}</span>
+                        <span class="dish-price">${d.price}</span>
                       </div>
-                      <p class="dish-desc">${dish.desc}</p>
+                      <p class="dish-desc">${d.desc}</p>
                     </div>
                   </div>
                 `).join("")}
@@ -1718,27 +2319,26 @@
         `;
       }
 
-      // 5. FULL MENU SECTION
-      const menuCats = data.menuCategories || [];
+      // 6. FULL MENU SECTION (Conditionally rendered: only if categories exist)
       if (menuCats.length > 0) {
         html += `
           <section class="rest-section" id="menu-sec">
             <div class="container">
               <div class="section-head">
-                <span class="section-eyebrow">Exquisite Selections</span>
+                <span class="section-eyebrow">Artisan Selections</span>
                 <h2 class="section-title">Dining Menu</h2>
               </div>
 
-              <!-- Category Tabs -->
+              <!-- Menu Tabs -->
               <div class="menu-tabs">
                 ${menuCats.map((cat, idx) => `
-                  <button class="menu-tab-btn ${idx === activeMenuTab ? 'active' : ''}" onclick="switchMenuTab(${idx})">
+                  <button class="menu-tab-btn ${idx === activeMenuTab ? 'active' : ''}" onclick="switchMenuCategory(${idx})">
                     ${escapeHtml(cat.name)}
                   </button>
                 `).join("")}
               </div>
 
-              <!-- Active Category Items -->
+              <!-- Selected Category Items -->
               ${menuCats[activeMenuTab] ? `
                 <div class="menu-split-grid">
                   ${(menuCats[activeMenuTab].items || []).map(item => `
@@ -1748,6 +2348,11 @@
                         <span class="menu-entry-price">${escapeHtml(item.price || '')}</span>
                       </div>
                       ${item.desc ? `<p class="menu-entry-desc">${escapeHtml(item.desc)}</p>` : ''}
+                      <div class="dish-chips">
+                        ${item.veg === true || item.veg === "true" ? `<span class="chip chip-veg">Pure Veg</span>` : ''}
+                        ${item.veg === false || item.veg === "false" ? `<span class="chip chip-nonveg">Non-Veg</span>` : ''}
+                        ${item.bestseller ? `<span class="chip chip-bestseller">&#9733; Bestseller</span>` : ''}
+                      </div>
                     </div>
                   `).join("")}
                 </div>
@@ -1757,55 +2362,19 @@
         `;
       }
 
-      // 6. WHY CHOOSE US (DEMO ONLY)
-      if (isDemo) {
-        html += `
-          <section class="rest-section" style="background: #090c13;">
-            <div class="container">
-              <div class="section-head">
-                <span class="section-eyebrow">Our Distinctions</span>
-                <h2 class="section-title">Why Dine With Us</h2>
-              </div>
-              <div class="features-grid">
-                <div class="feature-card">
-                  <span class="feature-icon">🌿</span>
-                  <h4 class="feature-title">Farm-To-Table</h4>
-                  <p class="feature-desc">All herbs and vegetables sourced directly from local organic farms daily.</p>
-                </div>
-                <div class="feature-card">
-                  <span class="feature-icon">👨‍🍳</span>
-                  <h4 class="feature-title">Artisan Chefs</h4>
-                  <p class="feature-desc">Decades of international experience crafting balanced, memorable courses.</p>
-                </div>
-                <div class="feature-card">
-                  <span class="feature-icon">🍷</span>
-                  <h4 class="feature-title">Cellar Reserves</h4>
-                  <p class="feature-desc">Handpicked rare vintage wines matched to each seasonal menu change.</p>
-                </div>
-                <div class="feature-card">
-                  <span class="feature-icon">🕯️</span>
-                  <h4 class="feature-title">Private Ambiance</h4>
-                  <p class="feature-desc">Atmospheric lighting, acoustics and luxury booths for intimate occasions.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-        `;
-      }
-
-      // 7. GALLERY SECTION (Show only if photos exist)
+      // 7. GALLERY SECTION (Conditionally rendered)
       if (galleryPhotos.length > 0) {
         html += `
-          <section class="rest-section" id="gallery-sec">
+          <section class="rest-section" id="gallery-sec" style="background: #090c13;">
             <div class="container">
               <div class="section-head">
-                <span class="section-eyebrow">Visual Experience</span>
-                <h2 class="section-title">Restaurant Showcase</h2>
+                <span class="section-eyebrow">Visual Tour</span>
+                <h2 class="section-title">Photo Gallery</h2>
               </div>
               <div class="gallery-masonry">
                 ${galleryPhotos.map(src => `
                   <div class="gallery-item">
-                    <img src="${src}" alt="Showcase Photo" />
+                    <img src="${src}" alt="Gallery" />
                   </div>
                 `).join("")}
               </div>
@@ -1814,17 +2383,17 @@
         `;
       }
 
-      // 8. TESTIMONIALS (Shown in Demo only, never fabricated)
-      if (isDemo && restaurantDemoData.testimonials.length > 0) {
+      // 8. TESTIMONIALS (Conditionally rendered)
+      if (isDemo && data.testimonials && data.testimonials.length > 0) {
         html += `
-          <section class="rest-section" style="background: #090c13;">
+          <section class="rest-section">
             <div class="container">
               <div class="section-head">
-                <span class="section-eyebrow">Patron Praise</span>
-                <h2 class="section-title">Guest Testimonials</h2>
+                <span class="section-eyebrow">Guest Reviews</span>
+                <h2 class="section-title">Words From Our Patrons</h2>
               </div>
               <div class="testi-grid">
-                ${restaurantDemoData.testimonials.map(t => `
+                ${data.testimonials.map(t => `
                   <div class="testi-card">
                     <p class="testi-quote">"${t.quote}"</p>
                     <div class="testi-author">${t.author}</div>
@@ -1835,16 +2404,29 @@
             </div>
           </section>
         `;
+      } else if (!isDemo && testiQuote) {
+        html += `
+          <section class="rest-section">
+            <div class="container" style="max-width: 760px; text-align: center;">
+              <span class="section-eyebrow">Customer Words</span>
+              <div class="testi-card">
+                <p class="testi-quote">"${escapeHtml(testiQuote)}"</p>
+                <div class="testi-author">${escapeHtml(testiName || 'Valued Guest')}</div>
+                ${testiRole ? `<div class="testi-role">${escapeHtml(testiRole)}</div>` : ''}
+              </div>
+            </div>
+          </section>
+        `;
       }
 
-      // 9. HOURS & LOCATION SECTION
+      // 9. HOURS & LOCATION SECTION (Conditionally rendered)
       if (hoursText || address || phone || email) {
         html += `
-          <section class="rest-section" id="location-sec">
+          <section class="rest-section" id="location-sec" style="background: #090c13;">
             <div class="container">
               <div class="section-head">
-                <span class="section-eyebrow">Visit Us</span>
-                <h2 class="section-title">Hours & Location</h2>
+                <span class="section-eyebrow">Hours & Map</span>
+                <h2 class="section-title">Visit Us</h2>
               </div>
               <div class="hours-location-wrap">
                 ${(hoursText || workingDays) ? `
@@ -1852,13 +2434,13 @@
                     <h3>Operating Schedule</h3>
                     ${workingDays ? `
                       <div class="info-row">
-                        <span style="color: #999;">Working Days</span>
-                        <strong style="color: #fff;">${escapeHtml(workingDays)}</strong>
+                        <span style="color: #999;">Schedule</span>
+                        <strong>${escapeHtml(workingDays)}</strong>
                       </div>
                     ` : ''}
                     ${hoursText ? `
                       <div class="info-row">
-                        <span style="color: #999;">Hours</span>
+                        <span style="color: #999;">Timing</span>
                         <strong style="color: var(--gold);">${escapeHtml(hoursText)}</strong>
                       </div>
                     ` : ''}
@@ -1867,11 +2449,11 @@
 
                 ${(address || phone || email || maps) ? `
                   <div class="info-box-3d">
-                    <h3>Contact & Address</h3>
+                    <h3>Address & Contact</h3>
                     ${address ? `
                       <div class="info-row">
-                        <span style="color: #999;">Address</span>
-                        <strong style="color: #fff; text-align: right; max-width: 60%;">${escapeHtml(address)}</strong>
+                        <span style="color: #999;">Location</span>
+                        <strong style="text-align: right; max-width: 65%;">${escapeHtml(address)}</strong>
                       </div>
                     ` : ''}
                     ${phone ? `
@@ -1883,13 +2465,13 @@
                     ${email ? `
                       <div class="info-row">
                         <span style="color: #999;">Email</span>
-                        <a href="mailto:${escapeHtml(email)}" style="color: #fff;">${escapeHtml(email)}</a>
+                        <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>
                       </div>
                     ` : ''}
                     ${maps ? `
-                      <div style="margin-top: 20px;">
-                        <a href="${escapeHtml(maps)}" target="_blank" class="btn-outline-gold" style="width: 100%; text-align: center; justify-content: center; display: flex;">
-                          Open in Google Maps &rarr;
+                      <div style="margin-top: 18px;">
+                        <a href="${escapeHtml(maps)}" target="_blank" class="btn-outline-gold" style="width: 100%; text-align: center; display: flex; justify-content: center;">
+                          Open Google Maps &rarr;
                         </a>
                       </div>
                     ` : ''}
@@ -1901,14 +2483,52 @@
         `;
       }
 
-      // 10. PROMINENT BOTTOM "BUY THIS WEBSITE" BANNER (Demo only)
+      // 10. RESERVATION SECTION (Conditionally rendered)
+      if (resLink || resNote) {
+        html += `
+          <section class="rest-section">
+            <div class="container" style="max-width: 800px; text-align: center;">
+              <span class="section-eyebrow">Reservations</span>
+              <h2 class="section-title" style="margin-bottom: 12px;">Reserve a Table</h2>
+              ${resNote ? `<p style="color: #bbb; margin-bottom: 24px;">${escapeHtml(resNote)}</p>` : ''}
+              ${resLink ? `
+                <a href="${escapeHtml(resLink)}" class="btn-gold" style="padding: 12px 28px;">
+                  Book Table Now
+                </a>
+              ` : ''}
+            </div>
+          </section>
+        `;
+      }
+
+      // 11. FAQ SECTION (Conditionally rendered)
+      if (faqQ && faqA) {
+        html += `
+          <section class="rest-section" id="faq-sec" style="background: #090c13;">
+            <div class="container">
+              <div class="section-head">
+                <span class="section-eyebrow">Inquiries</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+              </div>
+              <div class="faq-list">
+                <div class="faq-item">
+                  <div class="faq-q">${escapeHtml(faqQ)}</div>
+                  <div class="faq-a">${escapeHtml(faqA)}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // 12. BOTTOM PURCHASE BANNER (DEMO ONLY)
       if (isDemo) {
         html += `
           <div class="container">
             <div class="purchase-banner">
               <h2>Ready to Make This Website Yours?</h2>
-              <p>Customize this high-converting restaurant website with your own dishes, contact numbers, and location in minutes.</p>
-              <button class="btn-gold" onclick="openBuyModal()" style="font-size: 1rem; padding: 14px 34px;">
+              <p>Customize this high-converting restaurant website with your dishes, numbers, and branding in minutes.</p>
+              <button class="btn-gold" onclick="openBuyModal()" style="font-size: 1rem; padding: 14px 32px;">
                 Buy This Website
               </button>
             </div>
@@ -1916,17 +2536,14 @@
         `;
       }
 
-      // 11. FOOTER
-      const social = data.social || {};
-      const hasSocial = social.instagram || social.facebook || social.youtube;
-
+      // 13. FOOTER
       html += `
         <footer class="rest-footer">
           <div class="container">
-            <div style="font-family: var(--font-royal); font-size: 1.5rem; color: #fff; margin-bottom: 8px;">
+            <div style="font-family: var(--font-royal); font-size: 1.5rem; color: #fff; margin-bottom: 6px;">
               ${escapeHtml(name)}
             </div>
-            ${tagline ? `<p style="font-size: 0.88rem; color: #888; margin-bottom: 20px;">${escapeHtml(tagline)}</p>` : ''}
+            ${tagline ? `<p style="font-size: 0.86rem; color: #888; margin-bottom: 16px;">${escapeHtml(tagline)}</p>` : ''}
 
             ${hasSocial ? `
               <div class="footer-social-row">
@@ -1943,294 +2560,403 @@
         </footer>
       `;
 
-      // 12. CUSTOMER FINAL VIEW BOTTOM "CONTINUE" STRIP
-      if (!isDemo) {
-        html += `
-          <div class="final-bottom-bar">
-            <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 12px;">Your website is ready.</h3>
-            <button class="btn-gold" onclick="handleContinueNextStep()" style="padding: 12px 36px; font-size: 1rem;">
-              Continue
-            </button>
-          </div>
-        `;
-      }
-
       mount.innerHTML = html;
     }
 
-    function switchMenuTab(idx) {
+    function switchMenuCategory(idx) {
       activeMenuTab = idx;
-      // Re-render currently active dataset
-      const current = restaurantCustomerData.name ? restaurantCustomerData : restaurantDemoData;
-      renderRestaurant(current);
-      const menuSec = document.getElementById("menu-sec");
-      if (menuSec) menuSec.scrollIntoView({ behavior: "smooth" });
+      const curData = restaurantCustomerData.name ? restaurantCustomerData : restaurantDemoData;
+      renderRestaurant(curData);
+      const m = document.getElementById("menu-sec");
+      if (m) m.scrollIntoView({ behavior: "smooth" });
     }
 
     /* ==========================================================================
-       4. BUY MODAL & FORM LOGIC
+       BUY MODAL & FORM CONTROLS
        ========================================================================== */
     function openBuyModal() {
       document.getElementById("buyModalOverlay").classList.add("active");
       document.body.style.overflow = "hidden";
-      renderDynamicMenuForm();
+      renderMenuBuilderList();
+      updateReviewSummary();
     }
-
     function closeBuyModal() {
       document.getElementById("buyModalOverlay").classList.remove("active");
       document.body.style.overflow = "";
     }
 
-    function syncWhatsAppPhone() {
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle("open");
+    }
+
+    function syncWhatsApp() {
       if (document.getElementById("cust_same_wa").checked) {
         document.getElementById("cust_whatsapp").value = document.getElementById("cust_phone").value;
       }
     }
-
-    function toggleSamePhoneCheckbox() {
+    function toggleSameWhatsApp() {
       const isChecked = document.getElementById("cust_same_wa").checked;
-      const waInput = document.getElementById("cust_whatsapp");
+      const wa = document.getElementById("cust_whatsapp");
       if (isChecked) {
-        waInput.value = document.getElementById("cust_phone").value;
-        waInput.disabled = true;
+        wa.value = document.getElementById("cust_phone").value;
+        wa.disabled = true;
       } else {
-        waInput.disabled = false;
+        wa.disabled = false;
       }
     }
 
     /* ==========================================================================
-       5. DYNAMIC MENU BUILDER (FORM - NO PRELOADED CUSTOMER DATA)
+       DYNAMIC MENU BUILDER
        ========================================================================== */
-    function renderDynamicMenuForm() {
-      const container = document.getElementById("dynamicMenuBuilder");
-      container.innerHTML = "";
+    function renderMenuBuilderList() {
+      const c = document.getElementById("menuBuilderList");
+      c.innerHTML = "";
 
       restaurantCustomerData.menuCategories.forEach((cat, catIdx) => {
-        const catCard = document.createElement("div");
-        catCard.className = "menu-cat-card";
-
-        catCard.innerHTML = `
+        const div = document.createElement("div");
+        div.className = "menu-cat-card";
+        div.innerHTML = `
           <div class="menu-cat-head">
-            <input type="text" class="form-input" style="font-weight: 700; max-width: 300px;" 
-              placeholder="Category Name (e.g. Starters)" 
-              value="${escapeHtml(cat.name)}" 
-              oninput="updateCategoryName(${catIdx}, this.value)" />
-            <button type="button" class="btn-delete" onclick="deleteCategory(${catIdx})">Delete Category</button>
+            <input type="text" class="form-input" style="font-weight: 700; max-width: 280px;" 
+              placeholder="Category Name (e.g. Starters)" value="${escapeHtml(cat.name)}" 
+              oninput="setCatName(${catIdx}, this.value)" />
+            <button type="button" class="btn-delete" onclick="delCat(${catIdx})">Delete Category</button>
           </div>
           <div>
             ${(cat.items || []).map((item, itemIdx) => `
               <div class="dish-row-builder">
-                <input type="text" class="form-input" placeholder="Dish Name (e.g. Garlic Naan)" 
-                  value="${escapeHtml(item.name)}" 
-                  oninput="updateDishItem(${catIdx}, ${itemIdx}, 'name', this.value)" />
-                <input type="text" class="form-input" placeholder="Price (e.g. ₹280)" 
-                  value="${escapeHtml(item.price)}" 
-                  oninput="updateDishItem(${catIdx}, ${itemIdx}, 'price', this.value)" />
-                <button type="button" class="btn-delete" onclick="deleteDishItem(${catIdx}, ${itemIdx})">&times;</button>
-                <div style="grid-column: 1 / -1;">
-                  <input type="text" class="form-input" placeholder="Description (e.g. Freshly baked in tandoor with roasted garlic)" 
-                    value="${escapeHtml(item.desc || '')}" 
-                    oninput="updateDishItem(${catIdx}, ${itemIdx}, 'desc', this.value)" />
+                <input type="text" class="form-input" placeholder="Dish Name (e.g. Biryani)" 
+                  value="${escapeHtml(item.name)}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'name', this.value)" />
+                <input type="text" class="form-input" placeholder="Price (e.g. ₹350)" 
+                  value="${escapeHtml(item.price)}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'price', this.value)" />
+                <button type="button" class="btn-delete" onclick="delDish(${catIdx}, ${itemIdx})">&times;</button>
+                <div style="grid-column: 1 / -1; display: flex; gap: 10px; align-items: center;">
+                  <input type="text" class="form-input" placeholder="Short description..." 
+                    value="${escapeHtml(item.desc || '')}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'desc', this.value)" style="flex-grow: 1;" />
+                  <label class="checkbox-label" style="font-size:0.75rem;">
+                    <input type="checkbox" ${item.veg ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'veg', this.checked)"> Veg
+                  </label>
+                  <label class="checkbox-label" style="font-size:0.75rem;">
+                    <input type="checkbox" ${item.bestseller ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'bestseller', this.checked)"> Bestseller
+                  </label>
                 </div>
               </div>
             `).join("")}
           </div>
-          <button type="button" class="btn-outline-gold" style="font-size: 0.8rem; padding: 6px 14px; margin-top: 6px;" onclick="addDishItem(${catIdx})">
+          <button type="button" class="btn-outline-gold" style="font-size: 0.76rem; padding: 6px 12px; margin-top: 6px;" onclick="addDish(${catIdx})">
             + Add Dish
           </button>
         `;
-        container.appendChild(catCard);
+        c.appendChild(div);
       });
     }
 
-    function addNewCategoryForm() {
+    function addMenuCategoryForm() {
       restaurantCustomerData.menuCategories.push({
         name: "",
-        items: [{ name: "", price: "", desc: "" }]
+        items: [{ name: "", price: "", desc: "", veg: false, bestseller: false }]
       });
-      renderDynamicMenuForm();
+      renderMenuBuilderList();
     }
-
-    function deleteCategory(catIdx) {
-      restaurantCustomerData.menuCategories.splice(catIdx, 1);
-      renderDynamicMenuForm();
+    function delCat(idx) {
+      restaurantCustomerData.menuCategories.splice(idx, 1);
+      renderMenuBuilderList();
     }
-
-    function updateCategoryName(catIdx, val) {
-      restaurantCustomerData.menuCategories[catIdx].name = val;
+    function setCatName(idx, val) {
+      restaurantCustomerData.menuCategories[idx].name = val;
     }
-
-    function addDishItem(catIdx) {
-      restaurantCustomerData.menuCategories[catIdx].items.push({ name: "", price: "", desc: "" });
-      renderDynamicMenuForm();
+    function addDish(catIdx) {
+      restaurantCustomerData.menuCategories[catIdx].items.push({ name: "", price: "", desc: "", veg: false, bestseller: false });
+      renderMenuBuilderList();
     }
-
-    function deleteDishItem(catIdx, itemIdx) {
+    function delDish(catIdx, itemIdx) {
       restaurantCustomerData.menuCategories[catIdx].items.splice(itemIdx, 1);
-      renderDynamicMenuForm();
+      renderMenuBuilderList();
     }
-
-    function updateDishItem(catIdx, itemIdx, key, val) {
-      restaurantCustomerData.menuCategories[catIdx].items[itemIdx][key] = val;
+    function setDishProp(catIdx, itemIdx, prop, val) {
+      restaurantCustomerData.menuCategories[catIdx].items[itemIdx][prop] = val;
     }
 
     /* ==========================================================================
-       6. IMAGE PREVIEWS (LOCAL FILE READER)
+       IMAGE UPLOADS (LOCAL SESSION)
        ========================================================================== */
-    function handleLogoChange(input) {
+    function handleLogoUpload(input) {
       if (input.files && input.files[0]) {
         const reader = new FileReader();
         reader.onload = (e) => {
           restaurantCustomerData.logoUrl = e.target.result;
-          document.getElementById("logoThumbImg").src = e.target.result;
-          document.getElementById("logoThumbPreview").style.display = "block";
+          document.getElementById("logoPreviewImg").src = e.target.result;
+          document.getElementById("logoPreviewWrap").style.display = "block";
         };
         reader.readAsDataURL(input.files[0]);
       }
     }
 
-    function handleGalleryChange(input) {
+    function handleGalleryUpload(input) {
       if (!input.files) return;
       const files = Array.from(input.files);
-      const remainingSlots = 12 - restaurantCustomerData.galleryImages.length;
-
-      files.slice(0, remainingSlots).forEach(file => {
+      const remaining = 12 - restaurantCustomerData.galleryImages.length;
+      files.slice(0, remaining).forEach(file => {
         const reader = new FileReader();
         reader.onload = (e) => {
           restaurantCustomerData.galleryImages.push(e.target.result);
-          renderGalleryThumbnails();
+          renderGalleryThumbsList();
         };
         reader.readAsDataURL(file);
       });
     }
 
-    function renderGalleryThumbnails() {
-      const container = document.getElementById("galleryThumbsGrid");
-      container.innerHTML = "";
+    function renderGalleryThumbsList() {
+      const c = document.getElementById("galleryThumbs");
+      c.innerHTML = "";
       restaurantCustomerData.galleryImages.forEach((src, idx) => {
         const div = document.createElement("div");
         div.className = "thumb-item";
         div.innerHTML = `
-          <img src="${src}" alt="Gallery ${idx + 1}" />
-          <div class="thumb-del" onclick="removeGalleryThumbnail(${idx})">&times;</div>
+          <img src="${src}" alt="Thumb ${idx + 1}" />
+          <div class="thumb-del" onclick="removeGalleryPhoto(${idx})">&times;</div>
         `;
-        container.appendChild(div);
+        c.appendChild(div);
       });
     }
-
-    function removeGalleryThumbnail(idx) {
+    function removeGalleryPhoto(idx) {
       restaurantCustomerData.galleryImages.splice(idx, 1);
-      renderGalleryThumbnails();
+      renderGalleryThumbsList();
     }
 
     /* ==========================================================================
-       7. FORM SUBMISSION, VALIDATION & INSTANT CREATION (500–800ms)
+       FINAL REVIEW SUMMARY
        ========================================================================== */
-    function handleCustomerFormSubmit(e) {
+    function updateReviewSummary() {
+      const box = document.getElementById("reviewSummaryCard");
+      const name = document.getElementById("cust_name").value.trim();
+      const addr = document.getElementById("cust_address").value.trim();
+      const phone = document.getElementById("cust_phone").value.trim();
+      const catCount = restaurantCustomerData.menuCategories.filter(c => c.name).length;
+      const imgCount = restaurantCustomerData.galleryImages.length;
+
+      box.innerHTML = `
+        <div class="rev-row">
+          <span class="rev-label">Restaurant Name:</span>
+          <span class="rev-val">${escapeHtml(name || "(Not provided yet)")}</span>
+        </div>
+        <div class="rev-row">
+          <span class="rev-label">Address:</span>
+          <span class="rev-val">${escapeHtml(addr || "(Not provided yet)")}</span>
+        </div>
+        <div class="rev-row">
+          <span class="rev-label">Contact Phone:</span>
+          <span class="rev-val">${escapeHtml(phone || "(None)")}</span>
+        </div>
+        <div class="rev-row">
+          <span class="rev-label">Menu Categories:</span>
+          <span class="rev-val">${catCount} categories</span>
+        </div>
+        <div class="rev-row">
+          <span class="rev-label">Custom Gallery Photos:</span>
+          <span class="rev-val">${imgCount} photos</span>
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       FORM SUBMISSION, VALIDATION & FAST TRANSITION
+       ========================================================================== */
+    function handleFormSubmit(e) {
       e.preventDefault();
 
-      let isValid = true;
-      clearErrors();
+      let valid = true;
+      document.querySelectorAll(".form-input").forEach(i => i.classList.remove("input-error"));
+      document.querySelectorAll(".field-error").forEach(err => err.style.display = "none");
 
-      // Required: Restaurant Name
       const nameVal = document.getElementById("cust_name").value.trim();
       if (!nameVal) {
-        showError("cust_name");
-        isValid = false;
+        document.getElementById("cust_name").classList.add("input-error");
+        document.getElementById("err_cust_name").style.display = "block";
+        valid = false;
       }
 
-      // Required: Location / Address
-      const addressVal = document.getElementById("cust_address").value.trim();
-      if (!addressVal) {
-        showError("cust_address");
-        isValid = false;
+      const addrVal = document.getElementById("cust_address").value.trim();
+      if (!addrVal) {
+        document.getElementById("cust_address").classList.add("input-error");
+        document.getElementById("err_cust_address").style.display = "block";
+        valid = false;
       }
 
-      // Optional format validation
-      const emailVal = document.getElementById("cust_email").value.trim();
-      if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-        showError("cust_email");
-        isValid = false;
+      if (!valid) {
+        showToast("Please enter required fields (Business Name & Address)");
+        return;
       }
 
-      const phoneVal = document.getElementById("cust_phone").value.trim();
-      if (phoneVal && !/^[\d\s+\-()]{7,18}$/.test(phoneVal)) {
-        showError("cust_phone");
-        isValid = false;
-      }
-
-      const mapsVal = document.getElementById("cust_maps").value.trim();
-      if (mapsVal && !/^https?:\/\/.+/i.test(mapsVal)) {
-        showError("cust_maps");
-        isValid = false;
-      }
-
-      if (!isValid) return;
-
-      // Extract form values into customer data
+      // Sync data model strictly from inputs
       restaurantCustomerData.name = nameVal;
       restaurantCustomerData.tagline = document.getElementById("cust_tagline").value.trim();
       restaurantCustomerData.type = document.getElementById("cust_type").value;
       restaurantCustomerData.cuisine = document.getElementById("cust_cuisine").value.trim();
+      restaurantCustomerData.est = document.getElementById("cust_est").value.trim();
+      restaurantCustomerData.specialty = document.getElementById("cust_specialty").value.trim();
 
-      restaurantCustomerData.phone = phoneVal;
+      restaurantCustomerData.phone = document.getElementById("cust_phone").value.trim();
       restaurantCustomerData.whatsapp = document.getElementById("cust_whatsapp").value.trim();
-      restaurantCustomerData.email = emailVal;
+      restaurantCustomerData.telephone = document.getElementById("cust_telephone").value.trim();
+      restaurantCustomerData.email = document.getElementById("cust_email").value.trim();
 
-      restaurantCustomerData.address = addressVal;
+      restaurantCustomerData.address = addrVal;
       restaurantCustomerData.city = document.getElementById("cust_city").value.trim();
       restaurantCustomerData.state = document.getElementById("cust_state").value.trim();
       restaurantCustomerData.pincode = document.getElementById("cust_pincode").value.trim();
-      restaurantCustomerData.maps = mapsVal;
+      restaurantCustomerData.maps = document.getElementById("cust_maps").value.trim();
 
-      restaurantCustomerData.about = document.getElementById("cust_about").value.trim();
+      restaurantCustomerData.workingDays = document.getElementById("cust_working_days").value.trim();
       restaurantCustomerData.openTime = document.getElementById("cust_open_time").value.trim();
       restaurantCustomerData.closeTime = document.getElementById("cust_close_time").value.trim();
-      restaurantCustomerData.workingDays = document.getElementById("cust_working_days").value.trim();
+
+      restaurantCustomerData.about = document.getElementById("cust_about").value.trim();
+      restaurantCustomerData.orderUrl = document.getElementById("cust_order_url").value.trim();
+      restaurantCustomerData.resLink = document.getElementById("cust_res_link").value.trim();
+      restaurantCustomerData.resNote = document.getElementById("cust_res_note").value.trim();
+
+      restaurantCustomerData.offerTitle = document.getElementById("cust_offer_title").value.trim();
+      restaurantCustomerData.offerCode = document.getElementById("cust_offer_code").value.trim();
+
+      restaurantCustomerData.testiQuote = document.getElementById("cust_testi_q").value.trim();
+      restaurantCustomerData.testiName = document.getElementById("cust_testi_name").value.trim();
+      restaurantCustomerData.testiRole = document.getElementById("cust_testi_role").value.trim();
+
+      restaurantCustomerData.faqQ = document.getElementById("cust_faq_q").value.trim();
+      restaurantCustomerData.faqA = document.getElementById("cust_faq_a").value.trim();
 
       restaurantCustomerData.social.instagram = document.getElementById("cust_insta").value.trim();
       restaurantCustomerData.social.facebook = document.getElementById("cust_fb").value.trim();
       restaurantCustomerData.social.youtube = document.getElementById("cust_yt").value.trim();
 
-      // Clean up empty categories or items
+      restaurantCustomerData.seoTitle = document.getElementById("cust_seo_title").value.trim();
+      if (restaurantCustomerData.seoTitle) {
+        document.title = restaurantCustomerData.seoTitle;
+      }
+
+      // Filter empty menu items
       restaurantCustomerData.menuCategories = restaurantCustomerData.menuCategories
-        .filter(cat => cat.name.trim() !== "")
-        .map(cat => ({
-          name: cat.name.trim(),
-          items: (cat.items || []).filter(it => it.name.trim() !== "")
+        .filter(c => c && c.name && c.name.trim() !== "")
+        .map(c => ({
+          name: c.name.trim(),
+          items: (c.items || []).filter(it => it && it.name && it.name.trim() !== "")
         }));
 
-      // Close modal
       closeBuyModal();
 
-      // Instant transition (approx 600ms)
+      // Fast transition (approx 0.6s)
       const loader = document.getElementById("fastLoader");
       loader.classList.add("active");
 
       setTimeout(() => {
         loader.classList.remove("active");
-        renderCustomerRestaurant();
+        renderFinalCustomerWebsite();
       }, 650);
     }
 
-    function renderCustomerRestaurant() {
-      // Hide portal bar and modes strip
+    /* ==========================================================================
+       RENDER CUSTOMER RESTAURANT & REVEAL DOMAIN QUESTION
+       ========================================================================== */
+    function renderFinalCustomerWebsite() {
+      // Hide WebCraft portal bar, modes section and template selector
       document.getElementById("portalBar").style.display = "none";
-      document.getElementById("modesStrip").style.display = "none";
+      document.getElementById("modesSection").style.display = "none";
+      document.getElementById("templateSelectorSec").style.display = "none";
 
       // Show final preview toolbar
       document.getElementById("finalToolbar").classList.add("active");
 
-      // Reset active menu tab to 0
+      // Reset menu tab
       activeMenuTab = 0;
 
       // Render strictly from customer data
       renderRestaurant(restaurantCustomerData);
       window.scrollTo(0, 0);
+
+      // Trigger Domain Decision Modal after a tiny pause
+      setTimeout(() => {
+        document.getElementById("domainChoiceModal").classList.add("active");
+      }, 500);
     }
 
     /* ==========================================================================
-       8. VIEWPORT CONTROLS
+       DOMAIN FLOW & SIMULATED PROGRESS (FRONTEND DEMO ONLY)
+       ========================================================================== */
+    function handleDomainDecision(wantsDomain) {
+      document.getElementById("domainChoiceModal").classList.remove("active");
+
+      if (wantsDomain) {
+        document.getElementById("domainInputModal").classList.add("active");
+      } else {
+        // Continue without domain
+        setupCheckoutModal(false);
+      }
+    }
+
+    function startDomainSetupProgress() {
+      const dInput = document.getElementById("customDomainInput").value.trim() || "myrestaurant.com";
+      restaurantCustomerData.customDomain = dInput;
+
+      document.getElementById("domainInputModal").classList.remove("active");
+      const progModal = document.getElementById("domainProgressModal");
+      progModal.classList.add("active");
+
+      document.getElementById("domainTargetDisplay").textContent = dInput;
+      const bar = document.getElementById("domainProgressBar");
+      const countdown = document.getElementById("domainCountdownText");
+      const heading = document.getElementById("domainProgressHeading");
+      const sub = document.getElementById("domainProgressSub");
+
+      let progress = 0;
+      let minutesLeft = 19;
+
+      const timer = setInterval(() => {
+        progress += 20;
+        bar.style.width = progress + "%";
+        minutesLeft -= 4;
+        if (minutesLeft > 0) {
+          countdown.textContent = `Estimated remaining time: ~${minutesLeft} minutes`;
+        }
+
+        if (progress >= 100) {
+          clearInterval(timer);
+          heading.textContent = "Domain Connected Successfully";
+          sub.textContent = `${dInput} is bound to your WebCraft project.`;
+          countdown.textContent = "DNS & SSL setup completed.";
+
+          setTimeout(() => {
+            progModal.classList.remove("active");
+            setupCheckoutModal(true);
+          }, 900);
+        }
+      }, 350);
+    }
+
+    function setupCheckoutModal(hasDomain) {
+      const checkout = document.getElementById("checkoutModal");
+      const domainRow = document.getElementById("domainRowPrice");
+      const totalEl = document.getElementById("priceTotal");
+
+      if (hasDomain) {
+        domainRow.style.display = "flex";
+        totalEl.textContent = "₹3,898";
+      } else {
+        domainRow.style.display = "none";
+        totalEl.textContent = "₹2,999";
+      }
+
+      checkout.classList.add("active");
+    }
+
+    function handlePaymentDownload() {
+      document.getElementById("checkoutModal").classList.remove("active");
+      showToast("🎉 Thank you! Payment gateway and site exporter placeholder triggered.");
+    }
+
+    /* ==========================================================================
+       VIEWPORT TOGGLES
        ========================================================================== */
     function setDeviceViewport(mode, btn) {
       document.querySelectorAll(".vp-btn").forEach(b => b.classList.remove("active"));
@@ -2244,27 +2970,18 @@
       if (btn) btn.classList.add("active");
     }
 
-    function handleContinueNextStep() {
-      alert("Your customized website setup is complete! Publishing, payment and custom domain connection will be added next.");
-    }
-
     /* ==========================================================================
-       9. VALIDATION HELPERS & UTILITIES
+       UTILITIES
        ========================================================================== */
-    function showError(fieldId) {
-      const el = document.getElementById(fieldId);
-      const err = document.getElementById(`err_${fieldId}`);
-      if (el) el.classList.add("input-error");
-      if (err) err.style.display = "block";
-    }
-
-    function clearErrors() {
-      document.querySelectorAll(".form-input").forEach(i => i.classList.remove("input-error"));
-      document.querySelectorAll(".field-error").forEach(e => e.style.display = "none");
+    function showToast(msg) {
+      const t = document.getElementById("toastMsg");
+      t.textContent = msg;
+      t.style.display = "block";
+      setTimeout(() => { t.style.display = "none"; }, 3500);
     }
 
     function cleanPhone(str) {
-      return str.replace(/\D/g, "");
+      return (str || "").replace(/\D/g, "");
     }
 
     function escapeHtml(str) {
