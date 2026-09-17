@@ -152,7 +152,7 @@
     }
 
     /* ==========================================================================
-       2. CREATION MODES SECTION (SIDE-BY-SIDE 4 CARDS, PRICING/SAAS STYLE)
+       2. CREATION MODES SECTION (SIDE-BY-SIDE 4 CARDS)
        ========================================================================== */
     .creation-modes-sec {
       padding: 36px 0 24px;
@@ -521,7 +521,8 @@
     /* Delivery Platforms Strip */
     .delivery-strip {
       background: rgba(14, 19, 31, 0.9);
-      border-y: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
       padding: 22px 0;
     }
     .delivery-flex {
@@ -859,29 +860,6 @@
     }
     .testi-role { font-size: 0.74rem; color: #777; }
 
-    /* UPI & Payment Box */
-    .upi-box {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(14, 19, 31, 0.95));
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      border-radius: var(--radius-md);
-      padding: 30px;
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .upi-id-pill {
-      font-family: monospace;
-      font-size: 1.15rem;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px dashed var(--accent-emerald);
-      color: var(--accent-emerald);
-      padding: 8px 18px;
-      border-radius: var(--radius-sm);
-      display: inline-block;
-      margin: 12px 0;
-      user-select: all;
-    }
-
     /* Hours & Location Cards */
     .hours-location-wrap {
       display: grid;
@@ -1144,7 +1122,7 @@
     }
     .checkbox-label input { width: 16px; height: 16px; accent-color: var(--gold); }
 
-    /* Repeatable Dynamic Boxes */
+    /* Dynamic Repeatable Boxes */
     .repeat-box {
       background: #090c13;
       border: 1px solid var(--border-subtle);
@@ -1165,17 +1143,55 @@
     }
     .btn-delete:hover { background: rgba(244, 63, 94, 0.2); }
 
-    /* Image Preview Thumbnails */
-    .upload-zone {
-      border: 2px dashed var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      background: #080a10;
+    /* Modern Direct Upload Controls */
+    .upload-control-block {
+      background: #090c13;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .upload-preview-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .upload-preview-thumb {
+      width: 54px;
+      height: 54px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--border-subtle);
+      background: #111;
+    }
+    .upload-btns-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn-upload-trigger {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       transition: var(--transition);
     }
-    .upload-zone:hover { border-color: var(--gold); }
+    .btn-upload-trigger:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--gold);
+    }
+
+    /* Gallery Multiple Grid */
     .thumbs-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1201,12 +1217,12 @@
       background: rgba(0, 0, 0, 0.75);
       color: #fff;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       cursor: pointer;
     }
 
@@ -1378,19 +1394,6 @@
       font-size: 0.9rem;
       margin-bottom: 24px;
     }
-    .progress-track {
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-      margin: 20px 0;
-    }
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #6366f1, #10b981);
-      transition: width 0.3s linear;
-    }
 
     /* Toast */
     .toast {
@@ -1425,7 +1428,6 @@
       .form-row, .form-row-3 { grid-template-columns: 1fr; }
       .thumbs-grid { grid-template-columns: repeat(2, 1fr); }
       .rest-links { display: none; }
-      .dish-row-builder { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1641,7 +1643,7 @@
   <div class="final-toolbar" id="finalToolbar">
     <div style="display: flex; align-items: center; gap: 10px;">
       <div class="status-dot"></div>
-      <span style="font-weight: 700; color: #fff; font-size: 0.92rem;">Your Website Is Ready</span>
+      <span style="font-weight: 700; color: #fff; font-size: 0.92rem;">Your Website Is Ready 🎉</span>
     </div>
 
     <div class="viewport-btn-group">
@@ -1650,8 +1652,9 @@
       <button class="vp-btn" onclick="setDeviceViewport('mobile', this)">Mobile</button>
     </div>
 
-    <div>
+    <div style="display: flex; align-items: center; gap: 8px;">
       <button class="btn-outline-gold" onclick="openBuyModal()" style="padding: 6px 14px; font-size: 0.78rem;">Edit Details</button>
+      <button class="btn-gold" onclick="promptDomainChoice()" style="padding: 6px 16px; font-size: 0.78rem;">Proceed to Domain & Download &rarr;</button>
     </div>
   </div>
 
@@ -1667,7 +1670,7 @@
   </div>
 
   <!-- ==========================================================================
-       5. BUY MODAL (EXPANDED ACCORDION FORM FOR 40+ FEATURES)
+       5. BUY MODAL (GROUPED FORM UX WITH DIRECT IMAGE UPLOADS & ADMIN ACCESS)
        ========================================================================== -->
   <div class="buy-modal-overlay" id="buyModalOverlay">
     <div class="buy-header">
@@ -1737,10 +1740,47 @@
           </div>
         </div>
 
-        <!-- Group 2: Contact Details -->
+        <!-- Group 2: Admin Panel Access (NEW REQUIREMENT) -->
+        <div class="acc-group open" id="grp2_admin">
+          <div class="acc-header" onclick="toggleAccordion('grp2_admin')">
+            <span class="acc-title">2. Admin Panel Access</span>
+            <span class="acc-chevron">&#9660;</span>
+          </div>
+          <div class="acc-body">
+            <div class="form-group">
+              <label class="form-label">Do you want an Admin Panel for this website?</label>
+              <div style="display: flex; gap: 20px; margin-top: 6px;">
+                <label class="checkbox-label">
+                  <input type="radio" name="admin_choice" value="yes" id="admin_choice_yes" onchange="toggleAdminAccessUI(true)" />
+                  <span>YES, Enable Admin Panel</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="radio" name="admin_choice" value="no" id="admin_choice_no" checked onchange="toggleAdminAccessUI(false)" />
+                  <span>NO, Not Needed Now</span>
+                </label>
+              </div>
+            </div>
+
+            <div id="adminPanelInputBox" style="display: none; margin-top: 16px; padding: 16px; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--radius-sm);">
+              <div class="form-group" style="margin-bottom: 8px;">
+                <label class="form-label">Admin / Owner Gmail <span class="req">*</span></label>
+                <input type="email" id="cust_admin_gmail" class="form-input" placeholder="e.g. owner.restaurant@gmail.com" />
+                <div class="field-error" id="err_cust_admin_gmail">Please enter your valid Gmail address.</div>
+              </div>
+              <p style="font-size: 0.78rem; color: #a5b4fc; line-height: 1.5; margin-top: 6px;">
+                <strong>Security Notice:</strong> Use the Gmail account that should manage this website. Keep this Gmail account secure and do not share access. Only the selected Google account will be authorized for the Admin Panel.
+              </p>
+              <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; margin-top: 8px;">
+                The future Admin Panel will allow you to sign in with this Google account to easily edit menu items, prices, operating hours, photos, special offers, reviews, and bookings at any time. (This Gmail will NOT be displayed publicly on your website).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 3: Contact Details -->
         <div class="acc-group" id="grp2">
           <div class="acc-header" onclick="toggleAccordion('grp2')">
-            <span class="acc-title">2. Contact Details</span>
+            <span class="acc-title">3. Contact Details</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1764,21 +1804,21 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" id="cust_email" class="form-input" placeholder="e.g. contact@royalspice.in" />
-              </div>
-              <div class="form-group">
                 <label class="form-label">Telephone / Landline</label>
                 <input type="text" id="cust_telephone" class="form-input" placeholder="e.g. 040-2345678" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="cust_email" class="form-input" placeholder="e.g. contact@royalspice.in" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Group 3: Location -->
+        <!-- Group 4: Location -->
         <div class="acc-group" id="grp3">
           <div class="acc-header" onclick="toggleAccordion('grp3')">
-            <span class="acc-title">3. Location</span>
+            <span class="acc-title">4. Location & Map</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1810,35 +1850,34 @@
           </div>
         </div>
 
-        <!-- Group 4: Operating Hours (Separate Lunch & Dinner) -->
+        <!-- Group 5: Simplified Operating Hours (NEW REQUIREMENT) -->
         <div class="acc-group" id="grp4">
           <div class="acc-header" onclick="toggleAccordion('grp4')">
-            <span class="acc-title">4. Operating Hours (Separate Lunch & Dinner)</span>
+            <span class="acc-title">5. Operating Hours (Opening, Closing & Closed Days)</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
-            <div class="form-group">
-              <label class="form-label">Working Days</label>
-              <input type="text" id="cust_working_days" class="form-input" placeholder="e.g. Tuesday – Sunday (Closed on Mondays)" />
-            </div>
-
-            <div class="form-row">
+            <div class="form-row-3">
               <div class="form-group">
-                <label class="form-label">Lunch Timings</label>
-                <input type="text" id="cust_lunch_hours" class="form-input" placeholder="e.g. 12:00 PM – 3:30 PM" />
+                <label class="form-label">Opening Time</label>
+                <input type="text" id="cust_open_time" class="form-input" placeholder="e.g. 11:00 AM" />
               </div>
               <div class="form-group">
-                <label class="form-label">Dinner Timings</label>
-                <input type="text" id="cust_dinner_hours" class="form-input" placeholder="e.g. 7:00 PM – 11:30 PM" />
+                <label class="form-label">Closing Time</label>
+                <input type="text" id="cust_close_time" class="form-input" placeholder="e.g. 11:00 PM" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Closed Days (Optional)</label>
+                <input type="text" id="cust_closed_days" class="form-input" placeholder="e.g. Monday (or leave blank if open all days)" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Group 5: About & Story -->
+        <!-- Group 6: About & Story -->
         <div class="acc-group" id="grp5">
           <div class="acc-header" onclick="toggleAccordion('grp5')">
-            <span class="acc-title">5. About & Story</span>
+            <span class="acc-title">6. About & Story</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1849,14 +1888,14 @@
           </div>
         </div>
 
-        <!-- Group 6: Chef / Culinary Team -->
+        <!-- Group 7: Chef / Culinary Team (WITH DIRECT IMAGE UPLOADS) -->
         <div class="acc-group" id="grp6">
           <div class="acc-header" onclick="toggleAccordion('grp6')">
-            <span class="acc-title">6. Chef / Team Members</span>
+            <span class="acc-title">7. Chef / Team Members</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
-            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Highlight your master chefs and culinary team.</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Highlight your master chefs and culinary team with direct photo uploads.</div>
             <div id="chefBuilderList"></div>
             <button type="button" class="btn-outline-gold" onclick="addChefForm()" style="width: 100%; border-style: dashed; padding: 10px;">
               + Add Chef / Team Member
@@ -1864,10 +1903,10 @@
           </div>
         </div>
 
-        <!-- Group 7: Dynamic Menu Builder -->
+        <!-- Group 8: Dynamic Menu Builder (WITH DIRECT DISH UPLOADS) -->
         <div class="acc-group" id="grp7">
           <div class="acc-header" onclick="toggleAccordion('grp7')">
-            <span class="acc-title">7. Menu Builder</span>
+            <span class="acc-title">8. Menu Builder</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1879,10 +1918,10 @@
           </div>
         </div>
 
-        <!-- Group 8: Delivery Platform Links -->
+        <!-- Group 9: Delivery Platform Links -->
         <div class="acc-group" id="grp8">
           <div class="acc-header" onclick="toggleAccordion('grp8')">
-            <span class="acc-title">8. Online Food Delivery Links</span>
+            <span class="acc-title">9. Online Food Delivery Links</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1903,17 +1942,20 @@
           </div>
         </div>
 
-        <!-- Group 9: Reservations -->
+        <!-- Group 10: Reservations (STRICT LOGIC) -->
         <div class="acc-group" id="grp9">
           <div class="acc-header" onclick="toggleAccordion('grp9')">
-            <span class="acc-title">9. Table Reservations</span>
+            <span class="acc-title">10. Table Reservations</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">
+              Leave all fields below empty if you do not wish to offer table booking on the website.
+            </p>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">Reservation Booking Phone</label>
-                <input type="text" id="cust_res_phone" class="form-input" placeholder="e.g. +91 98765 43210" />
+                <label class="form-label">Reservation Dedicated Phone</label>
+                <input type="tel" id="cust_res_phone" class="form-input" placeholder="e.g. +91 98765 43210" />
               </div>
               <div class="form-group">
                 <label class="form-label">Reservation Booking Link (Optional)</label>
@@ -1927,10 +1969,10 @@
           </div>
         </div>
 
-        <!-- Group 10: Special Offers -->
+        <!-- Group 11: Special Offers -->
         <div class="acc-group" id="grp10">
           <div class="acc-header" onclick="toggleAccordion('grp10')">
-            <span class="acc-title">10. Special Offers & Discounts</span>
+            <span class="acc-title">11. Special Offers & Discounts</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1947,14 +1989,14 @@
           </div>
         </div>
 
-        <!-- Group 11: Special Events -->
+        <!-- Group 12: Special Events (WITH DIRECT IMAGE UPLOADS) -->
         <div class="acc-group" id="grp11">
           <div class="acc-header" onclick="toggleAccordion('grp11')">
-            <span class="acc-title">11. Events / Live Music / Special Nights</span>
+            <span class="acc-title">12. Events / Live Music / Special Nights</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
-            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Add special events, weekend live bands, or food festivals.</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Add special events, weekend live bands, or food festivals with photos.</div>
             <div id="eventBuilderList"></div>
             <button type="button" class="btn-outline-gold" onclick="addEventForm()" style="width: 100%; border-style: dashed; padding: 10px;">
               + Add Event
@@ -1962,14 +2004,16 @@
           </div>
         </div>
 
-        <!-- Group 12: Customer Testimonials -->
+        <!-- Group 13: Customer Testimonials (OPTIONAL / CAN SKIP) -->
         <div class="acc-group" id="grp12">
           <div class="acc-header" onclick="toggleAccordion('grp12')">
-            <span class="acc-title">12. Customer Testimonials (Multiple)</span>
+            <span class="acc-title">13. Customer Testimonials (Optional)</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
-            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Add real reviews from patrons.</div>
+            <div style="font-size: 0.8rem; color: #a5b4fc; margin-bottom: 12px;">
+              ⭐ <em>Optional: You can skip this completely. Comprehensive review management will be handled in the future Admin Panel.</em>
+            </div>
             <div id="testiBuilderList"></div>
             <button type="button" class="btn-outline-gold" onclick="addTestiForm()" style="width: 100%; border-style: dashed; padding: 10px;">
               + Add Testimonial
@@ -1977,10 +2021,10 @@
           </div>
         </div>
 
-        <!-- Group 13: Multiple FAQs -->
+        <!-- Group 14: Multiple FAQs -->
         <div class="acc-group" id="grp13">
           <div class="acc-header" onclick="toggleAccordion('grp13')">
-            <span class="acc-title">13. Multiple FAQs</span>
+            <span class="acc-title">14. Multiple FAQs</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1992,55 +2036,60 @@
           </div>
         </div>
 
-        <!-- Group 14: Images & Gallery -->
+        <!-- Group 15: Direct Image Uploads (Logo, Hero & Gallery) -->
         <div class="acc-group" id="grp14">
           <div class="acc-header" onclick="toggleAccordion('grp14')">
-            <span class="acc-title">14. Images & Gallery</span>
+            <span class="acc-title">15. Direct Image Uploads (Logo, Hero & Gallery)</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
+            <!-- Direct Logo Upload -->
             <div class="form-group">
               <label class="form-label">Restaurant Logo</label>
-              <input type="file" id="logoUpload" accept="image/*" class="form-input" onchange="handleLogoUpload(this)" />
-              <div id="logoPreviewWrap" style="margin-top: 8px; display: none;">
-                <img id="logoPreviewImg" src="" style="height: 48px; border-radius: 6px; object-fit: contain;" alt="Logo" />
+              <div class="upload-control-block" id="logoUploadBlock">
+                <div class="upload-preview-area">
+                  <img id="logoPreviewImg" class="upload-preview-thumb" src="" alt="Logo" style="display: none;" />
+                  <span id="logoStatusText" style="font-size: 0.85rem; color: var(--text-muted);">No logo chosen</span>
+                </div>
+                <div class="upload-btns-group">
+                  <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="handleDirectImageUpload(this, 'logo')" />
+                  <button type="button" class="btn-upload-trigger" onclick="document.getElementById('logoUploadInput').click()">
+                    <span id="logoBtnLabel">+ Upload Logo</span>
+                  </button>
+                  <button type="button" id="logoRemoveBtn" class="btn-delete" style="display: none;" onclick="removeDirectImage('logo')">Remove</button>
+                </div>
               </div>
             </div>
 
+            <!-- Direct Hero Image Upload -->
             <div class="form-group">
-              <label class="form-label">Custom Hero Banner Image URL (Optional)</label>
-              <input type="url" id="cust_hero_img" class="form-input" placeholder="https://.../hero.jpg" />
+              <label class="form-label">Hero Banner Image</label>
+              <div class="upload-control-block" id="heroUploadBlock">
+                <div class="upload-preview-area">
+                  <img id="heroPreviewImg" class="upload-preview-thumb" src="" alt="Hero" style="display: none;" />
+                  <span id="heroStatusText" style="font-size: 0.85rem; color: var(--text-muted);">No hero image chosen</span>
+                </div>
+                <div class="upload-btns-group">
+                  <input type="file" id="heroUploadInput" accept="image/*" style="display: none;" onchange="handleDirectImageUpload(this, 'hero')" />
+                  <button type="button" class="btn-upload-trigger" onclick="document.getElementById('heroUploadInput').click()">
+                    <span id="heroBtnLabel">+ Upload Hero Image</span>
+                  </button>
+                  <button type="button" id="heroRemoveBtn" class="btn-delete" style="display: none;" onclick="removeDirectImage('hero')">Remove</button>
+                </div>
+              </div>
             </div>
 
+            <!-- Gallery Multiple Direct Upload -->
             <div class="form-group">
-              <label class="form-label">Gallery Photos (Up to 12 images)</label>
-              <div class="upload-zone" onclick="document.getElementById('galleryUpload').click()">
-                <div style="font-size: 1.8rem; margin-bottom: 4px;">📷</div>
-                <strong style="font-size: 0.9rem;">Click to upload restaurant images</strong>
-                <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 4px;">PNG, JPG, WEBP (Saved locally in session)</div>
+              <label class="form-label">Gallery Photos (Direct Upload — Max 12)</label>
+              <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                <input type="file" id="galleryUploadInput" accept="image/*" multiple style="display: none;" onchange="handleGalleryDirectUpload(this)" />
+                <button type="button" class="btn-upload-trigger" onclick="document.getElementById('galleryUploadInput').click()">
+                  + Upload Gallery Photos
+                </button>
+                <span id="galleryCountLabel" style="font-size: 0.82rem; color: var(--text-muted);">0 / 12 photos</span>
               </div>
-              <input type="file" id="galleryUpload" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(this)" />
-              <div class="thumbs-grid" id="galleryThumbs"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Group 15: UPI & Digital Payment -->
-        <div class="acc-group" id="grp15">
-          <div class="acc-header" onclick="toggleAccordion('grp15')">
-            <span class="acc-title">15. UPI / Payment Details</span>
-            <span class="acc-chevron">&#9660;</span>
-          </div>
-          <div class="acc-body">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">UPI ID for Digital Payments</label>
-                <input type="text" id="cust_upi_id" class="form-input" placeholder="e.g. royalspice@okhdfcbank" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Accepted Modes Note</label>
-                <input type="text" id="cust_upi_note" class="form-input" placeholder="e.g. We accept GPay, PhonePe, Cards & Cash" />
-              </div>
+              <div class="thumbs-grid" id="galleryThumbsGrid"></div>
             </div>
           </div>
         </div>
@@ -2048,7 +2097,7 @@
         <!-- Group 16: Social Links & Custom Button -->
         <div class="acc-group" id="grp16">
           <div class="acc-header" onclick="toggleAccordion('grp16')">
-            <span class="acc-title">16. Social Links & Extra Button</span>
+            <span class="acc-title">16. Social Links & Custom Button</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -2087,12 +2136,12 @@
           </div>
           <div class="acc-body">
             <div class="form-group">
-              <label class="form-label">Privacy Policy Summary</label>
-              <textarea id="cust_privacy" class="form-textarea" rows="2" placeholder="e.g. We respect your privacy. Guest contact details collected for reservations are never sold."></textarea>
+              <label class="form-label">Privacy Policy</label>
+              <textarea id="cust_privacy" class="form-textarea" rows="2" placeholder="e.g. We respect your privacy. Contact information is never shared."></textarea>
             </div>
             <div class="form-group">
-              <label class="form-label">Terms of Dining Summary</label>
-              <textarea id="cust_terms" class="form-textarea" rows="2" placeholder="e.g. Tables held for 15 minutes past reservation time. Outside food not allowed."></textarea>
+              <label class="form-label">Terms of Dining</label>
+              <textarea id="cust_terms" class="form-textarea" rows="2" placeholder="e.g. Tables held for 15 minutes past reservation time."></textarea>
             </div>
           </div>
         </div>
@@ -2124,69 +2173,51 @@
   </div>
 
   <!-- ==========================================================================
-       6. SHORT TRANSITION SPINNER
+       6. SHORT 0.5-1s TRANSITION LOADER
        ========================================================================== -->
   <div class="fast-loader-overlay" id="fastLoader">
     <div class="pulse-gold-ring"></div>
     <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 6px;">Preparing your website...</h3>
-    <p style="color: var(--text-muted); font-size: 0.86rem;">Compiling dynamic components and zeroing demo placeholders.</p>
+    <p style="color: var(--text-muted); font-size: 0.86rem;">Compiling dynamic components and loading preview.</p>
   </div>
 
   <!-- ==========================================================================
-       8. DOMAIN FLOW & CHECKOUT MODALS
+       7. DOMAIN SELECTION MODAL (ASKED AFTER PREVIEW)
        ========================================================================== -->
   <div class="flow-modal" id="domainChoiceModal">
     <div class="flow-box">
-      <h3>Would you like to add a custom domain?</h3>
-      <p>Connect your own domain (e.g. yourrestaurant.com) or continue without domain for download.</p>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-size: 2.2rem; margin-bottom: 8px;">🎉</div>
+      <h3 style="color: #fff;">Your Website Is Ready 🎉</h3>
+      <p style="color: var(--text-muted);">Would you like to add a custom domain for your restaurant?</p>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
         <button class="btn-gold" style="justify-content: center;" onclick="handleDomainDecision(true)">YES, ADD DOMAIN</button>
         <button class="btn-outline-gold" style="justify-content: center;" onclick="handleDomainDecision(false)">NO, CONTINUE WITHOUT DOMAIN</button>
       </div>
     </div>
   </div>
 
-  <!-- Domain Input Modal -->
+  <!-- Domain Input Modal with Executive Assistance Disclosure -->
   <div class="flow-modal" id="domainInputModal">
     <div class="flow-box">
       <h3>Enter Your Domain Name</h3>
-      <p>Enter the domain name you wish to configure.</p>
+      <p>Enter the custom domain name you want for your website.</p>
       <div class="form-group" style="text-align: left;">
         <input type="text" id="customDomainInput" class="form-input" placeholder="e.g. royalspicerestaurant.com" />
       </div>
-      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); padding: 12px; border-radius: 6px; font-size: 0.82rem; color: #fbbf24; margin-bottom: 18px;">
-        Domain setup may take approximately 20 minutes to propagate.
+      <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); padding: 14px; border-radius: 8px; font-size: 0.84rem; color: #c7d2fe; margin-bottom: 20px; text-align: left; line-height: 1.5;">
+        <strong>Notice:</strong> Domain setup and final website activation may take some time. A WebCraft executive will contact you if any assistance or verification is required.
       </div>
-      <button class="btn-gold" style="width: 100%; justify-content: center;" onclick="startDomainSetupProgress()">
-        OK, START DOMAIN SETUP
+      <button class="btn-gold" style="width: 100%; justify-content: center;" onclick="proceedFromDomainInputToPayment()">
+        OK, PROCEED TO PAYMENT
       </button>
     </div>
   </div>
 
-  <!-- Domain Progress Countdown Simulation -->
-  <div class="flow-modal" id="domainProgressModal">
-    <div class="flow-box">
-      <div style="font-size: 2rem; margin-bottom: 8px;">⏳</div>
-      <h3 id="domainProgressHeading">Domain Setup in Progress</h3>
-      <p id="domainProgressSub">Configuring DNS zone and SSL certificate...</p>
-      <div style="font-family: monospace; font-size: 1.1rem; color: var(--gold); font-weight: 700;" id="domainTargetDisplay">domain.com</div>
-      
-      <div class="progress-track">
-        <div class="progress-fill" id="domainProgressBar"></div>
-      </div>
-
-      <div style="font-size: 0.85rem; color: var(--text-muted);" id="domainCountdownText">
-        Estimated remaining time: ~19 minutes
-      </div>
-    </div>
-  </div>
-
-  <!-- Final Checkout / Payment Placeholder Modal -->
+  <!-- Final Checkout & Payment Summary Modal -->
   <div class="flow-modal" id="checkoutModal">
     <div class="flow-box">
-      <div style="font-size: 2.2rem; margin-bottom: 6px;">🎉</div>
-      <h3 id="checkoutTitle">Website Ready for Download</h3>
-      <p id="checkoutSubtitle">Review final package and proceed to download your code.</p>
+      <h3>Website Price Summary</h3>
+      <p>Review final order details and proceed to payment.</p>
 
       <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: left;">
         <div class="rev-row">
@@ -2194,21 +2225,44 @@
           <span class="rev-val">₹2,999</span>
         </div>
         <div class="rev-row" id="domainRowPrice" style="display: none;">
-          <span class="rev-label">Domain Charges</span>
+          <span class="rev-label">Custom Domain Charge</span>
           <span class="rev-val">₹899</span>
         </div>
+        <div class="rev-row" id="adminRowStatus" style="display: none;">
+          <span class="rev-label">Admin Panel Access</span>
+          <span class="rev-val" style="color: var(--accent-emerald);">Included</span>
+        </div>
         <div class="rev-row" style="font-weight: 700; font-size: 1.05rem; color: var(--gold); margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px;">
-          <span>Total</span>
+          <span>Total Amount</span>
           <span id="priceTotal">₹2,999</span>
         </div>
       </div>
 
-      <button class="btn-gold" style="width: 100%; justify-content: center; font-size: 1rem; padding: 14px;" onclick="handlePaymentDownload()">
-        PAY & DOWNLOAD
+      <button class="btn-gold" style="width: 100%; justify-content: center; font-size: 1rem; padding: 14px;" onclick="simulatePaymentProcess()">
+        PAY NOW
       </button>
       <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 10px;">
-        (Frontend payment placeholder state)
+        (Simulated payment & activation step)
       </div>
+    </div>
+  </div>
+
+  <!-- Payment Successful & Download Website Modal -->
+  <div class="flow-modal" id="paymentSuccessModal">
+    <div class="flow-box">
+      <div style="font-size: 2.4rem; margin-bottom: 8px;">✅</div>
+      <div style="color: var(--accent-emerald); font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;">
+        PAYMENT SUCCESSFUL
+      </div>
+      <h3 style="color: #fff; font-size: 1.6rem; margin-bottom: 8px;">Your Website Is Ready</h3>
+      <p id="paymentSuccessDesc" style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 24px;">
+        Your restaurant website has been generated successfully. You can download the complete standalone website package now.
+      </p>
+
+      <button class="btn-gold" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 16px;" onclick="executeWebsiteDownload()">
+        DOWNLOAD YOUR WEBSITE 📥
+      </button>
+      <div id="postPaymentAssistanceNote" style="font-size: 0.78rem; color: #a5b4fc; margin-top: 14px; display: none;"></div>
     </div>
   </div>
 
@@ -2227,7 +2281,7 @@
   <div class="toast" id="toastMsg"></div>
 
   <!-- ==========================================================================
-       9. JAVASCRIPT LOGIC & ARCHITECTURE
+       8. JAVASCRIPT ARCHITECTURE
        ========================================================================== -->
   <script>
     /* ==========================================================================
@@ -2250,9 +2304,9 @@
       state: "Telangana",
       pincode: "500033",
       maps: "https://maps.google.com",
-      workingDays: "Monday – Sunday",
-      lunchHours: "12:00 PM – 3:30 PM",
-      dinnerHours: "7:00 PM – 11:30 PM",
+      openTime: "11:00 AM",
+      closeTime: "11:00 PM",
+      closedDays: "Open All 7 Days",
       about: "Crafted with unwavering dedication, La Bella Kitchen brings European culinary artistry to life with organic farm produce, hand-rolled pasta, and prime steaks flame-kissed over aged oak.",
       zomato: "https://zomato.com",
       swiggy: "https://swiggy.com",
@@ -2267,8 +2321,6 @@
       offerCode: "CODE: BELLA15",
       extraBtnText: "View Wine Cellar List",
       extraBtnUrl: "#menu-sec",
-      upiId: "labellakitchen@okhdfcbank",
-      upiNote: "We accept all UPI Apps, Credit/Debit Cards & Cash",
       privacyPolicy: "We respect guest confidentiality. Contact information collected for bookings is never sold to third parties.",
       termsOfService: "Tables are held for 15 minutes past reservation time. Outside food and beverages are not permitted.",
       social: {
@@ -2333,7 +2385,7 @@
       ]
     };
 
-    // Customer Data starts 100% EMPTY. NO FABRICATION.
+    // Customer Data starts 100% EMPTY. NO DEMO FABRICATION.
     let restaurantCustomerData = {
       isDemo: false,
       name: "",
@@ -2343,6 +2395,8 @@
       est: "",
       specialty: "",
       favicon: "",
+      adminAccess: false,
+      adminGmail: "",
       phone: "",
       whatsapp: "",
       telephone: "",
@@ -2352,9 +2406,9 @@
       state: "",
       pincode: "",
       maps: "",
-      workingDays: "",
-      lunchHours: "",
-      dinnerHours: "",
+      openTime: "",
+      closeTime: "",
+      closedDays: "",
       about: "",
       chefs: [],
       menuCategories: [],
@@ -2372,8 +2426,6 @@
       logoUrl: "",
       heroImg: "",
       galleryImages: [],
-      upiId: "",
-      upiNote: "",
       social: { instagram: "", facebook: "", youtube: "" },
       extraBtnText: "",
       extraBtnUrl: "",
@@ -2383,6 +2435,7 @@
     };
 
     let activeMenuTab = 0;
+    let selectedDomainChoice = false;
 
     /* ==========================================================================
        INITIALIZATION
@@ -2399,7 +2452,7 @@
     }
 
     /* ==========================================================================
-       RESTAURANT RENDER ENGINE (DYNAMIC & CONDITIONALLY FILTERED)
+       RESTAURANT RENDER ENGINE (DYNAMIC, STRICT NO-FABRICATION FILTERING)
        ========================================================================== */
     function renderRestaurant(data) {
       const mount = document.getElementById("restaurantMount");
@@ -2414,31 +2467,34 @@
 
       const phone = data.phone || "";
       const whatsapp = data.whatsapp || "";
+      const telephone = data.telephone || "";
       const email = data.email || "";
 
       const address = data.address ? `${data.address}${data.city ? ', ' + data.city : ''}${data.state ? ', ' + data.state : ''}${data.pincode ? ' - ' + data.pincode : ''}` : "";
       const maps = data.maps || "";
 
-      const workingDays = data.workingDays || "";
-      const lunchHours = data.lunchHours || "";
-      const dinnerHours = data.dinnerHours || "";
+      // Simplified Operating Hours
+      const openTime = data.openTime || "";
+      const closeTime = data.closeTime || "";
+      const closedDays = data.closedDays || "";
+      const hasHours = !!(openTime || closeTime || closedDays);
 
       const about = data.about || "";
       const zomato = data.zomato || "";
       const swiggy = data.swiggy || "";
       const orderUrl = data.orderUrl || "";
-      const resPhone = data.resPhone || phone || "";
+
+      // STRICT RESERVATION LOGIC: Never fallback to general mobile phone!
+      const resPhone = data.resPhone || "";
       const resLink = data.resLink || "";
       const resNote = data.resNote || "";
+      const hasReservation = isDemo || !!(resPhone || resLink || resNote);
 
       const offerTitle = data.offerTitle || "";
       const offerCode = data.offerCode || "";
 
       const extraBtnText = data.extraBtnText || "";
       const extraBtnUrl = data.extraBtnUrl || "";
-
-      const upiId = data.upiId || "";
-      const upiNote = data.upiNote || "";
 
       const logoUrl = data.logoUrl || "";
       const galleryPhotos = data.galleryImages || [];
@@ -2448,8 +2504,9 @@
       const testimonials = data.testimonials || [];
       const faqs = data.faqs || [];
 
-      const heroBg = data.heroImg || (galleryPhotos && galleryPhotos[0]) || (isDemo ? restaurantDemoData.heroImg : "");
-      const aboutBg = (galleryPhotos && galleryPhotos[1]) || (isDemo ? restaurantDemoData.aboutImg : "");
+      // STRICT HERO BACKGROUND: Never show demo hero image on customer site
+      const heroBg = data.heroImg || (isDemo ? restaurantDemoData.heroImg : "");
+      const aboutBg = (galleryPhotos && galleryPhotos[0]) || (isDemo ? restaurantDemoData.aboutImg : "");
 
       const social = data.social || {};
       const hasSocial = social.instagram || social.facebook || social.youtube;
@@ -2474,7 +2531,8 @@
               ${menuCats.length > 0 ? `<li><a href="#menu-sec">Menu</a></li>` : ''}
               ${events.length > 0 ? `<li><a href="#events-sec">Events</a></li>` : ''}
               ${galleryPhotos.length > 0 ? `<li><a href="#gallery-sec">Gallery</a></li>` : ''}
-              ${(lunchHours || dinnerHours || address) ? `<li><a href="#location-sec">Visit</a></li>` : ''}
+              ${(hasHours || address) ? `<li><a href="#location-sec">Visit</a></li>` : ''}
+              ${hasReservation ? `<li><a href="#res-sec">Reservations</a></li>` : ''}
               ${faqs.length > 0 ? `<li><a href="#faq-sec">FAQ</a></li>` : ''}
             </ul>
 
@@ -2482,7 +2540,7 @@
               ${whatsapp ? `<a href="https://wa.me/${cleanPhone(whatsapp)}" target="_blank" class="btn-outline-gold" style="padding: 7px 14px; font-size: 0.78rem;">WhatsApp</a>` : ''}
               ${isDemo ? `
                 <button class="btn-gold" onclick="openBuyModal()" style="padding: 8px 18px; font-size: 0.8rem;">Buy This Website</button>
-              ` : (resPhone ? `<a href="tel:${cleanPhone(resPhone)}" class="btn-gold" style="padding: 8px 18px; font-size: 0.8rem;">Reserve: ${escapeHtml(resPhone)}</a>` : '')}
+              ` : (resPhone ? `<a href="tel:${cleanPhone(resPhone)}" class="btn-gold" style="padding: 8px 18px; font-size: 0.8rem;">Reserve: ${escapeHtml(resPhone)}</a>` : (resLink ? `<a href="${escapeHtml(resLink)}" target="_blank" class="btn-gold" style="padding: 8px 18px; font-size: 0.8rem;">Book Table</a>` : (phone ? `<a href="tel:${cleanPhone(phone)}" class="btn-gold" style="padding: 8px 18px; font-size: 0.8rem;">Call: ${escapeHtml(phone)}</a>` : '')))}
             </div>
           </div>
         </nav>
@@ -2490,7 +2548,7 @@
 
       // 2. HERO SECTION
       html += `
-        <header class="rest-hero" style="${heroBg ? `background: linear-gradient(rgba(8, 8, 10, 0.65), rgba(8, 8, 10, 0.85)), url('${heroBg}') center/cover no-repeat;` : ''}">
+        <header class="rest-hero" style="${heroBg ? `background: linear-gradient(rgba(8, 8, 10, 0.65), rgba(8, 8, 10, 0.85)), url('${heroBg}') center/cover no-repeat;` : 'background: linear-gradient(135deg, #0e131f 0%, #07090e 100%);'}">
           <div class="rest-hero-card">
             ${(type || cuisine) ? `<span class="hero-eyebrow">${escapeHtml(type ? type : '')}${type && cuisine ? ' &bull; ' : ''}${escapeHtml(cuisine ? cuisine : '')}</span>` : ''}
             <h1 class="hero-heading">${escapeHtml(name)}</h1>
@@ -2499,7 +2557,7 @@
             <div class="hero-cta-group">
               ${menuCats.length > 0 ? `<a href="#menu-sec" class="btn-outline-gold">Explore Menu</a>` : ''}
               ${orderUrl ? `<a href="${escapeHtml(orderUrl)}" target="_blank" class="btn-gold">Order Online</a>` : ''}
-              ${(resLink || resPhone) ? `<a href="#res-sec" class="btn-gold">Book a Table</a>` : ''}
+              ${hasReservation ? `<a href="#res-sec" class="btn-gold">Book a Table</a>` : ''}
               ${(extraBtnText && extraBtnUrl) ? `<a href="${escapeHtml(extraBtnUrl)}" class="btn-outline-gold">${escapeHtml(extraBtnText)}</a>` : ''}
               ${isDemo ? `
                 <button class="btn-gold" onclick="openBuyModal()">Buy This Website</button>
@@ -2645,16 +2703,21 @@
                 <div class="menu-split-grid">
                   ${(menuCats[activeMenuTab].items || []).map(item => `
                     <div class="menu-entry">
-                      <div class="menu-entry-top">
-                        <span class="menu-entry-name">${escapeHtml(item.name)}</span>
-                        <span class="menu-entry-price">${escapeHtml(item.price || '')}</span>
-                      </div>
-                      ${item.desc ? `<p class="menu-entry-desc">${escapeHtml(item.desc)}</p>` : ''}
-                      <div class="dish-chips">
-                        ${item.veg === true || item.veg === "true" ? `<span class="chip chip-veg">Pure Veg</span>` : ''}
-                        ${item.veg === false || item.veg === "false" ? `<span class="chip chip-nonveg">Non-Veg</span>` : ''}
-                        ${item.bestseller ? `<span class="chip chip-bestseller">&#9733; Bestseller</span>` : ''}
-                        ${item.spicy > 0 ? `<span class="chip chip-spicy">${"🌶️".repeat(item.spicy)} Spicy</span>` : ''}
+                      <div style="display: flex; gap: 14px; align-items: flex-start;">
+                        ${item.img ? `<img src="${item.img}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover; flex-shrink: 0;" alt="Dish" />` : ''}
+                        <div style="flex-grow: 1;">
+                          <div class="menu-entry-top">
+                            <span class="menu-entry-name">${escapeHtml(item.name)}</span>
+                            <span class="menu-entry-price">${escapeHtml(item.price || '')}</span>
+                          </div>
+                          ${item.desc ? `<p class="menu-entry-desc">${escapeHtml(item.desc)}</p>` : ''}
+                          <div class="dish-chips">
+                            ${item.veg === true || item.veg === "true" ? `<span class="chip chip-veg">Pure Veg</span>` : ''}
+                            ${item.veg === false || item.veg === "false" ? `<span class="chip chip-nonveg">Non-Veg</span>` : ''}
+                            ${item.bestseller ? `<span class="chip chip-bestseller">&#9733; Bestseller</span>` : ''}
+                            ${item.spicy > 0 ? `<span class="chip chip-spicy">${"🌶️".repeat(item.spicy)} Spicy</span>` : ''}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   `).join("")}
@@ -2715,7 +2778,7 @@
         `;
       }
 
-      // 11. TESTIMONIALS (Multiple)
+      // 11. TESTIMONIALS (Multiple - strictly customer entered if in customer mode)
       if (testimonials.length > 0) {
         html += `
           <section class="rest-section" style="background: #090c13;">
@@ -2739,25 +2802,8 @@
         `;
       }
 
-      // 12. UPI & DIGITAL PAYMENTS
-      if (upiId) {
-        html += `
-          <section class="rest-section" style="padding: 40px 0;">
-            <div class="container">
-              <div class="upi-box">
-                <span class="section-eyebrow" style="color: var(--accent-emerald);">Seamless Payments</span>
-                <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #fff; margin-bottom: 6px;">Pay Directly via UPI</h3>
-                <p style="font-size: 0.86rem; color: #aaa;">Scan with Google Pay, PhonePe, Paytm or transfer to UPI ID:</p>
-                <div class="upi-id-pill">${escapeHtml(upiId)}</div>
-                ${upiNote ? `<div style="font-size: 0.8rem; color: #888;">${escapeHtml(upiNote)}</div>` : ''}
-              </div>
-            </div>
-          </section>
-        `;
-      }
-
-      // 13. HOURS & LOCATION (Separate Lunch & Dinner)
-      if (lunchHours || dinnerHours || address || phone || email) {
+      // 12. HOURS & LOCATION (SIMPLIFIED OPERATING HOURS + TELEPHONE/LANDLINE)
+      if (hasHours || address || phone || telephone || email) {
         html += `
           <section class="rest-section" id="location-sec" style="background: #090c13;">
             <div class="container">
@@ -2766,43 +2812,53 @@
                 <h2 class="section-title">Plan Your Visit</h2>
               </div>
               <div class="hours-location-wrap">
-                ${(lunchHours || dinnerHours || workingDays) ? `
+                ${hasHours ? `
                   <div class="info-box-3d">
                     <h3>Operating Schedule</h3>
-                    ${workingDays ? `
+                    ${(openTime && closeTime) ? `
                       <div class="info-row">
-                        <span style="color: #999;">Days Open</span>
-                        <strong>${escapeHtml(workingDays)}</strong>
+                        <span style="color: #999;">Opening Hours</span>
+                        <strong style="color: var(--gold);">${escapeHtml(openTime)} – ${escapeHtml(closeTime)}</strong>
                       </div>
-                    ` : ''}
-                    ${lunchHours ? `
+                    ` : (openTime ? `
                       <div class="info-row">
-                        <span style="color: #999;">Lunch Service</span>
-                        <strong style="color: var(--gold);">${escapeHtml(lunchHours)}</strong>
+                        <span style="color: #999;">Opens At</span>
+                        <strong style="color: var(--gold);">${escapeHtml(openTime)}</strong>
                       </div>
-                    ` : ''}
-                    ${dinnerHours ? `
+                    ` : (closeTime ? `
                       <div class="info-row">
-                        <span style="color: #999;">Dinner Service</span>
-                        <strong style="color: var(--gold);">${escapeHtml(dinnerHours)}</strong>
+                        <span style="color: #999;">Closes At</span>
+                        <strong style="color: var(--gold);">${escapeHtml(closeTime)}</strong>
+                      </div>
+                    ` : ''))}
+                    ${closedDays ? `
+                      <div class="info-row">
+                        <span style="color: #999;">Closed Days</span>
+                        <strong style="color: #f43f5e;">${escapeHtml(closedDays)}</strong>
                       </div>
                     ` : ''}
                   </div>
                 ` : ''}
 
-                ${(address || phone || email || maps) ? `
+                ${(address || phone || telephone || email || maps) ? `
                   <div class="info-box-3d">
                     <h3>Address & Contact</h3>
                     ${address ? `
                       <div class="info-row">
-                        <span style="color: #999;">Address</span>
+                        <span style="color: #999;">Location</span>
                         <strong style="text-align: right; max-width: 65%;">${escapeHtml(address)}</strong>
                       </div>
                     ` : ''}
                     ${phone ? `
                       <div class="info-row">
-                        <span style="color: #999;">Phone</span>
+                        <span style="color: #999;">Mobile</span>
                         <a href="tel:${cleanPhone(phone)}" style="color: var(--gold); font-weight: 700;">${escapeHtml(phone)}</a>
+                      </div>
+                    ` : ''}
+                    ${telephone ? `
+                      <div class="info-row">
+                        <span style="color: #999;">Tel / Landline</span>
+                        <a href="tel:${cleanPhone(telephone)}" style="color: var(--gold); font-weight: 700;">${escapeHtml(telephone)}</a>
                       </div>
                     ` : ''}
                     ${email ? `
@@ -2826,8 +2882,8 @@
         `;
       }
 
-      // 14. TABLE RESERVATIONS
-      if (resPhone || resLink || resNote) {
+      // 13. TABLE RESERVATIONS (Hidden completely if user left reservation details empty)
+      if (hasReservation) {
         html += `
           <section class="rest-section" id="res-sec">
             <div class="container" style="max-width: 800px; text-align: center;">
@@ -2843,7 +2899,7 @@
         `;
       }
 
-      // 15. MULTIPLE FAQS
+      // 14. MULTIPLE FAQS
       if (faqs.length > 0) {
         html += `
           <section class="rest-section" id="faq-sec" style="background: #090c13;">
@@ -2865,13 +2921,13 @@
         `;
       }
 
-      // 16. PROMINENT BOTTOM PURCHASE BANNER (DEMO ONLY)
+      // 15. PROMINENT BOTTOM PURCHASE BANNER (DEMO ONLY)
       if (isDemo) {
         html += `
           <div class="container">
             <div class="purchase-banner">
               <h2>Ready to Make This Website Yours?</h2>
-              <p>Customize this restaurant website with your dishes, separate lunch & dinner timings, team members, and events.</p>
+              <p>Customize this restaurant website with your dishes, operating hours, team members, and events.</p>
               <button class="btn-gold" onclick="openBuyModal()" style="font-size: 1rem; padding: 14px 32px;">
                 Buy This Website
               </button>
@@ -2880,7 +2936,7 @@
         `;
       }
 
-      // 17. FOOTER & LEGAL
+      // 16. FOOTER & LEGAL
       const hasLegal = data.privacyPolicy || data.termsOfService;
       html += `
         <footer class="rest-footer">
@@ -2912,13 +2968,14 @@
         </footer>
       `;
 
-      // 18. CUSTOMER BOTTOM "CONTINUE" TRIGGER
+      // 17. CUSTOMER BOTTOM BAR: PROCEED TO DOMAIN & DOWNLOAD
       if (!isDemo) {
         html += `
           <div style="background: #07090e; border-top: 1px solid var(--border-subtle); padding: 40px 24px; text-align: center;">
-            <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 12px;">Your website is ready.</h3>
-            <button class="btn-gold" onclick="promptDomainChoice()" style="padding: 12px 36px; font-size: 1rem;">
-              Continue
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 8px;">Your website is ready.</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px;">Proceed to configure domain options and complete website activation.</p>
+            <button class="btn-gold" onclick="promptDomainChoice()" style="padding: 13px 36px; font-size: 1rem;">
+              Proceed to Domain & Download &rarr;
             </button>
           </div>
         `;
@@ -2936,25 +2993,26 @@
     }
 
     /* ==========================================================================
-       BUY MODAL & ACCORDION CONTROL
+       BUY MODAL & ACCORDION CONTROL WITH FULL DATA PRESERVATION ON EDIT
        ========================================================================== */
     function openBuyModal() {
+      populateFormFromCustomerData();
       document.getElementById("buyModalOverlay").classList.add("active");
       document.body.style.overflow = "hidden";
-      renderMenuBuilderList();
-      renderChefBuilderList();
-      renderEventBuilderList();
-      renderTestiBuilderList();
-      renderFaqBuilderList();
-      updateReviewSummary();
     }
+
     function closeBuyModal() {
       document.getElementById("buyModalOverlay").classList.remove("active");
       document.body.style.overflow = "";
     }
+
     function toggleAccordion(id) {
       const el = document.getElementById(id);
       if (el) el.classList.toggle("open");
+    }
+
+    function toggleAdminAccessUI(enable) {
+      document.getElementById("adminPanelInputBox").style.display = enable ? "block" : "none";
     }
 
     function syncWhatsApp() {
@@ -2962,6 +3020,7 @@
         document.getElementById("cust_whatsapp").value = document.getElementById("cust_phone").value;
       }
     }
+
     function toggleSameWhatsApp() {
       const isChecked = document.getElementById("cust_same_wa").checked;
       const wa = document.getElementById("cust_whatsapp");
@@ -2974,18 +3033,195 @@
     }
 
     /* ==========================================================================
+       POPULATE FORM ON EDIT DETAILS (RESTORES ALL DATA & PREVIEWS)
+       ========================================================================== */
+    function populateFormFromCustomerData() {
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val || "";
+      };
+
+      setVal("cust_name", restaurantCustomerData.name);
+      setVal("cust_tagline", restaurantCustomerData.tagline);
+      setVal("cust_type", restaurantCustomerData.type);
+      setVal("cust_cuisine", restaurantCustomerData.cuisine);
+      setVal("cust_est", restaurantCustomerData.est);
+      setVal("cust_specialty", restaurantCustomerData.specialty);
+      setVal("cust_favicon", restaurantCustomerData.favicon);
+
+      // Admin access restoration
+      const wantsAdmin = !!restaurantCustomerData.adminAccess;
+      document.getElementById("admin_choice_yes").checked = wantsAdmin;
+      document.getElementById("admin_choice_no").checked = !wantsAdmin;
+      toggleAdminAccessUI(wantsAdmin);
+      setVal("cust_admin_gmail", restaurantCustomerData.adminGmail);
+
+      // Contact Details
+      setVal("cust_phone", restaurantCustomerData.phone);
+      setVal("cust_whatsapp", restaurantCustomerData.whatsapp);
+      setVal("cust_telephone", restaurantCustomerData.telephone);
+      setVal("cust_email", restaurantCustomerData.email);
+
+      const sameWa = document.getElementById("cust_same_wa");
+      if (sameWa) {
+        const isSame = !!(restaurantCustomerData.phone && restaurantCustomerData.whatsapp && restaurantCustomerData.phone === restaurantCustomerData.whatsapp);
+        sameWa.checked = isSame;
+        const waInput = document.getElementById("cust_whatsapp");
+        if (waInput) waInput.disabled = isSame;
+      }
+
+      // Location
+      setVal("cust_address", restaurantCustomerData.address);
+      setVal("cust_city", restaurantCustomerData.city);
+      setVal("cust_state", restaurantCustomerData.state);
+      setVal("cust_pincode", restaurantCustomerData.pincode);
+      setVal("cust_maps", restaurantCustomerData.maps);
+
+      // Simplified Hours
+      setVal("cust_open_time", restaurantCustomerData.openTime);
+      setVal("cust_close_time", restaurantCustomerData.closeTime);
+      setVal("cust_closed_days", restaurantCustomerData.closedDays);
+
+      setVal("cust_about", restaurantCustomerData.about);
+
+      // Delivery & Reservations
+      setVal("cust_zomato", restaurantCustomerData.zomato);
+      setVal("cust_swiggy", restaurantCustomerData.swiggy);
+      setVal("cust_order_url", restaurantCustomerData.orderUrl);
+
+      setVal("cust_res_phone", restaurantCustomerData.resPhone);
+      setVal("cust_res_link", restaurantCustomerData.resLink);
+      setVal("cust_res_note", restaurantCustomerData.resNote);
+
+      setVal("cust_offer_title", restaurantCustomerData.offerTitle);
+      setVal("cust_offer_code", restaurantCustomerData.offerCode);
+
+      setVal("cust_extra_btn_text", restaurantCustomerData.extraBtnText);
+      setVal("cust_extra_btn_url", restaurantCustomerData.extraBtnUrl);
+
+      setVal("cust_privacy", restaurantCustomerData.privacyPolicy);
+      setVal("cust_terms", restaurantCustomerData.termsOfService);
+
+      if (restaurantCustomerData.social) {
+        setVal("cust_insta", restaurantCustomerData.social.instagram);
+        setVal("cust_fb", restaurantCustomerData.social.facebook);
+        setVal("cust_yt", restaurantCustomerData.social.youtube);
+      }
+
+      // Direct Upload Controls UI Restoration (Logo & Hero)
+      updateDirectUploadControlUI('logo', restaurantCustomerData.logoUrl);
+      updateDirectUploadControlUI('hero', restaurantCustomerData.heroImg);
+
+      // Dynamic builders restoration
+      renderGalleryThumbsList();
+      renderMenuBuilderList();
+      renderChefBuilderList();
+      renderEventBuilderList();
+      renderTestiBuilderList();
+      renderFaqBuilderList();
+      updateReviewSummary();
+    }
+
+    /* ==========================================================================
+       DIRECT IMAGE UPLOAD CONTROLS (PREVIEW, REPLACE, REMOVE)
+       ========================================================================== */
+    function handleDirectImageUpload(input, targetKey) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const dataUrl = e.target.result;
+          if (targetKey === 'logo') {
+            restaurantCustomerData.logoUrl = dataUrl;
+          } else if (targetKey === 'hero') {
+            restaurantCustomerData.heroImg = dataUrl;
+          }
+          updateDirectUploadControlUI(targetKey, dataUrl);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function updateDirectUploadControlUI(targetKey, dataUrl) {
+      const img = document.getElementById(`${targetKey}PreviewImg`);
+      const status = document.getElementById(`${targetKey}StatusText`);
+      const btnLabel = document.getElementById(`${targetKey}BtnLabel`);
+      const removeBtn = document.getElementById(`${targetKey}RemoveBtn`);
+
+      if (dataUrl) {
+        if (img) { img.src = dataUrl; img.style.display = "block"; }
+        if (status) status.textContent = `${targetKey === 'logo' ? 'Logo' : 'Hero banner'} uploaded`;
+        if (btnLabel) btnLabel.textContent = "Replace";
+        if (removeBtn) removeBtn.style.display = "inline-block";
+      } else {
+        if (img) { img.src = ""; img.style.display = "none"; }
+        if (status) status.textContent = `No ${targetKey} chosen`;
+        if (btnLabel) btnLabel.textContent = `+ Upload ${targetKey === 'logo' ? 'Logo' : 'Hero Image'}`;
+        if (removeBtn) removeBtn.style.display = "none";
+      }
+    }
+
+    function removeDirectImage(targetKey) {
+      if (targetKey === 'logo') {
+        restaurantCustomerData.logoUrl = "";
+        document.getElementById("logoUploadInput").value = "";
+      } else if (targetKey === 'hero') {
+        restaurantCustomerData.heroImg = "";
+        document.getElementById("heroUploadInput").value = "";
+      }
+      updateDirectUploadControlUI(targetKey, "");
+    }
+
+    // Direct Gallery Multiple Upload
+    function handleGalleryDirectUpload(input) {
+      if (!input.files) return;
+      const files = Array.from(input.files);
+      const remaining = 12 - restaurantCustomerData.galleryImages.length;
+      files.slice(0, remaining).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          restaurantCustomerData.galleryImages.push(e.target.result);
+          renderGalleryThumbsList();
+        };
+        reader.readAsDataURL(file);
+      });
+      input.value = "";
+    }
+
+    function renderGalleryThumbsList() {
+      const c = document.getElementById("galleryThumbsGrid");
+      if (!c) return;
+      c.innerHTML = "";
+      restaurantCustomerData.galleryImages.forEach((src, idx) => {
+        const div = document.createElement("div");
+        div.className = "thumb-item";
+        div.innerHTML = `
+          <img src="${src}" alt="Gallery ${idx + 1}" />
+          <div class="thumb-del" title="Remove image" onclick="removeGalleryPhoto(${idx})">&times;</div>
+        `;
+        c.appendChild(div);
+      });
+      document.getElementById("galleryCountLabel").textContent = `${restaurantCustomerData.galleryImages.length} / 12 photos`;
+    }
+
+    function removeGalleryPhoto(idx) {
+      restaurantCustomerData.galleryImages.splice(idx, 1);
+      renderGalleryThumbsList();
+    }
+
+    /* ==========================================================================
        DYNAMIC BUILDERS (CHEFS, MENU, EVENTS, TESTIMONIALS, FAQS)
        ========================================================================== */
-    // Chef Builder
+    // Chef Builder with Direct Upload
     function renderChefBuilderList() {
       const c = document.getElementById("chefBuilderList");
+      if (!c) return;
       c.innerHTML = "";
       restaurantCustomerData.chefs.forEach((chef, idx) => {
         const div = document.createElement("div");
         div.className = "repeat-box";
         div.innerHTML = `
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <strong style="color: var(--gold); font-size: 0.88rem;">Chef / Team #${idx + 1}</strong>
+            <strong style="color: var(--gold); font-size: 0.88rem;">Chef / Team Member #${idx + 1}</strong>
             <button type="button" class="btn-delete" onclick="delChef(${idx})">Remove</button>
           </div>
           <div class="form-row">
@@ -2993,10 +3229,16 @@
             <input type="text" class="form-input" placeholder="Role (e.g. Executive Head Chef)" value="${escapeHtml(chef.role)}" oninput="setChefProp(${idx}, 'role', this.value)" />
           </div>
           <div class="form-group" style="margin-top: 10px;">
-            <input type="text" class="form-input" placeholder="Short Bio / Background..." value="${escapeHtml(chef.bio || '')}" oninput="setChefProp(${idx}, 'bio', this.value)" />
+            <input type="text" class="form-input" placeholder="Short Bio / Specialty..." value="${escapeHtml(chef.bio || '')}" oninput="setChefProp(${idx}, 'bio', this.value)" />
           </div>
-          <div class="form-group">
-            <input type="url" class="form-input" placeholder="Chef Photo URL (Optional)" value="${escapeHtml(chef.img || '')}" oninput="setChefProp(${idx}, 'img', this.value)" />
+          <!-- Direct Photo Upload -->
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 6px;">
+            <input type="file" id="chefPhoto_${idx}" accept="image/*" style="display: none;" onchange="uploadChefPhoto(this, ${idx})" />
+            <button type="button" class="btn-upload-trigger" onclick="document.getElementById('chefPhoto_${idx}').click()">
+              ${chef.img ? 'Replace Photo' : '+ Upload Chef Photo'}
+            </button>
+            ${chef.img ? `<img src="${chef.img}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover;" alt="Chef" />` : ''}
+            ${chef.img ? `<button type="button" class="btn-delete" style="padding: 4px 8px;" onclick="removeChefPhoto(${idx})">Remove Photo</button>` : ''}
           </div>
         `;
         c.appendChild(div);
@@ -3013,16 +3255,32 @@
     function setChefProp(idx, prop, val) {
       restaurantCustomerData.chefs[idx][prop] = val;
     }
+    function uploadChefPhoto(input, idx) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          restaurantCustomerData.chefs[idx].img = e.target.result;
+          renderChefBuilderList();
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function removeChefPhoto(idx) {
+      restaurantCustomerData.chefs[idx].img = "";
+      renderChefBuilderList();
+    }
 
-    // Dynamic Menu Builder
+    // Dynamic Menu Builder with Dish Photo Upload
     function renderMenuBuilderList() {
       const c = document.getElementById("menuBuilderList");
+      if (!c) return;
       c.innerHTML = "";
       restaurantCustomerData.menuCategories.forEach((cat, catIdx) => {
         const div = document.createElement("div");
-        div.className = "menu-cat-card";
+        div.className = "repeat-box";
+        div.style.background = "#0c1018";
         div.innerHTML = `
-          <div class="menu-cat-head">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
             <input type="text" class="form-input" style="font-weight: 700; max-width: 280px;" 
               placeholder="Category Name (e.g. Starters)" value="${escapeHtml(cat.name)}" 
               oninput="setCatName(${catIdx}, this.value)" />
@@ -3030,14 +3288,17 @@
           </div>
           <div>
             ${(cat.items || []).map((item, itemIdx) => `
-              <div class="dish-row-builder">
-                <input type="text" class="form-input" placeholder="Dish Name (e.g. Biryani)" 
-                  value="${escapeHtml(item.name)}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'name', this.value)" />
-                <input type="text" class="form-input" placeholder="Price (e.g. ₹350)" 
-                  value="${escapeHtml(item.price)}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'price', this.value)" />
-                <button type="button" class="btn-delete" onclick="delDish(${catIdx}, ${itemIdx})">&times;</button>
-                <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 2fr 1fr; gap: 8px;">
-                  <input type="text" class="form-input" placeholder="Short description..." 
+              <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                <div style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px; align-items: center;">
+                  <input type="text" class="form-input" placeholder="Dish Name (e.g. Garlic Naan)" 
+                    value="${escapeHtml(item.name)}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'name', this.value)" />
+                  <input type="text" class="form-input" placeholder="Price (e.g. ₹280)" 
+                    value="${escapeHtml(item.price)}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'price', this.value)" />
+                  <button type="button" class="btn-delete" onclick="delDish(${catIdx}, ${itemIdx})">&times;</button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-top: 8px;">
+                  <input type="text" class="form-input" placeholder="Description (e.g. Crispy clay oven baked naan with roasted garlic)" 
                     value="${escapeHtml(item.desc || '')}" oninput="setDishProp(${catIdx}, ${itemIdx}, 'desc', this.value)" />
                   <select class="form-select" onchange="setDishProp(${catIdx}, ${itemIdx}, 'spicy', parseInt(this.value))">
                     <option value="0" ${item.spicy === 0 ? 'selected' : ''}>Not Spicy</option>
@@ -3046,18 +3307,30 @@
                     <option value="3" ${item.spicy === 3 ? 'selected' : ''}>🌶️🌶️🌶️ Extra Hot</option>
                   </select>
                 </div>
-                <div style="grid-column: 1 / -1; display: flex; gap: 14px; align-items: center;">
-                  <label class="checkbox-label" style="font-size:0.78rem;">
-                    <input type="checkbox" ${item.veg ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'veg', this.checked)"> Pure Veg
-                  </label>
-                  <label class="checkbox-label" style="font-size:0.78rem;">
-                    <input type="checkbox" ${item.bestseller ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'bestseller', this.checked)"> Bestseller
-                  </label>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 10px;">
+                  <div style="display: flex; gap: 14px; align-items: center;">
+                    <label class="checkbox-label" style="font-size:0.78rem;">
+                      <input type="checkbox" ${item.veg ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'veg', this.checked)"> Pure Veg
+                    </label>
+                    <label class="checkbox-label" style="font-size:0.78rem;">
+                      <input type="checkbox" ${item.bestseller ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'bestseller', this.checked)"> Bestseller
+                    </label>
+                  </div>
+                  <!-- Optional Dish Photo Direct Upload -->
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="file" id="dishImg_${catIdx}_${itemIdx}" accept="image/*" style="display: none;" onchange="uploadDishPhoto(this, ${catIdx}, ${itemIdx})" />
+                    <button type="button" class="btn-upload-trigger" style="padding: 4px 8px; font-size: 0.72rem;" onclick="document.getElementById('dishImg_${catIdx}_${itemIdx}').click()">
+                      ${item.img ? 'Replace Photo' : '+ Dish Photo'}
+                    </button>
+                    ${item.img ? `<img src="${item.img}" style="width: 26px; height: 26px; border-radius: 4px; object-fit: cover;" alt="Dish" />` : ''}
+                    ${item.img ? `<button type="button" class="btn-delete" style="padding: 2px 6px; font-size: 0.7rem;" onclick="removeDishPhoto(${catIdx}, ${itemIdx})">&times;</button>` : ''}
+                  </div>
                 </div>
               </div>
             `).join("")}
           </div>
-          <button type="button" class="btn-outline-gold" style="font-size: 0.76rem; padding: 6px 12px; margin-top: 6px;" onclick="addDish(${catIdx})">
+          <button type="button" class="btn-outline-gold" style="font-size: 0.76rem; padding: 6px 12px; margin-top: 4px;" onclick="addDish(${catIdx})">
             + Add Dish
           </button>
         `;
@@ -3067,7 +3340,7 @@
     function addMenuCategoryForm() {
       restaurantCustomerData.menuCategories.push({
         name: "",
-        items: [{ name: "", price: "", desc: "", veg: false, bestseller: false, spicy: 0 }]
+        items: [{ name: "", price: "", desc: "", veg: false, bestseller: false, spicy: 0, img: "" }]
       });
       renderMenuBuilderList();
     }
@@ -3079,7 +3352,7 @@
       restaurantCustomerData.menuCategories[idx].name = val;
     }
     function addDish(catIdx) {
-      restaurantCustomerData.menuCategories[catIdx].items.push({ name: "", price: "", desc: "", veg: false, bestseller: false, spicy: 0 });
+      restaurantCustomerData.menuCategories[catIdx].items.push({ name: "", price: "", desc: "", veg: false, bestseller: false, spicy: 0, img: "" });
       renderMenuBuilderList();
     }
     function delDish(catIdx, itemIdx) {
@@ -3089,10 +3362,25 @@
     function setDishProp(catIdx, itemIdx, prop, val) {
       restaurantCustomerData.menuCategories[catIdx].items[itemIdx][prop] = val;
     }
+    function uploadDishPhoto(input, catIdx, itemIdx) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          restaurantCustomerData.menuCategories[catIdx].items[itemIdx].img = e.target.result;
+          renderMenuBuilderList();
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function removeDishPhoto(catIdx, itemIdx) {
+      restaurantCustomerData.menuCategories[catIdx].items[itemIdx].img = "";
+      renderMenuBuilderList();
+    }
 
-    // Events Builder
+    // Events Builder with Direct Upload
     function renderEventBuilderList() {
       const c = document.getElementById("eventBuilderList");
+      if (!c) return;
       c.innerHTML = "";
       restaurantCustomerData.events.forEach((ev, idx) => {
         const div = document.createElement("div");
@@ -3103,15 +3391,20 @@
             <button type="button" class="btn-delete" onclick="delEvent(${idx})">Remove</button>
           </div>
           <div class="form-row">
-            <input type="text" class="form-input" placeholder="Event Title (e.g. Jazz Night)" value="${escapeHtml(ev.title)}" oninput="setEventProp(${idx}, 'title', this.value)" />
-            <input type="text" class="form-input" placeholder="Date/Time (e.g. Friday 8 PM)" value="${escapeHtml(ev.date)}" oninput="setEventProp(${idx}, 'date', this.value)" />
+            <input type="text" class="form-input" placeholder="Event Title (e.g. Friday Live Jazz)" value="${escapeHtml(ev.title)}" oninput="setEventProp(${idx}, 'title', this.value)" />
+            <input type="text" class="form-input" placeholder="Date/Schedule (e.g. Every Friday &bull; 8:00 PM)" value="${escapeHtml(ev.date)}" oninput="setEventProp(${idx}, 'date', this.value)" />
           </div>
           <div class="form-row" style="margin-top: 10px;">
             <input type="text" class="form-input" placeholder="Description..." value="${escapeHtml(ev.desc)}" oninput="setEventProp(${idx}, 'desc', this.value)" />
-            <input type="url" class="form-input" placeholder="RSVP / Ticket Link" value="${escapeHtml(ev.link)}" oninput="setEventProp(${idx}, 'link', this.value)" />
+            <input type="url" class="form-input" placeholder="RSVP / Ticket Link (Optional)" value="${escapeHtml(ev.link)}" oninput="setEventProp(${idx}, 'link', this.value)" />
           </div>
-          <div class="form-group" style="margin-top: 10px;">
-            <input type="url" class="form-input" placeholder="Event Image URL (Optional)" value="${escapeHtml(ev.img)}" oninput="setEventProp(${idx}, 'img', this.value)" />
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+            <input type="file" id="eventPhoto_${idx}" accept="image/*" style="display: none;" onchange="uploadEventPhoto(this, ${idx})" />
+            <button type="button" class="btn-upload-trigger" onclick="document.getElementById('eventPhoto_${idx}').click()">
+              ${ev.img ? 'Replace Event Image' : '+ Upload Event Image'}
+            </button>
+            ${ev.img ? `<img src="${ev.img}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover;" alt="Event" />` : ''}
+            ${ev.img ? `<button type="button" class="btn-delete" style="padding: 4px 8px;" onclick="removeEventPhoto(${idx})">Remove</button>` : ''}
           </div>
         `;
         c.appendChild(div);
@@ -3128,10 +3421,25 @@
     function setEventProp(idx, prop, val) {
       restaurantCustomerData.events[idx][prop] = val;
     }
+    function uploadEventPhoto(input, idx) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          restaurantCustomerData.events[idx].img = e.target.result;
+          renderEventBuilderList();
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function removeEventPhoto(idx) {
+      restaurantCustomerData.events[idx].img = "";
+      renderEventBuilderList();
+    }
 
-    // Testimonials Builder
+    // Testimonials Builder (Optional)
     function renderTestiBuilderList() {
       const c = document.getElementById("testiBuilderList");
+      if (!c) return;
       c.innerHTML = "";
       restaurantCustomerData.testimonials.forEach((t, idx) => {
         const div = document.createElement("div");
@@ -3170,6 +3478,7 @@
     // FAQs Builder
     function renderFaqBuilderList() {
       const c = document.getElementById("faqBuilderList");
+      if (!c) return;
       c.innerHTML = "";
       restaurantCustomerData.faqs.forEach((faq, idx) => {
         const div = document.createElement("div");
@@ -3202,50 +3511,20 @@
     }
 
     /* ==========================================================================
-       IMAGE UPLOADS (LOCAL SESSION)
+       DYNAMIC FAVICON APPLICATION
        ========================================================================== */
-    function handleLogoUpload(input) {
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          restaurantCustomerData.logoUrl = e.target.result;
-          document.getElementById("logoPreviewImg").src = e.target.result;
-          document.getElementById("logoPreviewWrap").style.display = "block";
-        };
-        reader.readAsDataURL(input.files[0]);
+    function applyFavicon(url) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (url) {
+        if (!link) {
+          link = document.createElement("link");
+          link.rel = "icon";
+          document.head.appendChild(link);
+        }
+        link.href = url;
+      } else if (link) {
+        link.remove();
       }
-    }
-
-    function handleGalleryUpload(input) {
-      if (!input.files) return;
-      const files = Array.from(input.files);
-      const remaining = 12 - restaurantCustomerData.galleryImages.length;
-      files.slice(0, remaining).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          restaurantCustomerData.galleryImages.push(e.target.result);
-          renderGalleryThumbsList();
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function renderGalleryThumbsList() {
-      const c = document.getElementById("galleryThumbs");
-      c.innerHTML = "";
-      restaurantCustomerData.galleryImages.forEach((src, idx) => {
-        const div = document.createElement("div");
-        div.className = "thumb-item";
-        div.innerHTML = `
-          <img src="${src}" alt="Thumb ${idx + 1}" />
-          <div class="thumb-del" onclick="removeGalleryPhoto(${idx})">&times;</div>
-        `;
-        c.appendChild(div);
-      });
-    }
-    function removeGalleryPhoto(idx) {
-      restaurantCustomerData.galleryImages.splice(idx, 1);
-      renderGalleryThumbsList();
     }
 
     /* ==========================================================================
@@ -3260,6 +3539,8 @@
       const imgCount = restaurantCustomerData.galleryImages.length;
       const chefCount = restaurantCustomerData.chefs.filter(c => c.name).length;
       const evCount = restaurantCustomerData.events.filter(e => e.title).length;
+      const wantsAdmin = document.getElementById("admin_choice_yes").checked;
+      const adminMail = document.getElementById("cust_admin_gmail").value.trim();
 
       box.innerHTML = `
         <div class="rev-row">
@@ -3273,6 +3554,10 @@
         <div class="rev-row">
           <span class="rev-label">Contact Phone:</span>
           <span class="rev-val">${escapeHtml(phone || "(None)")}</span>
+        </div>
+        <div class="rev-row">
+          <span class="rev-label">Admin Panel Access:</span>
+          <span class="rev-val" style="${wantsAdmin ? 'color: var(--accent-emerald);' : ''}">${wantsAdmin ? `Enabled (${escapeHtml(adminMail || 'No Gmail entered')})` : 'Not requested'}</span>
         </div>
         <div class="rev-row">
           <span class="rev-label">Menu Categories:</span>
@@ -3317,12 +3602,21 @@
         valid = false;
       }
 
+      // Admin access validation
+      const wantsAdmin = document.getElementById("admin_choice_yes").checked;
+      const adminMailVal = document.getElementById("cust_admin_gmail").value.trim();
+      if (wantsAdmin && (!adminMailVal || !adminMailVal.includes("@"))) {
+        document.getElementById("cust_admin_gmail").classList.add("input-error");
+        document.getElementById("err_cust_admin_gmail").style.display = "block";
+        valid = false;
+      }
+
       if (!valid) {
-        showToast("Please complete required fields (Business Name & Address)");
+        showToast("Please complete all required fields.");
         return;
       }
 
-      // Sync customer data object
+      // Sync customer data
       restaurantCustomerData.name = nameVal;
       restaurantCustomerData.tagline = document.getElementById("cust_tagline").value.trim();
       restaurantCustomerData.type = document.getElementById("cust_type").value;
@@ -3330,6 +3624,9 @@
       restaurantCustomerData.est = document.getElementById("cust_est").value.trim();
       restaurantCustomerData.specialty = document.getElementById("cust_specialty").value.trim();
       restaurantCustomerData.favicon = document.getElementById("cust_favicon").value.trim();
+
+      restaurantCustomerData.adminAccess = wantsAdmin;
+      restaurantCustomerData.adminGmail = wantsAdmin ? adminMailVal : "";
 
       restaurantCustomerData.phone = document.getElementById("cust_phone").value.trim();
       restaurantCustomerData.whatsapp = document.getElementById("cust_whatsapp").value.trim();
@@ -3342,12 +3639,11 @@
       restaurantCustomerData.pincode = document.getElementById("cust_pincode").value.trim();
       restaurantCustomerData.maps = document.getElementById("cust_maps").value.trim();
 
-      restaurantCustomerData.workingDays = document.getElementById("cust_working_days").value.trim();
-      restaurantCustomerData.lunchHours = document.getElementById("cust_lunch_hours").value.trim();
-      restaurantCustomerData.dinnerHours = document.getElementById("cust_dinner_hours").value.trim();
+      restaurantCustomerData.openTime = document.getElementById("cust_open_time").value.trim();
+      restaurantCustomerData.closeTime = document.getElementById("cust_close_time").value.trim();
+      restaurantCustomerData.closedDays = document.getElementById("cust_closed_days").value.trim();
 
       restaurantCustomerData.about = document.getElementById("cust_about").value.trim();
-      restaurantCustomerData.heroImg = document.getElementById("cust_hero_img").value.trim();
 
       restaurantCustomerData.zomato = document.getElementById("cust_zomato").value.trim();
       restaurantCustomerData.swiggy = document.getElementById("cust_swiggy").value.trim();
@@ -3359,9 +3655,6 @@
 
       restaurantCustomerData.offerTitle = document.getElementById("cust_offer_title").value.trim();
       restaurantCustomerData.offerCode = document.getElementById("cust_offer_code").value.trim();
-
-      restaurantCustomerData.upiId = document.getElementById("cust_upi_id").value.trim();
-      restaurantCustomerData.upiNote = document.getElementById("cust_upi_note").value.trim();
 
       restaurantCustomerData.extraBtnText = document.getElementById("cust_extra_btn_text").value.trim();
       restaurantCustomerData.extraBtnUrl = document.getElementById("cust_extra_btn_url").value.trim();
@@ -3381,15 +3674,15 @@
           items: (c.items || []).filter(it => it && it.name && it.name.trim() !== "")
         }));
 
-      // Filter empty items in repeatables
-      restaurantCustomerData.chefs = restaurantCustomerData.chefs.filter(c => c.name.trim() !== "");
-      restaurantCustomerData.events = restaurantCustomerData.events.filter(e => e.title.trim() !== "");
-      restaurantCustomerData.testimonials = restaurantCustomerData.testimonials.filter(t => t.quote.trim() !== "");
-      restaurantCustomerData.faqs = restaurantCustomerData.faqs.filter(f => f.q.trim() !== "");
+      // Filter empty items
+      restaurantCustomerData.chefs = restaurantCustomerData.chefs.filter(c => c.name && c.name.trim() !== "");
+      restaurantCustomerData.events = restaurantCustomerData.events.filter(e => e.title && e.title.trim() !== "");
+      restaurantCustomerData.testimonials = restaurantCustomerData.testimonials.filter(t => t.quote && t.quote.trim() !== "");
+      restaurantCustomerData.faqs = restaurantCustomerData.faqs.filter(f => f.q && f.q.trim() !== "");
 
       closeBuyModal();
 
-      // Short transition 600ms
+      // Short transition (approx 650ms)
       const loader = document.getElementById("fastLoader");
       loader.classList.add("active");
 
@@ -3400,10 +3693,10 @@
     }
 
     /* ==========================================================================
-       RENDER CUSTOMER RESTAURANT
+       RENDER CUSTOMER RESTAURANT PREVIEW (BEFORE PAYMENT)
        ========================================================================== */
     function renderFinalCustomerWebsite() {
-      // Hide WebCraft portal bar and template selector
+      // Hide WebCraft portal bar, modes strip, and template selector
       document.getElementById("portalBar").style.display = "none";
       document.getElementById("modesSection").style.display = "none";
       document.getElementById("templateSelectorSec").style.display = "none";
@@ -3414,74 +3707,45 @@
       // Reset menu tab
       activeMenuTab = 0;
 
+      // Apply dynamic customer favicon if provided
+      applyFavicon(restaurantCustomerData.favicon);
+
       // Render strictly from customer data
       renderRestaurant(restaurantCustomerData);
       window.scrollTo(0, 0);
 
-      // Prompt custom domain question immediately after generation
-      setTimeout(() => {
-        promptDomainChoice();
-      }, 400);
+      showToast("🎉 Website preview compiled! Review your website below.");
     }
 
+    /* ==========================================================================
+       DOMAIN DECISION & PAYMENT/DOWNLOAD FLOW
+       ========================================================================== */
     function promptDomainChoice() {
       document.getElementById("domainChoiceModal").classList.add("active");
     }
 
-    /* ==========================================================================
-       DOMAIN FLOW & SIMULATION
-       ========================================================================== */
     function handleDomainDecision(wantsDomain) {
       document.getElementById("domainChoiceModal").classList.remove("active");
+      selectedDomainChoice = wantsDomain;
+
       if (wantsDomain) {
         document.getElementById("domainInputModal").classList.add("active");
       } else {
-        setupCheckoutModal(false);
+        openCheckoutModal(false);
       }
     }
 
-    function startDomainSetupProgress() {
+    function proceedFromDomainInputToPayment() {
       const dInput = document.getElementById("customDomainInput").value.trim() || "myrestaurant.com";
       restaurantCustomerData.customDomain = dInput;
-
       document.getElementById("domainInputModal").classList.remove("active");
-      const progModal = document.getElementById("domainProgressModal");
-      progModal.classList.add("active");
-
-      document.getElementById("domainTargetDisplay").textContent = dInput;
-      const bar = document.getElementById("domainProgressBar");
-      const countdown = document.getElementById("domainCountdownText");
-      const heading = document.getElementById("domainProgressHeading");
-      const sub = document.getElementById("domainProgressSub");
-
-      let progress = 0;
-      let minutesLeft = 20;
-
-      const timer = setInterval(() => {
-        progress += 20;
-        bar.style.width = progress + "%";
-        minutesLeft -= 4;
-        if (minutesLeft > 0) {
-          countdown.textContent = `Estimated remaining time: ~${minutesLeft} minutes`;
-        }
-
-        if (progress >= 100) {
-          clearInterval(timer);
-          heading.textContent = "Domain Connected Successfully";
-          sub.textContent = `${dInput} is bound to your website.`;
-          countdown.textContent = "DNS & SSL propagation simulation completed.";
-
-          setTimeout(() => {
-            progModal.classList.remove("active");
-            setupCheckoutModal(true);
-          }, 900);
-        }
-      }, 350);
+      openCheckoutModal(true);
     }
 
-    function setupCheckoutModal(hasDomain) {
+    function openCheckoutModal(hasDomain) {
       const checkout = document.getElementById("checkoutModal");
       const domainRow = document.getElementById("domainRowPrice");
+      const adminRow = document.getElementById("adminRowStatus");
       const totalEl = document.getElementById("priceTotal");
 
       if (hasDomain) {
@@ -3492,12 +3756,85 @@
         totalEl.textContent = "₹2,999";
       }
 
+      if (restaurantCustomerData.adminAccess) {
+        adminRow.style.display = "flex";
+      } else {
+        adminRow.style.display = "none";
+      }
+
       checkout.classList.add("active");
     }
 
-    function handlePaymentDownload() {
+    function simulatePaymentProcess() {
       document.getElementById("checkoutModal").classList.remove("active");
-      showToast("🎉 Order confirmed! Code exporter and payment gateway placeholder triggered.");
+      
+      const loader = document.getElementById("fastLoader");
+      loader.classList.add("active");
+
+      setTimeout(() => {
+        loader.classList.remove("active");
+        showPaymentSuccessScreen();
+      }, 750);
+    }
+
+    function showPaymentSuccessScreen() {
+      const successModal = document.getElementById("paymentSuccessModal");
+      const desc = document.getElementById("paymentSuccessDesc");
+      const note = document.getElementById("postPaymentAssistanceNote");
+
+      let detailsHtml = `Your restaurant website <strong>${escapeHtml(restaurantCustomerData.name)}</strong> has been processed successfully.`;
+      
+      if (selectedDomainChoice && restaurantCustomerData.customDomain) {
+        detailsHtml += ` Custom domain <strong>${escapeHtml(restaurantCustomerData.customDomain)}</strong> has been registered for setup.`;
+        note.innerHTML = `<strong>Domain Setup:</strong> A WebCraft executive will contact you at <em>${escapeHtml(restaurantCustomerData.phone || restaurantCustomerData.email)}</em> for verification and DNS setup support.`;
+        note.style.display = "block";
+      } else {
+        note.style.display = "none";
+      }
+
+      if (restaurantCustomerData.adminAccess && restaurantCustomerData.adminGmail) {
+        detailsHtml += `<br><span style="color:#a5b4fc;">Admin Panel authorization prepared for: <strong>${escapeHtml(restaurantCustomerData.adminGmail)}</strong>.</span>`;
+      }
+
+      desc.innerHTML = detailsHtml;
+      successModal.classList.add("active");
+    }
+
+    function executeWebsiteDownload() {
+      // Build pure standalone customer HTML string
+      const customerSiteHtml = document.getElementById("restaurantMount").innerHTML;
+      const fullStandaloneHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(restaurantCustomerData.name || "My Restaurant Website")}</title>
+  ${restaurantCustomerData.favicon ? `<link rel="icon" href="${escapeHtml(restaurantCustomerData.favicon)}">` : ''}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    ${document.querySelector("style").innerHTML}
+    .rest-nav { top: 0 !important; }
+  </style>
+</head>
+<body style="background:#08080a; color:#edecec;">
+  ${customerSiteHtml}
+</body>
+</html>`;
+
+      const blob = new Blob([fullStandaloneHtml], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${(restaurantCustomerData.name || "restaurant").toLowerCase().replace(/[^a-z0-9]/g, "-")}-website.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      document.getElementById("paymentSuccessModal").classList.remove("active");
+      showToast("📥 Website downloaded successfully!");
     }
 
     /* ==========================================================================
