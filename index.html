@@ -967,7 +967,7 @@
 
     /* ==========================================================================
        5. BUY MODAL & GROUPED FORM UX
-       ========================================================================== */
+       ========================================================================= */
     .buy-modal-overlay {
       position: fixed;
       inset: 0;
@@ -1217,12 +1217,12 @@
       background: rgba(0, 0, 0, 0.75);
       color: #fff;
       border-radius: 50%;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       cursor: pointer;
     }
 
@@ -1394,6 +1394,19 @@
       font-size: 0.9rem;
       margin-bottom: 24px;
     }
+    .progress-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6366f1, #10b981);
+      transition: width 0.3s linear;
+    }
 
     /* Toast */
     .toast {
@@ -1428,6 +1441,7 @@
       .form-row, .form-row-3 { grid-template-columns: 1fr; }
       .thumbs-grid { grid-template-columns: repeat(2, 1fr); }
       .rest-links { display: none; }
+      .dish-row-builder { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1732,15 +1746,28 @@
                 <label class="form-label">Culinary Specialty</label>
                 <input type="text" id="cust_specialty" class="form-input" placeholder="e.g. Authentic Dum Biryani & Charcoal Kebabs" />
               </div>
+              <!-- Direct Favicon Upload Control -->
               <div class="form-group">
-                <label class="form-label">Favicon URL (Optional)</label>
-                <input type="url" id="cust_favicon" class="form-input" placeholder="https://.../favicon.png" />
+                <label class="form-label">Favicon (Optional)</label>
+                <div class="upload-control-block" id="faviconUploadBlock">
+                  <div class="upload-preview-area">
+                    <img id="faviconPreviewImg" class="upload-preview-thumb" src="" alt="Favicon" style="display: none; width: 32px; height: 32px;" />
+                    <span id="faviconStatusText" style="font-size: 0.85rem; color: var(--text-muted);">No favicon chosen</span>
+                  </div>
+                  <div class="upload-btns-group">
+                    <input type="file" id="faviconUploadInput" accept="image/*" style="display: none;" onchange="handleDirectImageUpload(this, 'favicon')" />
+                    <button type="button" class="btn-upload-trigger" onclick="document.getElementById('faviconUploadInput').click()">
+                      <span id="faviconBtnLabel">+ Upload Favicon</span>
+                    </button>
+                    <button type="button" id="faviconRemoveBtn" class="btn-delete" style="display: none;" onclick="removeDirectImage('favicon')">Remove</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Group 2: Admin Panel Access (NEW REQUIREMENT) -->
+        <!-- Group 2: Admin Panel Access -->
         <div class="acc-group open" id="grp2_admin">
           <div class="acc-header" onclick="toggleAccordion('grp2_admin')">
             <span class="acc-title">2. Admin Panel Access</span>
@@ -1850,10 +1877,10 @@
           </div>
         </div>
 
-        <!-- Group 5: Simplified Operating Hours (NEW REQUIREMENT) -->
+        <!-- Group 5: Simplified Operating Hours -->
         <div class="acc-group" id="grp4">
           <div class="acc-header" onclick="toggleAccordion('grp4')">
-            <span class="acc-title">5. Operating Hours (Opening, Closing & Closed Days)</span>
+            <span class="acc-title">5. Operating Hours</span>
             <span class="acc-chevron">&#9660;</span>
           </div>
           <div class="acc-body">
@@ -1888,7 +1915,7 @@
           </div>
         </div>
 
-        <!-- Group 7: Chef / Culinary Team (WITH DIRECT IMAGE UPLOADS) -->
+        <!-- Group 7: Chef / Culinary Team -->
         <div class="acc-group" id="grp6">
           <div class="acc-header" onclick="toggleAccordion('grp6')">
             <span class="acc-title">7. Chef / Team Members</span>
@@ -1903,7 +1930,7 @@
           </div>
         </div>
 
-        <!-- Group 8: Dynamic Menu Builder (WITH DIRECT DISH UPLOADS) -->
+        <!-- Group 8: Dynamic Menu Builder -->
         <div class="acc-group" id="grp7">
           <div class="acc-header" onclick="toggleAccordion('grp7')">
             <span class="acc-title">8. Menu Builder</span>
@@ -1942,7 +1969,7 @@
           </div>
         </div>
 
-        <!-- Group 10: Reservations (STRICT LOGIC) -->
+        <!-- Group 10: Reservations -->
         <div class="acc-group" id="grp9">
           <div class="acc-header" onclick="toggleAccordion('grp9')">
             <span class="acc-title">10. Table Reservations</span>
@@ -1989,7 +2016,7 @@
           </div>
         </div>
 
-        <!-- Group 12: Special Events (WITH DIRECT IMAGE UPLOADS) -->
+        <!-- Group 12: Special Events -->
         <div class="acc-group" id="grp11">
           <div class="acc-header" onclick="toggleAccordion('grp11')">
             <span class="acc-title">12. Events / Live Music / Special Nights</span>
@@ -2004,7 +2031,7 @@
           </div>
         </div>
 
-        <!-- Group 13: Customer Testimonials (OPTIONAL / CAN SKIP) -->
+        <!-- Group 13: Customer Testimonials (OPTIONAL) -->
         <div class="acc-group" id="grp12">
           <div class="acc-header" onclick="toggleAccordion('grp12')">
             <span class="acc-title">13. Customer Testimonials (Optional)</span>
@@ -2196,20 +2223,26 @@
     </div>
   </div>
 
-  <!-- Domain Input Modal with Executive Assistance Disclosure -->
+  <!-- Domain Input Modal without fake fallback & strict validation -->
   <div class="flow-modal" id="domainInputModal">
     <div class="flow-box">
       <h3>Enter Your Domain Name</h3>
       <p>Enter the custom domain name you want for your website.</p>
       <div class="form-group" style="text-align: left;">
         <input type="text" id="customDomainInput" class="form-input" placeholder="e.g. royalspicerestaurant.com" />
+        <div class="field-error" id="err_customDomain">Please enter your domain name to continue.</div>
       </div>
       <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); padding: 14px; border-radius: 8px; font-size: 0.84rem; color: #c7d2fe; margin-bottom: 20px; text-align: left; line-height: 1.5;">
         <strong>Notice:</strong> Domain setup and final website activation may take some time. A WebCraft executive will contact you if any assistance or verification is required.
       </div>
-      <button class="btn-gold" style="width: 100%; justify-content: center;" onclick="proceedFromDomainInputToPayment()">
-        OK, PROCEED TO PAYMENT
-      </button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn-outline-gold" style="flex: 1; justify-content: center;" onclick="document.getElementById('domainInputModal').classList.remove('active'); document.getElementById('domainChoiceModal').classList.add('active');">
+          Back
+        </button>
+        <button class="btn-gold" style="flex: 2; justify-content: center;" onclick="proceedFromDomainInputToPayment()">
+          OK, PROCEED TO PAYMENT
+        </button>
+      </div>
     </div>
   </div>
 
@@ -2281,7 +2314,7 @@
   <div class="toast" id="toastMsg"></div>
 
   <!-- ==========================================================================
-       8. JAVASCRIPT ARCHITECTURE
+       9. JAVASCRIPT LOGIC & ARCHITECTURE
        ========================================================================== -->
   <script>
     /* ==========================================================================
@@ -2436,6 +2469,23 @@
 
     let activeMenuTab = 0;
     let selectedDomainChoice = false;
+
+    /* ==========================================================================
+       FAVICON HANDLER (DYNAMIC APPLY / UPDATE / REMOVE)
+       ========================================================================== */
+    function applyFavicon(faviconUrl) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (faviconUrl) {
+        if (!link) {
+          link = document.createElement("link");
+          link.rel = "icon";
+          document.head.appendChild(link);
+        }
+        link.href = faviconUrl;
+      } else if (link) {
+        link.remove();
+      }
+    }
 
     /* ==========================================================================
        INITIALIZATION
@@ -2971,7 +3021,7 @@
       // 17. CUSTOMER BOTTOM BAR: PROCEED TO DOMAIN & DOWNLOAD
       if (!isDemo) {
         html += `
-          <div style="background: #07090e; border-top: 1px solid var(--border-subtle); padding: 40px 24px; text-align: center;">
+          <div id="customerBottomBar" style="background: #07090e; border-top: 1px solid var(--border-subtle); padding: 40px 24px; text-align: center;">
             <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 8px;">Your website is ready.</h3>
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px;">Proceed to configure domain options and complete website activation.</p>
             <button class="btn-gold" onclick="promptDomainChoice()" style="padding: 13px 36px; font-size: 1rem;">
@@ -3047,7 +3097,6 @@
       setVal("cust_cuisine", restaurantCustomerData.cuisine);
       setVal("cust_est", restaurantCustomerData.est);
       setVal("cust_specialty", restaurantCustomerData.specialty);
-      setVal("cust_favicon", restaurantCustomerData.favicon);
 
       // Admin access restoration
       const wantsAdmin = !!restaurantCustomerData.adminAccess;
@@ -3108,9 +3157,10 @@
         setVal("cust_yt", restaurantCustomerData.social.youtube);
       }
 
-      // Direct Upload Controls UI Restoration (Logo & Hero)
+      // Direct Upload Controls UI Restoration (Logo, Hero, Favicon)
       updateDirectUploadControlUI('logo', restaurantCustomerData.logoUrl);
       updateDirectUploadControlUI('hero', restaurantCustomerData.heroImg);
+      updateDirectUploadControlUI('favicon', restaurantCustomerData.favicon);
 
       // Dynamic builders restoration
       renderGalleryThumbsList();
@@ -3134,6 +3184,8 @@
             restaurantCustomerData.logoUrl = dataUrl;
           } else if (targetKey === 'hero') {
             restaurantCustomerData.heroImg = dataUrl;
+          } else if (targetKey === 'favicon') {
+            restaurantCustomerData.favicon = dataUrl;
           }
           updateDirectUploadControlUI(targetKey, dataUrl);
         };
@@ -3147,15 +3199,21 @@
       const btnLabel = document.getElementById(`${targetKey}BtnLabel`);
       const removeBtn = document.getElementById(`${targetKey}RemoveBtn`);
 
+      const labelMap = {
+        logo: 'Logo',
+        hero: 'Hero Image',
+        favicon: 'Favicon'
+      };
+
       if (dataUrl) {
         if (img) { img.src = dataUrl; img.style.display = "block"; }
-        if (status) status.textContent = `${targetKey === 'logo' ? 'Logo' : 'Hero banner'} uploaded`;
+        if (status) status.textContent = `${labelMap[targetKey]} uploaded`;
         if (btnLabel) btnLabel.textContent = "Replace";
         if (removeBtn) removeBtn.style.display = "inline-block";
       } else {
         if (img) { img.src = ""; img.style.display = "none"; }
         if (status) status.textContent = `No ${targetKey} chosen`;
-        if (btnLabel) btnLabel.textContent = `+ Upload ${targetKey === 'logo' ? 'Logo' : 'Hero Image'}`;
+        if (btnLabel) btnLabel.textContent = `+ Upload ${labelMap[targetKey]}`;
         if (removeBtn) removeBtn.style.display = "none";
       }
     }
@@ -3167,6 +3225,9 @@
       } else if (targetKey === 'hero') {
         restaurantCustomerData.heroImg = "";
         document.getElementById("heroUploadInput").value = "";
+      } else if (targetKey === 'favicon') {
+        restaurantCustomerData.favicon = "";
+        document.getElementById("faviconUploadInput").value = "";
       }
       updateDirectUploadControlUI(targetKey, "");
     }
@@ -3231,7 +3292,6 @@
           <div class="form-group" style="margin-top: 10px;">
             <input type="text" class="form-input" placeholder="Short Bio / Specialty..." value="${escapeHtml(chef.bio || '')}" oninput="setChefProp(${idx}, 'bio', this.value)" />
           </div>
-          <!-- Direct Photo Upload -->
           <div style="display: flex; align-items: center; gap: 10px; margin-top: 6px;">
             <input type="file" id="chefPhoto_${idx}" accept="image/*" style="display: none;" onchange="uploadChefPhoto(this, ${idx})" />
             <button type="button" class="btn-upload-trigger" onclick="document.getElementById('chefPhoto_${idx}').click()">
@@ -3317,7 +3377,6 @@
                       <input type="checkbox" ${item.bestseller ? 'checked' : ''} onchange="setDishProp(${catIdx}, ${itemIdx}, 'bestseller', this.checked)"> Bestseller
                     </label>
                   </div>
-                  <!-- Optional Dish Photo Direct Upload -->
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <input type="file" id="dishImg_${catIdx}_${itemIdx}" accept="image/*" style="display: none;" onchange="uploadDishPhoto(this, ${catIdx}, ${itemIdx})" />
                     <button type="button" class="btn-upload-trigger" style="padding: 4px 8px; font-size: 0.72rem;" onclick="document.getElementById('dishImg_${catIdx}_${itemIdx}').click()">
@@ -3511,23 +3570,6 @@
     }
 
     /* ==========================================================================
-       DYNAMIC FAVICON APPLICATION
-       ========================================================================== */
-    function applyFavicon(url) {
-      let link = document.querySelector("link[rel~='icon']");
-      if (url) {
-        if (!link) {
-          link = document.createElement("link");
-          link.rel = "icon";
-          document.head.appendChild(link);
-        }
-        link.href = url;
-      } else if (link) {
-        link.remove();
-      }
-    }
-
-    /* ==========================================================================
        FINAL REVIEW SUMMARY
        ========================================================================== */
     function updateReviewSummary() {
@@ -3623,7 +3665,6 @@
       restaurantCustomerData.cuisine = document.getElementById("cust_cuisine").value.trim();
       restaurantCustomerData.est = document.getElementById("cust_est").value.trim();
       restaurantCustomerData.specialty = document.getElementById("cust_specialty").value.trim();
-      restaurantCustomerData.favicon = document.getElementById("cust_favicon").value.trim();
 
       restaurantCustomerData.adminAccess = wantsAdmin;
       restaurantCustomerData.adminGmail = wantsAdmin ? adminMailVal : "";
@@ -3693,10 +3734,10 @@
     }
 
     /* ==========================================================================
-       RENDER CUSTOMER RESTAURANT PREVIEW (BEFORE PAYMENT)
+       RENDER CUSTOMER RESTAURANT PREVIEW (BEFORE PAYMENT & DOMAIN PROMPT)
        ========================================================================== */
     function renderFinalCustomerWebsite() {
-      // Hide WebCraft portal bar, modes strip, and template selector
+      // Hide WebCraft portal bar and template selector
       document.getElementById("portalBar").style.display = "none";
       document.getElementById("modesSection").style.display = "none";
       document.getElementById("templateSelectorSec").style.display = "none";
@@ -3707,7 +3748,7 @@
       // Reset menu tab
       activeMenuTab = 0;
 
-      // Apply dynamic customer favicon if provided
+      // Apply dynamic customer favicon if uploaded
       applyFavicon(restaurantCustomerData.favicon);
 
       // Render strictly from customer data
@@ -3731,12 +3772,27 @@
       if (wantsDomain) {
         document.getElementById("domainInputModal").classList.add("active");
       } else {
+        restaurantCustomerData.customDomain = "";
         openCheckoutModal(false);
       }
     }
 
+    // STRICT DOMAIN VALIDATION (NO FAKE FALLBACK DOMAIN)
     function proceedFromDomainInputToPayment() {
-      const dInput = document.getElementById("customDomainInput").value.trim() || "myrestaurant.com";
+      const errEl = document.getElementById("err_customDomain");
+      const dInput = document.getElementById("customDomainInput").value.trim();
+      const domainPattern = /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+
+      if (!dInput || !domainPattern.test(dInput.replace(/^https?:\/\//i, '').replace(/^www\./i, ''))) {
+        document.getElementById("customDomainInput").classList.add("input-error");
+        errEl.textContent = "Please enter a valid domain name (e.g. example.com or restaurant.in).";
+        errEl.style.display = "block";
+        return;
+      }
+
+      document.getElementById("customDomainInput").classList.remove("input-error");
+      errEl.style.display = "none";
+
       restaurantCustomerData.customDomain = dInput;
       document.getElementById("domainInputModal").classList.remove("active");
       openCheckoutModal(true);
@@ -3786,7 +3842,7 @@
       
       if (selectedDomainChoice && restaurantCustomerData.customDomain) {
         detailsHtml += ` Custom domain <strong>${escapeHtml(restaurantCustomerData.customDomain)}</strong> has been registered for setup.`;
-        note.innerHTML = `<strong>Domain Setup:</strong> A WebCraft executive will contact you at <em>${escapeHtml(restaurantCustomerData.phone || restaurantCustomerData.email)}</em> for verification and DNS setup support.`;
+        note.innerHTML = `<strong>Domain Activation Support:</strong> A WebCraft executive will contact you at <em>${escapeHtml(restaurantCustomerData.phone || restaurantCustomerData.email)}</em> for verification and DNS setup support.`;
         note.style.display = "block";
       } else {
         note.style.display = "none";
@@ -3800,16 +3856,95 @@
       successModal.classList.add("active");
     }
 
+    // CLEAN STANDALONE CUSTOMER WEBSITE GENERATION & DOWNLOAD
     function executeWebsiteDownload() {
-      // Build pure standalone customer HTML string
-      const customerSiteHtml = document.getElementById("restaurantMount").innerHTML;
+      const clonedMount = document.getElementById("restaurantMount").cloneNode(true);
+
+      // Strip any WebCraft builder and preview controls from downloaded file
+      const bottomBar = clonedMount.querySelector("#customerBottomBar");
+      if (bottomBar) bottomBar.remove();
+
+      // Make standalone menu buttons use switchStandaloneMenuCategory directly
+      const menuBtns = clonedMount.querySelectorAll("#menu-sec .menu-tab-btn");
+      menuBtns.forEach((btn, idx) => {
+        btn.setAttribute("onclick", "switchStandaloneMenuCategory(" + idx + ")");
+      });
+
+      const customerSiteHtml = clonedMount.innerHTML;
+
+      // Standalone categories data safely serialized without raw closing script tag issues
+      const menuDataJson = JSON.stringify(restaurantCustomerData.menuCategories || []).replace(/</g, '\\u003c');
+      const faviconTag = restaurantCustomerData.favicon ? `<link rel="icon" href="${escapeHtml(restaurantCustomerData.favicon)}">` : '';
+
+      const standaloneScript = `
+    const customerMenuData = ${menuDataJson};
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function safeUrl(url) {
+      if (!url) return "";
+      const s = String(url).trim();
+      return /^(?:https?:|data:image\\/|\\/)/i.test(s) ? escapeHtml(s) : "";
+    }
+
+    function switchStandaloneMenuCategory(idx) {
+      const container = document.getElementById("menu-sec");
+      if (!container || !customerMenuData || !customerMenuData[idx]) return;
+      
+      const btns = container.querySelectorAll(".menu-tab-btn");
+      btns.forEach((b, i) => {
+        if (i === idx) b.classList.add("active");
+        else b.classList.remove("active");
+      });
+
+      const grid = container.querySelector(".menu-split-grid");
+      if (!grid) return;
+
+      const items = customerMenuData[idx].items || [];
+      grid.innerHTML = items.map(item => {
+        const safeImg = safeUrl(item.img);
+        const spicyCount = Math.max(0, Math.min(3, parseInt(item.spicy) || 0));
+        return '<div class="menu-entry">' +
+          '<div style="display: flex; gap: 14px; align-items: flex-start;">' +
+            (safeImg ? '<img src="' + safeImg + '" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover; flex-shrink: 0;" alt="Dish" />' : '') +
+            '<div style="flex-grow: 1;">' +
+              '<div class="menu-entry-top">' +
+                '<span class="menu-entry-name">' + escapeHtml(item.name || '') + '</span>' +
+                '<span class="menu-entry-price">' + escapeHtml(item.price || '') + '</span>' +
+              '</div>' +
+              (item.desc ? '<p class="menu-entry-desc">' + escapeHtml(item.desc) + '</p>' : '') +
+              '<div class="dish-chips">' +
+                (item.veg === true || item.veg === 'true' ? '<span class="chip chip-veg">Pure Veg</span>' : '') +
+                (item.veg === false || item.veg === 'false' ? '<span class="chip chip-nonveg">Non-Veg</span>' : '') +
+                (item.bestseller ? '<span class="chip chip-bestseller">&#9733; Bestseller</span>' : '') +
+                (spicyCount > 0 ? '<span class="chip chip-spicy">' + "🌶️".repeat(spicyCount) + ' Spicy</span>' : '') +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join("");
+    }
+
+    function openLegalModal(title, text) {
+      alert(title + "\\n\\n" + text);
+    }
+  `;
+
       const fullStandaloneHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(restaurantCustomerData.name || "My Restaurant Website")}</title>
-  ${restaurantCustomerData.favicon ? `<link rel="icon" href="${escapeHtml(restaurantCustomerData.favicon)}">` : ''}
+  <title>${escapeHtml(restaurantCustomerData.name || "My Restaurant")}</title>
+  ${faviconTag}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
@@ -3820,6 +3955,9 @@
 </head>
 <body style="background:#08080a; color:#edecec;">
   ${customerSiteHtml}
+  <script>
+  ${standaloneScript}
+  <\/script>
 </body>
 </html>`;
 
@@ -3834,7 +3972,7 @@
       URL.revokeObjectURL(url);
 
       document.getElementById("paymentSuccessModal").classList.remove("active");
-      showToast("📥 Website downloaded successfully!");
+      showToast("📥 Standalone website downloaded successfully!");
     }
 
     /* ==========================================================================
