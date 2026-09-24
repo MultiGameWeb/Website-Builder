@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080611" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AstroCosmos 3D" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <title>AstroCosmos 3D — Vedic Astrology & Space Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -519,58 +526,6 @@
       transform: translateY(-2px);
     }
 
-    /* Representational Radar Location Card */
-    .radar-box {
-      background: rgba(7, 5, 16, 0.9);
-      border: 1px solid rgba(0, 247, 255, 0.3);
-      border-radius: 12px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .radar-circle {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 1px dashed rgba(0, 247, 255, 0.4);
-      margin: 20px auto;
-      position: relative;
-      animation: radarSpin 7s linear infinite;
-    }
-
-    @keyframes radarSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .radar-blip {
-      width: 10px;
-      height: 10px;
-      background: #ffd700;
-      border-radius: 50%;
-      position: absolute;
-      top: 48%;
-      left: 52%;
-      box-shadow: 0 0 16px #ffd700;
-    }
-
-    .location-details h5 {
-      color: #00f7ff;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .location-details p {
-      font-size: 0.82rem;
-      color: #aba092;
-      line-height: 1.6;
-    }
-
     /* SECTION 5: PRIVACY POLICY */
     .privacy-card {
       background: rgba(14, 11, 24, 0.7);
@@ -756,6 +711,199 @@
       border-radius: 20px;
       font-weight: 700;
       cursor: pointer;
+    }
+
+
+    /* =========================================================
+       NAV / LIVE CLOCKS / CONTACT ACTIONS / ADMIN TESTING UI
+       ========================================================= */
+    .time-strip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 32px;
+      z-index: 1101;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 5px 18px;
+      background: rgba(4,3,10,0.96);
+      border-bottom: 1px solid rgba(226,183,106,0.18);
+      backdrop-filter: blur(14px);
+      color: #c9b99f;
+      font-size: .68rem;
+      letter-spacing: 1px;
+    }
+    .clock-chip { display:flex; align-items:center; gap:7px; white-space:nowrap; }
+    .clock-chip span { color:#8f806f; text-transform:uppercase; }
+    .clock-chip strong { color:#ffe2a5; font-family:'Cinzel',serif; font-size:.72rem; }
+    header { top:32px; }
+    .mobile-nav { top:104px; }
+    .header-actions { display:flex; align-items:center; gap:10px; }
+    .language-toggle, .mobile-language-toggle {
+      border:1px solid rgba(226,183,106,.34);
+      background:rgba(226,183,106,.08);
+      color:#ffdfa4;
+      border-radius:20px;
+      padding:7px 12px;
+      cursor:pointer;
+      font:600 .72rem 'Space Grotesk',sans-serif;
+      letter-spacing:1px;
+    }
+    .mobile-language-toggle { width:100%; text-align:left; border-radius:8px; padding:10px 0; background:transparent; border-color:rgba(226,183,106,.16); }
+
+    .hero-desc { display:none; }
+    .hero-actions { display:flex; gap:10px; margin-top:16px; pointer-events:auto; }
+    .hero-contact-btn { text-decoration:none; display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:24px; border:1px solid rgba(226,183,106,.32); background:rgba(8,6,16,.7); color:#f7e7ce; font-size:.72rem; letter-spacing:.7px; transition:.25s ease; }
+    .hero-contact-btn:hover { transform:translateY(-2px); border-color:#ffdfa4; box-shadow:0 0 18px rgba(226,183,106,.28); }
+    .hero-contact-btn.whatsapp { color:#c7ffd9; }
+    .hero-contact-btn.call { color:#ffe2a5; }
+
+    .section-subtitle { max-width:720px; margin:12px auto 0; color:#8f8172; font-size:.78rem; line-height:1.55; }
+    .publish-date-pill { display:inline-flex; gap:8px; align-items:center; margin-top:14px; padding:7px 12px; border-radius:20px; border:1px solid rgba(226,183,106,.22); background:rgba(226,183,106,.07); font-size:.66rem; }
+    .publish-date-pill span { color:#8d806f; }
+    .publish-date-pill strong { color:#ffdfa4; }
+    .rashi-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+    .rashi-card { position:relative; overflow:hidden; padding:20px; border-radius:14px; border:1px solid rgba(226,183,106,.22); background:rgba(14,11,24,.74); transition:.28s ease; }
+    .rashi-card:hover { transform:translateY(-4px); border-color:rgba(226,183,106,.65); box-shadow:0 10px 26px rgba(0,0,0,.3),0 0 20px rgba(226,183,106,.12); }
+    .rashi-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:10px; }
+    .rashi-icon { width:42px; height:42px; display:grid; place-items:center; border-radius:50%; background:rgba(226,183,106,.09); border:1px solid rgba(226,183,106,.2); font-size:1.5rem; }
+    .rashi-date { font-size:.6rem; color:#827563; letter-spacing:1px; text-transform:uppercase; }
+    .rashi-card h4 { font-family:'Cinzel',serif; color:#ffdfa4; margin-bottom:5px; font-size:1rem; }
+    .rashi-card .rashi-en { color:#c7baa9; font-size:.75rem; line-height:1.5; }
+    .rashi-card .rashi-te { color:#927f6f; font-size:.74rem; line-height:1.55; margin-top:8px; }
+    .rashi-card-media { width:100%; height:120px; margin:-20px -20px 14px; width:calc(100% + 40px); object-fit:cover; display:block; border-bottom:1px solid rgba(226,183,106,.16); }
+    .rashi-card-empty { color:#7f7265; font-size:.7rem; font-style:italic; }
+
+    .experience-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .experience-card .gallery-planet-icon { filter:drop-shadow(0 0 12px rgba(226,183,106,.2)); }
+    .btn-view-3d { display:inline-flex; text-decoration:none; align-items:center; justify-content:center; }
+
+    .contact-tools { display:flex; flex-direction:column; gap:12px; }
+    .contact-action-card { display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center; padding:16px; border-radius:12px; background:rgba(7,5,16,.82); border:1px solid rgba(226,183,106,.2); }
+    .contact-action-icon { width:42px; height:42px; display:grid; place-items:center; border-radius:50%; background:rgba(226,183,106,.09); border:1px solid rgba(226,183,106,.2); font-size:1.2rem; }
+    .contact-action-card strong { display:block; color:#ffdfa4; font-family:'Cinzel',serif; }
+    .contact-action-card small { display:block; margin-top:2px; color:#847666; font-size:.68rem; }
+    .action-btn { text-decoration:none; border:1px solid #e2b76a; color:#e2b76a; border-radius:20px; padding:7px 11px; font-size:.66rem; font-weight:700; white-space:nowrap; }
+    .action-btn:hover { background:#e2b76a; color:#05030a; }
+    .availability-card { padding:18px; border-radius:14px; background:radial-gradient(circle at 20% 10%,rgba(226,183,106,.12),rgba(14,11,24,.82) 65%); border:1px solid rgba(226,183,106,.24); }
+    .availability-head { display:flex; align-items:center; gap:9px; color:#ffdfa4; font-family:'Cinzel',serif; }
+    .availability-card p { color:#a49685; font-size:.78rem; line-height:1.5; margin:10px 0; }
+    .availability-status { font-size:.68rem; color:#8d806e; }
+    .availability-status.open { color:#9affc8; }
+
+    .admin-launch { position:fixed; left:24px; bottom:24px; z-index:999; border:1px solid rgba(226,183,106,.55); background:rgba(8,6,16,.9); color:#ffdfa4; padding:10px 15px; border-radius:24px; font:700 .72rem 'Space Grotesk',sans-serif; cursor:pointer; box-shadow:0 0 18px rgba(226,183,106,.12); }
+    .admin-launch:hover { background:linear-gradient(135deg,#e2b76a,#aa782e); color:#05030a; }
+    .admin-overlay { position:fixed; inset:0; z-index:2000; background:rgba(1,1,6,.84); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; }
+    .admin-overlay[hidden] { display:none; }
+    .admin-modal { width:min(1100px,96vw); max-height:90vh; overflow:auto; border:1px solid rgba(226,183,106,.35); background:rgba(10,8,18,.98); border-radius:18px; box-shadow:0 22px 80px rgba(0,0,0,.7); }
+    .admin-header { display:flex; justify-content:space-between; gap:18px; padding:22px 24px; border-bottom:1px solid rgba(226,183,106,.16); }
+    .admin-header h2 { font-family:'Cinzel',serif; color:#ffdfa4; margin:3px 0 5px; }
+    .admin-header p { color:#857765; font-size:.68rem; }
+    .admin-close { border:0; background:transparent; color:#e2b76a; font-size:1.7rem; cursor:pointer; }
+    .admin-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:14px; padding:18px; }
+    .admin-card { padding:17px; border:1px solid rgba(226,183,106,.18); border-radius:14px; background:rgba(5,4,12,.64); }
+    .admin-card h3 { font-family:'Cinzel',serif; color:#ffdfa4; font-size:1rem; margin-bottom:12px; }
+    .admin-card label { display:block; color:#9f917e; font-size:.66rem; margin-bottom:10px; }
+    .admin-card input,.admin-card select,.admin-card textarea { width:100%; margin-top:5px; border:1px solid rgba(226,183,106,.22); border-radius:8px; background:rgba(255,255,255,.04); color:#f7e7ce; padding:9px 10px; outline:none; font:500 .75rem 'Space Grotesk',sans-serif; }
+    .admin-card textarea { resize:vertical; }
+    .admin-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .admin-btn-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .admin-primary,.admin-secondary,.admin-danger,.admin-import-btn { display:inline-flex; align-items:center; justify-content:center; border-radius:8px; padding:9px 12px; border:1px solid rgba(226,183,106,.35); cursor:pointer; font:700 .68rem 'Space Grotesk',sans-serif; }
+    .admin-primary { background:linear-gradient(135deg,#e2b76a,#aa782e); color:#05030a; }
+    .admin-secondary,.admin-import-btn { background:rgba(255,255,255,.04); color:#ffdfa4; }
+    .admin-danger { background:rgba(165,49,49,.14); color:#ff9b9b; border-color:rgba(255,100,100,.25); }
+    .admin-import-btn input { display:none; }
+    .admin-primary.full { width:100%; }
+    .admin-mini-status { margin-top:10px; color:#8f806f; font-size:.68rem; min-height:16px; }
+    .admin-image-preview { min-height:120px; display:grid; place-items:center; border-radius:10px; border:1px dashed rgba(226,183,106,.18); overflow:hidden; color:#76695c; font-size:.68rem; }
+    .admin-image-preview img { max-width:100%; max-height:180px; display:block; object-fit:cover; }
+    .admin-note p { color:#817365; font-size:.7rem; line-height:1.55; }
+
+    /* =========================================================
+       FREE KUNDALI / HOROSCOPE GENERATOR
+       ========================================================= */
+    .kundali-layout { display:grid; grid-template-columns: minmax(280px,.8fr) minmax(340px,1.2fr); gap:20px; }
+    .kundali-card, .kundali-result { background:rgba(14,11,24,.76); border:1px solid rgba(226,183,106,.22); border-radius:16px; padding:22px; }
+    .kundali-card h3, .kundali-result h3 { font-family:'Cinzel',serif; color:#ffdfa4; margin-bottom:12px; }
+    .kundali-note { color:#817466; font-size:.68rem; line-height:1.55; margin-bottom:14px; }
+    .kundali-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .kundali-card label { display:block; color:#a59683; font-size:.68rem; margin-bottom:10px; }
+    .kundali-card input { width:100%; margin-top:5px; border:1px solid rgba(226,183,106,.22); border-radius:8px; background:rgba(255,255,255,.04); color:#f7e7ce; padding:10px 11px; outline:none; font:500 .76rem 'Space Grotesk',sans-serif; }
+    .kundali-card input:focus { border-color:#e2b76a; box-shadow:0 0 12px rgba(226,183,106,.18); }
+    .kundali-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .kundali-primary, .kundali-secondary { border:1px solid rgba(226,183,106,.4); border-radius:22px; padding:10px 14px; cursor:pointer; font:700 .7rem 'Space Grotesk',sans-serif; }
+    .kundali-primary { background:linear-gradient(135deg,#e2b76a,#aa782e); color:#05030a; }
+    .kundali-secondary { background:rgba(255,255,255,.04); color:#ffdfa4; }
+    .kundali-status { min-height:16px; margin-top:9px; color:#9a8976; font-size:.67rem; }
+    .kundali-summary { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:14px; }
+    .kundali-chip { padding:10px; border-radius:10px; background:rgba(226,183,106,.06); border:1px solid rgba(226,183,106,.14); }
+    .kundali-chip small { display:block; color:#7f7162; font-size:.58rem; letter-spacing:1px; text-transform:uppercase; }
+    .kundali-chip strong { display:block; color:#ffe1a0; font-family:'Cinzel',serif; margin-top:3px; font-size:.82rem; }
+    .kundali-chart-wrap { display:grid; place-items:center; margin-top:8px; }
+    .kundali-chart { width:min(430px,100%); aspect-ratio:1; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); gap:1px; background:rgba(226,183,106,.3); border:1px solid rgba(226,183,106,.34); border-radius:8px; overflow:hidden; }
+    .khouse { position:relative; padding:7px 5px; background:rgba(6,5,13,.94); min-width:0; }
+    .khv1{grid-column:1;grid-row:1}.khv2{grid-column:2;grid-row:1}.khv3{grid-column:3;grid-row:1}.khv4{grid-column:4;grid-row:1}.khv5{grid-column:4;grid-row:2}.khv6{grid-column:4;grid-row:3}.khv7{grid-column:4;grid-row:4}.khv8{grid-column:3;grid-row:4}.khv9{grid-column:2;grid-row:4}.khv10{grid-column:1;grid-row:4}.khv11{grid-column:1;grid-row:3}.khv12{grid-column:1;grid-row:2}
+    .kh-center { grid-column:2 / span 2; grid-row:2 / span 2; background:radial-gradient(circle,rgba(226,183,106,.1),rgba(7,5,16,.96) 70%); display:grid; place-items:center; text-align:center; padding:10px; }
+    .kh-center span { color:#ffdfa4; font-family:'Cinzel',serif; font-size:.78rem; line-height:1.3; }
+    .kh-sign { color:#d8c1a0; font-size:.56rem; text-transform:uppercase; letter-spacing:.4px; }
+    .kh-house { color:#645a50; font-size:.5rem; position:absolute; top:4px; right:5px; }
+    .kh-planets { margin-top:9px; color:#f4dfb2; font-size:.67rem; line-height:1.35; word-break:break-word; }
+    .kundali-footnote { margin-top:11px; color:#76695b; font-size:.62rem; line-height:1.55; }
+    .place-hint { color:#75695d; font-size:.58rem; margin-top:-5px; margin-bottom:8px; }
+    .kundali-print { margin-top:10px; }
+
+    /* Rashi period selector */
+    .rashi-period-tabs { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin:18px 0 6px; }
+    .rashi-period-btn { border:1px solid rgba(226,183,106,.25); background:rgba(255,255,255,.035); color:#a99b88; border-radius:18px; padding:7px 12px; font:700 .65rem 'Space Grotesk',sans-serif; cursor:pointer; }
+    .rashi-period-btn.active { background:linear-gradient(135deg,#e2b76a,#aa782e); color:#05030a; border-color:#ffdfa4; }
+    .rashi-period-note { text-align:center; color:#7e7162; font-size:.62rem; margin-top:7px; }
+
+    /* PWA install */
+    .install-app-btn { display:none; border:1px solid rgba(226,183,106,.34); background:rgba(226,183,106,.08); color:#ffdfa4; border-radius:20px; padding:7px 12px; cursor:pointer; font:600 .72rem 'Space Grotesk',sans-serif; letter-spacing:.6px; }
+    .install-app-btn.show { display:inline-flex; }
+
+    @media print {
+      header, .time-strip, .chat-toggle-btn, .admin-launch, .hero-contact-btn, .planet-bar, .scroll-down-hint, #home, .zodiac-wrap, .rashi-period-tabs, .kundali-card, .install-app-btn { display:none !important; }
+      body { background:#fff; color:#111; }
+      .content-section { max-width:none; padding:20px; }
+      .kundali-result { background:#fff; border:1px solid #888; color:#111; }
+      .kundali-chart { background:#fff; border-color:#555; }
+      .khv1,.khv2,.khv3,.khv4,.khv5,.khv6,.khv7,.khv8,.khv9,.khv10,.khv11,.khv12,.kh-center { background:#fff; }
+      .kh-sign,.kh-planets,.kh-house,.kh-center span { color:#111; }
+    }
+
+    @media (max-width: 1050px) {
+      .desktop-nav { gap:12px !important; }
+      .desktop-nav a { font-size:.68rem !important; }
+      .rashi-grid, .experience-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .admin-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .time-strip { justify-content:flex-start; overflow-x:auto; gap:14px; }
+      header { top:32px; }
+      .desktop-nav { display:flex !important; }
+      .header-actions { margin-left:auto; }
+      .mobile-nav { top:104px; }
+      .rashi-grid, .experience-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .kundali-layout { grid-template-columns:1fr; }
+      .contact-action-card { grid-template-columns:auto 1fr; }
+      .contact-action-card .action-btn { grid-column:2; width:max-content; }
+      .admin-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width: 520px) {
+      .time-strip { font-size:.58rem; padding-inline:10px; }
+      .clock-chip strong { font-size:.62rem; }
+      .date-chip { display:none; }
+      .hero-actions { flex-wrap:wrap; }
+      .rashi-grid, .experience-grid { grid-template-columns:1fr; }
+      .kundali-form-grid { grid-template-columns:1fr; }
+      .kundali-actions > button { flex:1 1 140px; }
+      .admin-launch { left:12px; bottom:12px; }
+      .admin-modal { max-height:94vh; }
+      .admin-form-grid { grid-template-columns:1fr; }
     }
 
     /* =========================================================
@@ -1037,12 +1185,158 @@
     @media (max-width: 900px) {
       .contact-layout { grid-template-columns: 1fr; }
       header { padding: 15px 24px; }
-      nav.desktop-nav { display: none; }
+      nav.desktop-nav { display: flex; }
       .hamburger-btn { display: block; }
       .hero-hud { left: 20px; top: 80px; }
       .hero-title { font-size: 2.2rem; }
       .target-status-badge { right: 20px; top: 80px; }
       .content-section { padding: 80px 24px; }
+    }
+
+    /* =========================================================
+       POSITIVE COSMIC CONTENT THEME + ALWAYS-VISIBLE TOP NAV
+       ========================================================= */
+    body {
+      background:
+        radial-gradient(circle at 8% 14%, rgba(85,120,220,0.16), transparent 28%),
+        radial-gradient(circle at 92% 22%, rgba(185,119,225,0.13), transparent 28%),
+        radial-gradient(circle at 50% 78%, rgba(37,126,174,0.12), transparent 30%),
+        linear-gradient(180deg, #081025 0%, #0d1630 42%, #17112e 72%, #0b1b2b 100%);
+      color: #f8eddc;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,224,151,0.06), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.05));
+    }
+    #cosmic-bg { opacity: 0.82; }
+    body.cosmic-content-active #cosmic-bg { opacity: 0.82; }
+    .content-section {
+      max-width: 1260px;
+      padding-left: 46px;
+      padding-right: 46px;
+    }
+    .content-section > .section-header,
+    .content-section > .about-grid,
+    .content-section > .services-grid,
+    .content-section > .zodiac-wrap,
+    .content-section > .kundali-layout,
+    .content-section > .rashi-grid,
+    .content-section > .gallery-grid,
+    .content-section > .contact-layout,
+    .content-section > .privacy-card {
+      position: relative;
+      z-index: 2;
+    }
+    #about, #services, #kundali, #rashi, #gallery, #contact, #privacy {
+      isolation: isolate;
+    }
+    #about::before, #services::before, #kundali::before, #rashi::before, #gallery::before, #contact::before, #privacy::before {
+      content: "";
+      position: absolute;
+      inset: 22px 0;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(73,116,205,0.10), transparent 26%),
+        radial-gradient(circle at 85% 76%, rgba(176,105,213,0.08), transparent 25%);
+    }
+
+    /* Keep navigation directly visible on the page; hamburger stays hidden. */
+    header {
+      padding: 13px 30px;
+      gap: 18px;
+      background: rgba(7, 10, 24, 0.90);
+      border-bottom-color: rgba(226, 183, 106, 0.28);
+    }
+    header .logo { flex: 0 0 auto; font-size: 1.42rem; }
+    nav.desktop-nav {
+      flex: 1 1 auto;
+      min-width: 0;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 2px 0;
+    }
+    nav.desktop-nav::-webkit-scrollbar { display: none; }
+    nav.desktop-nav a { white-space: nowrap; }
+    .hamburger-btn { display: none !important; }
+    .mobile-nav { display: none !important; }
+    .header-actions { flex: 0 0 auto; }
+
+    /* Services: same visual language as existing cards, no outbound buttons. */
+    .planet-btn { position:relative; }
+    .planet-key { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; white-space:nowrap; opacity:0; pointer-events:none; }
+    .planet-label { display:inline-flex; align-items:center; gap:6px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .service-card {
+      background: rgba(16, 20, 44, 0.78);
+      border: 1px solid rgba(226, 183, 106, 0.25);
+      backdrop-filter: blur(14px);
+      border-radius: 14px;
+      padding: 24px;
+      min-height: 178px;
+      transition: all .3s ease;
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+    }
+    .service-card:hover {
+      border-color: #e2b76a;
+      transform: translateY(-5px);
+      box-shadow: 0 12px 34px rgba(0,0,0,.2), 0 0 24px rgba(226,183,106,.18);
+    }
+    .service-icon { font-size: 2.05rem; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(226,183,106,.16)); }
+    .service-card h3 { font-family:'Cinzel',serif; color:#ffe4ad; font-size:1.05rem; margin-bottom:8px; }
+    .service-card p { color:#c4b8ab; font-size:.76rem; line-height:1.55; }
+
+    /* Improve below-hero cards so they feel luminous rather than black. */
+    .about-card, .gallery-card, .kundali-card, .kundali-result, .rashi-card, .privacy-card, .contact-layout {
+      background: rgba(19, 24, 50, 0.74);
+      box-shadow: 0 12px 30px rgba(3,8,22,.14);
+    }
+    .contact-action-card { background: rgba(10, 18, 42, .72); }
+    footer {
+      background: linear-gradient(180deg, rgba(10,18,40,.94), rgba(15,12,34,.98));
+    }
+
+    @media (max-width: 1180px) {
+      header { padding-inline: 20px; }
+      header .logo { font-size: 1.18rem; letter-spacing: 2.7px; }
+      nav.desktop-nav { gap: 12px; }
+      nav.desktop-nav a { font-size: .70rem; letter-spacing: 1px; }
+      .services-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      header { top: 32px; padding: 10px 14px; gap: 10px; }
+      header .logo { font-size: .98rem; letter-spacing: 2px; }
+      nav.desktop-nav { justify-content: flex-start; gap: 10px; }
+      nav.desktop-nav a { font-size: .61rem; letter-spacing: .7px; }
+      .header-actions { gap: 6px; }
+      .install-app-btn { display:none !important; }
+      .language-toggle { padding: 6px 9px; font-size: .63rem; }
+      .content-section { padding-left: 18px; padding-right: 18px; }
+      .services-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 540px) {
+      .time-strip { min-height: 30px; }
+      header { top: 30px; }
+      header .logo { font-size: .84rem; letter-spacing: 1.4px; }
+      nav.desktop-nav { gap: 9px; }
+      nav.desktop-nav a { font-size: .56rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: 0; }
     }
   </style>
 </head>
@@ -1051,30 +1345,46 @@
   <!-- Lightweight 2D cosmic background for non-3D sections -->
   <canvas id="cosmic-bg" aria-hidden="true"></canvas>
 
+  <!-- LIVE TIME / DATE STRIP -->
+  <div class="time-strip" aria-label="Live date and time">
+    <div class="clock-chip"><span data-i18n="indiaLabel">🇮🇳 India</span><strong id="india-time">--:--:--</strong></div>
+    <div class="clock-chip"><span data-i18n="worldLabel">🌍 World · UTC</span><strong id="world-time">--:--:--</strong></div>
+    <div class="clock-chip date-chip"><span data-i18n="dateLabel">📅 Date</span><strong id="live-date">--</strong></div>
+  </div>
+
   <!-- FIXED HEADER NAVIGATION -->
   <header>
     <a href="#home" class="logo">AstroCosmos 3D</a>
-    
+
     <!-- Desktop Navigation -->
-    <nav class="desktop-nav">
-      <a href="#home">Home</a>
-      <a href="#about">About Us</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact & Location</a>
-      <a href="#privacy">Privacy Policy</a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#services" data-nav="services">Services</a>
+      <a href="#rashi" data-nav="rashi">Rashi Phalalu</a>
+      <a href="#kundali" data-nav="kundali">Free Kundali</a>
+      <a href="#gallery" data-nav="gallery">Gallery</a>
+      <a href="#contact" data-nav="contact">Location</a>
     </nav>
 
-    <!-- Mobile Hamburger Toggle -->
-    <button class="hamburger-btn" aria-label="Toggle Navigation" onclick="toggleMobileNav()">☰</button>
+    <div class="header-actions">
+      <button class="language-toggle" id="language-toggle" type="button" onclick="toggleLanguage()" aria-label="Switch language">తెలుగు</button>
+      <button class="install-app-btn" id="install-app-btn" type="button" onclick="installPWA()">📲 Install</button>
+      <button class="hamburger-btn" aria-label="Toggle Navigation" onclick="toggleMobileNav()">☰</button>
+    </div>
   </header>
 
   <!-- Mobile Dropdown Navigation -->
   <div class="mobile-nav" id="mobile-nav">
-    <a href="#home" onclick="toggleMobileNav()">Home</a>
-    <a href="#about" onclick="toggleMobileNav()">About Us</a>
-    <a href="#gallery" onclick="toggleMobileNav()">Gallery</a>
-    <a href="#contact" onclick="toggleMobileNav()">Contact & Location</a>
-    <a href="#privacy" onclick="toggleMobileNav()">Privacy Policy</a>
+    <a href="#home" data-i18n="navHome">Home</a>
+    <a href="#services" data-i18n="navServices">Services</a>
+    <a href="#rashi" data-i18n="navRashi">Rashi Phalalu</a>
+    <a href="#kundali" data-i18n="navKundali">Free Kundali</a>
+    <a href="#gallery" data-i18n="navGallery">Gallery</a>
+    <a href="#contact" data-i18n="navContact">Location</a>
+    <a href="#about" data-i18n="navAbout">About Us</a>
+    <a href="#privacy" data-i18n="navPrivacy">Privacy</a>
+    <button class="mobile-language-toggle" id="mobile-install-app-btn" type="button" onclick="installPWA();" style="display:none;">📲 Install App</button>
+    <button class="mobile-language-toggle" type="button" onclick="toggleLanguage();" data-i18n="mobileLanguage">తెలుగు / English</button>
   </div>
 
   <!-- SECTION 1: HERO & 3D SIMULATION (100vh) -->
@@ -1083,31 +1393,32 @@
     <div id="webgl-canvas"></div>
 
     <div class="hero-hud">
-      <span class="hero-tag">Live 3D Astrolabe</span>
-      <h1 class="hero-title">Celestial Destiny</h1>
-      <p class="hero-desc">
-        నవగ్రహాల నిజమైన 3D కదలికలు మరియు వేద ఖగోళ ప్రభావాన్ని కళ్లారా తిలకించండి. భారతీయ సరిహద్దులు ప్రత్యేక కాంతితో వెలుగుతుండగా, గ్రహాల గోచార ఫలితాలను ప్రత్యక్షంగా గమనించండి.
-      </p>
+      <span class="hero-tag" id="hero-tag" data-i18n="heroTag">Live 3D Astrolabe</span>
+      <h1 class="hero-title" id="hero-title" data-i18n="heroTitle">Celestial Destiny</h1>
+      <div class="hero-actions">
+        <a class="hero-contact-btn whatsapp" href="https://wa.me/919876543210" target="_blank" rel="noopener" data-i18n="heroWhatsApp">💬 WhatsApp</a>
+        <a class="hero-contact-btn call" href="tel:+919876543210" data-i18n="heroCall">📞 Call</a>
+      </div>
     </div>
 
     <div class="target-status-badge">
-      <small>Focused Planet</small>
+      <small data-i18n="focusedPlanet">Focused Planet</small>
       <span id="target-display">Solar System Overview</span>
     </div>
 
     <!-- Quick Switch Planetary Ribbon -->
     <div class="planet-bar">
-      <button class="planet-btn active" onclick="focusTarget('system')">☀️ Solar System</button>
-      <button class="planet-btn" onclick="focusTarget('Sun')">🔥 The Sun</button>
-      <button class="planet-btn" onclick="focusTarget('Earth')">🌍 Earth (India Outlined)</button>
-      <button class="planet-btn" onclick="focusTarget('Moon')">🌕 The Moon</button>
-      <button class="planet-btn" onclick="focusTarget('Mars')">🔴 Mars</button>
-      <button class="planet-btn" onclick="focusTarget('Jupiter')">♃ Jupiter</button>
-      <button class="planet-btn" onclick="focusTarget('Saturn')">🪐 Saturn</button>
+      <button class="planet-btn active" onclick="focusTarget('system')"><span class="planet-label" data-planet-label="planetSystem">☀️ Solar System</span><span class="planet-key">Solar System</span></button>
+      <button class="planet-btn" onclick="focusTarget('Sun')"><span class="planet-label" data-planet-label="planetSun">🔥 The Sun</span><span class="planet-key">The Sun</span></button>
+      <button class="planet-btn" onclick="focusTarget('Earth')"><span class="planet-label" data-planet-label="planetEarth">🌍 Earth (India Outlined)</span><span class="planet-key">Earth (India Outlined)</span></button>
+      <button class="planet-btn" onclick="focusTarget('Moon')"><span class="planet-label" data-planet-label="planetMoon">🌕 The Moon</span><span class="planet-key">The Moon</span></button>
+      <button class="planet-btn" onclick="focusTarget('Mars')"><span class="planet-label" data-planet-label="planetMars">🔴 Mars</span><span class="planet-key">Mars</span></button>
+      <button class="planet-btn" onclick="focusTarget('Jupiter')"><span class="planet-label" data-planet-label="planetJupiter">♃ Jupiter</span><span class="planet-key">Jupiter</span></button>
+      <button class="planet-btn" onclick="focusTarget('Saturn')"><span class="planet-label" data-planet-label="planetSaturn">🪐 Saturn</span><span class="planet-key">Saturn</span></button>
     </div>
 
     <a href="#about" class="scroll-down-hint">
-      <span>Scroll Down</span>
+      <span data-i18n="scrollDown">Scroll Down</span>
       <span>▼</span>
     </a>
   </section>
@@ -1115,41 +1426,41 @@
   <!-- SECTION 2: ABOUT US -->
   <section id="about" class="content-section">
     <div class="section-header">
-      <span class="section-tag">Our Cosmic Heritage</span>
-      <h2 class="section-title">About AstroCosmos 3D</h2>
+      <span class="section-tag" data-i18n="aboutTag">Our Cosmic Heritage</span>
+      <h2 class="section-title" data-i18n="aboutTitle">About AstroCosmos 3D</h2>
       <div class="divider"></div>
     </div>
 
     <div class="about-grid">
       <div class="about-card">
         <div class="about-card-icon">🕉️</div>
-        <h3>ప్రాచీన వేద ఖగోళ శాస్త్రం</h3>
+        <h3 data-i18n="about1Title">Ancient Vedic Astronomy</h3>
         <p>
-          ఋగ్వేదం మరియు సూర్య సిద్ధాంతంలో వివరించిన విధంగా నవగ్రహాల కదలికలు మానవ జీవితాలను, కాలగమనాన్ని ఎలా ప్రభావితం చేస్తాయో లోతైన జ్యోతిష్య విశ్లేషణ ద్వారా మేము అందిస్తున్నాము.
+          <span data-i18n="about1Desc">We present traditional Vedic astronomy and astrology through a modern, visual approach to planetary cycles and timing.</span>
         </p>
       </div>
 
       <div class="about-card">
         <div class="about-card-icon">🪐</div>
-        <h3>రియల్-టైమ్ 3D సిమ్యులేషన్</h3>
+        <h3 data-i18n="about2Title">Real-Time 3D Simulation</h3>
         <p>
-          కేవలం కాగితాలపై రాసే చక్రాలకే పరిమితం కాకుండా, నిజమైన 3D స్పేస్‌లో గ్రహాల కక్ష్యలు, తిరోగమనాలు (Retrogrades), మరియు గోచార గ్రహ స్థానాలను లైవ్‌గా చూపించే సరికొత్త టెక్నాలజీ.
+          <span data-i18n="about2Desc">Explore planetary orbits, motion and transit concepts through the site's live 3D celestial model.</span>
         </p>
       </div>
 
       <div class="about-card">
         <div class="about-card-icon">🇮🇳</div>
-        <h3>భారతీయ ఆధ్యాత్మిక వైభవం</h3>
+        <h3 data-i18n="about3Title">🇮🇳 Indian Spiritual Heritage</h3>
         <p>
-          జ్యోతిష్యం పుట్టిన భారత భూమిని గౌరవిస్తూ, మన భూగోళంపై భారతదేశాన్ని ప్రత్యేకంగా ప్రకాశించే సరిహద్దులు (Illuminated Borders) మరియు నగర కాంతులతో హైలైట్ చేశాము.
+          <span data-i18n="about3Desc">The experience blends India's cultural heritage with a luminous cosmic visual language.</span>
         </p>
       </div>
     </div>
 
     <div class="zodiac-wrap">
       <div class="zodiac-head">
-        <h3>Interactive Rasi Wheel</h3>
-        <p>Hover or click a rasi to explore its traditional Vedic sign name.</p>
+        <h3 id="zodiac-title" data-i18n="zodiacTitle">Interactive Rasi Wheel</h3>
+        <p id="zodiac-subtitle" data-i18n="zodiacSubtitle">Hover or click a rasi to explore its traditional Vedic sign name.</p>
       </div>
       <div class="zodiac-stage" aria-label="Interactive 12-sign zodiac wheel">
         <div class="zodiac-orbit" id="zodiac-orbit"></div>
@@ -1162,64 +1473,150 @@
     </div>
   </section>
 
-  <!-- SECTION 3: GALLERY -->
-  <section id="gallery" class="content-section">
+
+  <!-- SECTION 3: VEDIC ASTROLOGY SERVICES -->
+  <section id="services" class="content-section">
     <div class="section-header">
-      <span class="section-tag">Celestial Marvels</span>
-      <h2 class="section-title">Celestial 3D Gallery</h2>
+      <span class="section-tag" data-i18n="servicesTag">Our Services</span>
+      <h2 class="section-title" data-i18n="servicesTitle">Vedic Astrology Services</h2>
       <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="servicesSubtitle">Guidance for every important phase of life — consultations available in Telugu, Hindi, Kannada and English, open every day.</p>
     </div>
 
-    <div class="gallery-grid">
-      <div class="gallery-card">
-        <div class="gallery-planet-icon">🌍</div>
-        <h4>Earth & India</h4>
-        <p>ప్రకాశవంతమైన భారత సరిహద్దులు & భ్రమణం చేస్తున్న మేఘాల వలయం.</p>
-        <button class="btn-view-3d" onclick="viewPlanetIn3D('Earth')">View in 3D ↑</button>
+    <div class="services-grid">
+      <article class="service-card"><div class="service-icon">🔮</div><h3 data-i18n="svc1Title">Kundli Matching</h3><p data-i18n="svc1Desc">Compatibility review of two birth charts using the traditional 36-point Guna Milan approach with dosha review.</p></article>
+      <article class="service-card"><div class="service-icon">💍</div><h3 data-i18n="svc2Title">Marriage & Delay Guidance</h3><p data-i18n="svc2Desc">Chart-based review of possible marriage delays, with traditional guidance and suggested remedies.</p></article>
+      <article class="service-card"><div class="service-icon">💼</div><h3 data-i18n="svc3Title">Career & Job Guidance</h3><p data-i18n="svc3Desc">Timing-focused guidance for career decisions, job changes and professional growth.</p></article>
+      <article class="service-card"><div class="service-icon">🏢</div><h3 data-i18n="svc4Title">Business Astrology</h3><p data-i18n="svc4Desc">Guidance on favourable timing, partnerships and growth for entrepreneurs and business owners.</p></article>
+      <article class="service-card"><div class="service-icon">📅</div><h3 data-i18n="svc5Title">Muhurtham</h3><p data-i18n="svc5Desc">Auspicious-date guidance for weddings, gruhapravesham and other new beginnings.</p></article>
+      <article class="service-card"><div class="service-icon">🏠</div><h3 data-i18n="svc6Title">Vastu Consultation</h3><p data-i18n="svc6Desc">Practical home and office space guidance focused on balance, function and thoughtful changes.</p></article>
+      <article class="service-card"><div class="service-icon">🕉️</div><h3 data-i18n="svc7Title">Dosha Remedies</h3><p data-i18n="svc7Desc">Traditional parihara guidance for concerns such as Kaal Sarp, Mangal Dosha and Navagraha-related themes.</p></article>
+      <article class="service-card"><div class="service-icon">🔢</div><h3 data-i18n="svc8Title">Numerology</h3><p data-i18n="svc8Desc">Insights from birth number and name analysis for reflection, planning and personal clarity.</p></article>
+    </div>
+  </section>
+
+  <!-- SECTION 3: FREE HOROSCOPE & KUNDALI GENERATOR -->
+  <section id="kundali" class="content-section">
+    <div class="section-header">
+      <span class="section-tag" id="kundali-tag" data-i18n="kundaliTag">Free Horoscope & Kundali</span>
+      <h2 class="section-title" id="kundali-title" data-i18n="kundaliTitle">Generate Your Kundali</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" id="kundali-subtitle" data-i18n="kundaliSubtitle">Enter birth date, time and place to generate an automated Vedic-style birth chart.</p>
+    </div>
+
+    <div class="kundali-layout">
+      <div class="kundali-card">
+        <h3 id="kundali-form-title" data-i18n="kundaliFormTitle">Birth Details</h3>
+        <p class="kundali-note" id="kundali-note" data-i18n="kundaliNote">For best results, use the local birth time and a recognised city. Unknown places can use latitude/longitude manually.</p>
+        <label id="k-name-label"><span data-i18n="kundaliName">Name</span>
+          <input id="k-name" type="text" placeholder="Your name" data-i18n-placeholder="yourName" autocomplete="name">
+        </label>
+        <div class="kundali-form-grid">
+          <label id="k-date-label"><span data-i18n="birthDate">Birth Date</span>
+            <input id="k-date" type="date">
+          </label>
+          <label id="k-time-label"><span data-i18n="birthTime">Birth Time</span>
+            <input id="k-time" type="time" step="60">
+          </label>
+        </div>
+        <label id="k-place-label"><span data-i18n="kundaliPlace">Birth Place</span>
+          <input id="k-place" type="text" list="birth-city-list" placeholder="Example: Hyderabad" data-i18n-placeholder="placePlaceholder">
+        </label>
+        <div class="place-hint" id="k-place-hint" data-i18n="placeHint">Built-in coordinates are available for common cities. For other places, enter coordinates below.</div>
+        <div class="kundali-form-grid">
+          <label><span data-i18n="latitude">Latitude</span>
+            <input id="k-lat" type="number" step="0.0001" min="-90" max="90" placeholder="17.3850" data-i18n-placeholder="latitudePlaceholder">
+          </label>
+          <label><span data-i18n="longitude">Longitude</span>
+            <input id="k-lon" type="number" step="0.0001" min="-180" max="180" placeholder="78.4867" data-i18n-placeholder="longitudePlaceholder">
+          </label>
+        </div>
+        <div class="kundali-actions">
+          <button class="kundali-primary" type="button" onclick="generateKundali()" id="generate-kundali-btn" data-i18n="generateKundali">✨ Generate Kundali</button>
+          <button class="kundali-secondary" type="button" onclick="fillKundaliDemo()" id="demo-kundali-btn" data-i18n="demoData">Use Demo Data</button>
+          <button class="kundali-secondary" type="button" onclick="window.print()" id="print-kundali-btn" data-i18n="printChart">🖨️ Print</button>
+        </div>
+        <div class="kundali-status" id="kundali-status" aria-live="polite"></div>
+        <datalist id="birth-city-list">
+          <option value="Hyderabad"></option><option value="Secunderabad"></option><option value="Warangal"></option><option value="Vijayawada"></option><option value="Visakhapatnam"></option><option value="Tirupati"></option><option value="Bengaluru"></option><option value="Chennai"></option><option value="Mumbai"></option><option value="Delhi"></option><option value="Kolkata"></option><option value="Pune"></option><option value="Nashik"></option><option value="Ahmedabad"></option><option value="Jaipur"></option><option value="Lucknow"></option>
+        </datalist>
       </div>
 
-      <div class="gallery-card">
-        <div class="gallery-planet-icon">🌕</div>
-        <h4>The Moon</h4>
-        <p>భూమి చుట్టూ తిరుగుతూ మనస్సును శాసించే చంద్రుడి కక్ష్య.</p>
-        <button class="btn-view-3d" onclick="viewPlanetIn3D('Moon')">View in 3D ↑</button>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-planet-icon">🔥</div>
-        <h4>The Sun</h4>
-        <p>ప్రపంచానికి ఆత్మకారకుడు, జీవశక్తి ప్రదాత అయిన సూర్య భగవానుడు.</p>
-        <button class="btn-view-3d" onclick="viewPlanetIn3D('Sun')">View in 3D ↑</button>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-planet-icon">🪐</div>
-        <h4>Saturn & Rings</h4>
-        <p>కర్మ ప్రదాత శని గ్రహం, కాస్సిని డివిజన్ గ్యాప్‌తో కూడిన వలయాలు.</p>
-        <button class="btn-view-3d" onclick="viewPlanetIn3D('Saturn')">View in 3D ↑</button>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-planet-icon">🔴</div>
-        <h4>Mars</h4>
-        <p>భూమిపుత్రుడు కుజ గ్రహం • శౌర్యానికి, ధైర్యానికి ప్రతీక.</p>
-        <button class="btn-view-3d" onclick="viewPlanetIn3D('Mars')">View in 3D ↑</button>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-planet-icon">♃</div>
-        <h4>Jupiter</h4>
-        <p>దేవగురువు బృహస్పతి • జ్ఞానానికి, ఆధ్యాత్మిక ఉన్నతికి కారకుడు.</p>
-        <button class="btn-view-3d" onclick="viewPlanetIn3D('Jupiter')">View in 3D ↑</button>
+      <div class="kundali-result">
+        <h3 id="kundali-result-title" data-i18n="kundaliResultTitle">Your Chart</h3>
+        <div class="kundali-summary">
+          <div class="kundali-chip"><small id="ks-name-label">Name</small><strong id="ks-name">—</strong></div>
+          <div class="kundali-chip"><small id="ks-place-label">Birth Place</small><strong id="ks-place">—</strong></div>
+          <div class="kundali-chip"><small id="ks-lagna-label">Lagna</small><strong id="ks-lagna">—</strong></div>
+          <div class="kundali-chip"><small id="ks-moon-label">Moon Rashi</small><strong id="ks-moon">—</strong></div>
+          <div class="kundali-chip"><small id="ks-nak-label">Nakshatra</small><strong id="ks-nak">—</strong></div>
+          <div class="kundali-chip"><small id="ks-sun-label">Sun Rashi</small><strong id="ks-sun">—</strong></div>
+        </div>
+        <div class="kundali-chart-wrap"><div class="kundali-chart" id="kundali-chart"></div></div>
+        <p class="kundali-footnote" id="kundali-footnote" data-i18n="kundaliFootnote">Automated calculation uses a lightweight, browser-only astronomical approximation. It is intended for website/demo use and should not replace a professional ephemeris for exact horoscope work.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: CONTACT & LOCATION -->
+  <!-- SECTION 4: DAILY / MONTHLY / YEARLY RASHI UPDATES -->
+  <section id="rashi" class="content-section">
+    <div class="section-header">
+      <span class="section-tag" id="rashi-tag" data-i18n="rashiTag">Daily Vedic Updates</span>
+      <h2 class="section-title" id="rashi-title" data-i18n="rashiTitle">Today's Rashi</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" id="rashi-subtitle" data-i18n="rashiSubtitle">Updates published from the testing admin panel appear here.</p>
+      <div class="publish-date-pill"><span data-i18n="publishedFor">Published for</span><strong id="rashi-publish-date">Today</strong></div>
+      <div class="rashi-period-tabs" role="tablist" aria-label="Rashi update period">
+        <button class="rashi-period-btn active" data-period="daily" onclick="setPublicRashiPeriod('daily')" data-i18n="dailyTab">Daily</button>
+        <button class="rashi-period-btn" data-period="monthly" onclick="setPublicRashiPeriod('monthly')" data-i18n="monthlyTab">Monthly</button>
+        <button class="rashi-period-btn" data-period="yearly" onclick="setPublicRashiPeriod('yearly')" data-i18n="yearlyTab">Yearly</button>
+      </div>
+      <div class="rashi-period-note" id="rashi-period-note">Showing current daily updates</div>
+    </div>
+    <div class="rashi-grid" id="rashi-grid" aria-live="polite"></div>
+  </section>
+
+  <!-- SECTION 4: GALLERY / COSMIC EXPERIENCES -->
+  <section id="gallery" class="content-section">
+    <div class="section-header">
+      <span class="section-tag" id="gallery-tag" data-i18n="galleryTag">Cosmic Experiences</span>
+      <h2 class="section-title" id="gallery-title" data-i18n="galleryTitle">Explore AstroCosmos</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="gallery-grid experience-grid">
+      <article class="gallery-card experience-card">
+        <div class="gallery-planet-icon">☯</div>
+        <h4 data-i18n="gallery1Title">Interactive Rasi Wheel</h4>
+        <p data-i18n="gallery1Desc">Explore all 12 traditional rasi signs and tap any sign for a short description.</p>
+        <a class="btn-view-3d" href="#about" data-i18n="gallery1Btn">Open Rasi Wheel ↑</a>
+      </article>
+      <article class="gallery-card experience-card">
+        <div class="gallery-planet-icon">🌙</div>
+        <h4 data-i18n="gallery2Title">Live Moon Phase</h4>
+        <p data-i18n="gallery2Desc">The lunar widget updates from the device date without an external API.</p>
+        <a class="btn-view-3d" href="#contact" data-i18n="gallery2Btn">View Contact ↓</a>
+      </article>
+      <article class="gallery-card experience-card">
+        <div class="gallery-planet-icon">✨</div>
+        <h4 data-i18n="gallery3Title">Daily Rashi</h4>
+        <p data-i18n="gallery3Desc">Read the latest 12-rashi content published from the testing admin panel.</p>
+        <a class="btn-view-3d" href="#rashi" data-i18n="gallery3Btn">Open Daily Rashi ↓</a>
+      </article>
+      <article class="gallery-card experience-card">
+        <div class="gallery-planet-icon">📅</div>
+        <h4 data-i18n="gallery4Title">Availability</h4>
+        <p data-i18n="gallery4Desc">See the current appointment date range and available hours configured by admin.</p>
+        <a class="btn-view-3d" href="#contact" data-i18n="gallery4Btn">Check Timing ↓</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECTION 5: CONTACT & LOCATION -->
   <section id="contact" class="content-section">
     <div class="section-header">
-      <span class="section-tag">Reach Our Astro Desk</span>
-      <h2 class="section-title">Contact & Space Observatory</h2>
+      <span class="section-tag" id="contact-tag" data-i18n="contactTag">Reach Our Astro Desk</span>
+      <h2 class="section-title" id="contact-title" data-i18n="contactTitle">Contact & Location</h2>
       <div class="divider"></div>
     </div>
 
@@ -1227,78 +1624,82 @@
       <!-- Contact Form -->
       <form class="contact-form" id="contact-form" onsubmit="submitMessage(event)" novalidate>
         <div class="form-group">
-          <label for="user-name">మీ పూర్తి పేరు (Full Name) <span class="req">*</span></label>
-          <input type="text" id="user-name" placeholder="Ex: Ramesh Sharma" required />
+          <label for="user-name" id="name-label"><span data-i18n="fullName">Full Name</span> <span class="req">*</span></label>
+          <input type="text" id="user-name" placeholder="Ex: Ramesh Sharma" data-i18n-placeholder="contactNamePlaceholder" required />
           <span class="field-error" id="name-error"></span>
         </div>
 
         <div class="form-group">
-          <label for="user-email">మీ ఇమెయిల్ (Email Address) <span class="req">*</span></label>
-          <input type="email" id="user-email" placeholder="name@example.com" required />
+          <label for="user-email" id="email-label"><span data-i18n="email">Email Address</span> <span class="req">*</span></label>
+          <input type="email" id="user-email" placeholder="name@example.com" data-i18n-placeholder="emailPlaceholder" required />
           <span class="field-error" id="email-error"></span>
         </div>
 
         <div class="form-group">
-          <label for="user-dob">పుట్టిన తేదీ & సమయం (DOB & Time - Optional)</label>
-          <input type="text" id="user-dob" placeholder="DD/MM/YYYY, HH:MM AM/PM" />
+          <label for="user-dob" id="dob-label" data-i18n="dob">DOB & Time (Optional)</label>
+          <input type="text" id="user-dob" placeholder="DD/MM/YYYY, HH:MM AM/PM" data-i18n-placeholder="dobPlaceholder" />
         </div>
 
         <div class="form-group">
-          <label for="user-msg">సందేశం / ప్రశ్న (Message) <span class="req">*</span></label>
-          <textarea id="user-msg" rows="4" placeholder="మీ జాతక ప్రశ్న లేదా సందేశం ఇక్కడ రాయండి..." required></textarea>
+          <label for="user-msg" id="msg-label"><span data-i18n="message">Message / Question</span> <span class="req">*</span></label>
+          <textarea id="user-msg" rows="4" placeholder="Write your question or message here..." data-i18n-placeholder="messagePlaceholder" required></textarea>
           <span class="field-error" id="msg-error"></span>
         </div>
 
-        <button type="submit" class="btn-submit">సందేశం పంపండి (Submit Message)</button>
-
-        <p class="form-disclaimer">
-          <small>ℹ️ <strong>Demo Mode:</strong> This contact form is a front-end simulation. Submissions are validated and previewed locally; no data is sent to an external server.</small>
-        </p>
+        <button type="submit" class="btn-submit" id="whatsapp-submit" data-i18n="whatsappSubmit">💬 Send Message on WhatsApp</button>
+        <p class="form-disclaimer" id="form-disclaimer"><small data-i18n="formNote">ℹ️ Testing mode: the message is prepared locally and opened in WhatsApp using the demo number.</small></p>
         <div id="form-feedback" class="form-feedback" style="display: none;"></div>
       </form>
 
-      <!-- Representational Observatory Display -->
-      <div class="radar-box">
-        <div class="location-details">
-          <h5>🛰️ REGIONAL OBSERVATORY REFERENCE (ILLUSTRATIVE DISPLAY)</h5>
-          <p><strong>AstroCosmos Vedic Center:</strong> Jubilee Hills Observatory, Hyderabad, Telangana, India.</p>
-          <p><strong>Coordinates:</strong> 17.4325° N, 78.4071° E</p>
+      <!-- Contact / Location / Availability actions -->
+      <div class="contact-tools">
+        <div class="contact-action-card">
+          <span class="contact-action-icon">💬</span>
+          <div><strong data-i18n="whatsappLabel">WhatsApp</strong><small data-i18n="demoNumber">+91 98765 43210 · Demo</small></div>
+          <a class="action-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener" data-i18n="openWhatsApp">Open WhatsApp</a>
+        </div>
+        <div class="contact-action-card">
+          <span class="contact-action-icon">📞</span>
+          <div><strong data-i18n="callLabel">Call</strong><small data-i18n="demoNumber2">+91 98765 43210 · Demo</small></div>
+          <a class="action-btn" href="tel:+919876543210" data-i18n="callNow">Call Now</a>
+        </div>
+        <div class="contact-action-card">
+          <span class="contact-action-icon">📍</span>
+          <div><strong data-i18n="locationLabel">Location</strong><small data-i18n="locationValue">Jubilee Hills, Hyderabad, Telangana</small></div>
+          <a class="action-btn" href="https://www.google.com/maps/search/?api=1&query=AstroCosmos+Vedic+Center+Jubilee+Hills+Hyderabad+Telangana+India" target="_blank" rel="noopener" data-i18n="openMaps">Open Google Maps</a>
         </div>
 
-        <div class="radar-circle">
-          <div class="radar-blip"></div>
-        </div>
-
-        <div class="location-details">
-          <p style="color: #ffd700; font-size: 0.75rem;">● RADAR DISPLAY: REPRESENTATIONAL RADAR MAPPING</p>
-          <p style="color: #887b6d; font-size: 0.72rem; margin-top: 4px;">Visiting Hours: Mon - Sat (9:00 AM - 6:00 PM IST)</p>
+        <div class="availability-card">
+          <div class="availability-head"><span>📅</span><strong data-i18n="availableTiming">Available Timing</strong></div>
+          <p id="availability-summary">Testing schedule not configured yet.</p>
+          <div class="availability-status" id="availability-status">● Waiting for admin schedule</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 5: PRIVACY POLICY -->
+  <!-- SECTION 6: PRIVACY POLICY -->
   <section id="privacy" class="content-section">
     <div class="section-header">
-      <span class="section-tag">Data Trust & Integrity</span>
-      <h2 class="section-title">Privacy Policy</h2>
+      <span class="section-tag" data-i18n="privacyTag">Data Trust & Integrity</span>
+      <h2 class="section-title" data-i18n="privacyTitle">Privacy Policy</h2>
       <div class="divider"></div>
     </div>
 
     <div class="privacy-card">
-      <h4>1. జాతక వివరాల పూర్తి గోప్యత (Astrological Privacy)</h4>
+      <h4 data-i18n="privacy1Title">1. Astrological Privacy</h4>
       <p>
-        యూజర్లు నమోదు చేసే పుట్టిన తేదీ, సమయం, జన్మస్థలం మరియు వ్యక్తిగత జాతక వివరాలు 100% సురక్షితం. మీ అనుమతి లేకుండా ఈ డేటా ఎట్టి పరిస్థితుల్లోనూ ఎవరికీ చేరదు.
+<span data-i18n="privacy1Desc">Birth details entered on this demo are processed locally in the browser and are not sent to an external server by the site.</span>
       </p>
 
-      <h4>2. 3D గ్రాఫిక్స్ & కుకీల విధానం (3D WebGL Storage)</h4>
+      <h4 data-i18n="privacy2Title">2. 3D Graphics & Browser Storage</h4>
       <p>
-        వెబ్‌సైట్‌లో 360° స్పేస్ వీక్షణ వేగంగా పనిచేసేందుకు మాత్రమే మీ బ్రౌజర్ లోకల్ స్టోరేజ్ ఉపయోగపడుతుంది. ఎలాంటి అనధికార ట్రాకింగ్ చేయబడదు.
+<span data-i18n="privacy2Desc">Browser storage is used for local demo preferences and testing data; no external tracking is built into this demo.</span>
       </p>
 
-      <h4>3. సురక్షిత సంభాషణ (Quick Guide Security)</h4>
+      <h4 data-i18n="privacy3Title">3. Quick Guide Processing</h4>
       <p>
-        Astro Quick Guide బాట్ ద్వారా మీరు అడిగే ప్రశ్నలు లోకల్ బ్రౌజర్ పరిధిలో మాత్రమే ప్రాసెస్ చేయబడతాయి.
+<span data-i18n="privacy3Desc">The FAQ guide operates in the browser and uses a small local keyword response system for demo purposes.</span>
       </p>
     </div>
   </section>
@@ -1309,36 +1710,95 @@
     <div class="moon-phase-widget" id="moon-phase-widget" aria-label="Live Moon Phase">
       <div class="moon-phase-icon" id="moon-phase-icon">🌑</div>
       <div class="moon-phase-copy">
-        <small>Live Lunar Status</small>
+        <small id="moon-label" data-i18n="moonLabel">Live Lunar Status</small>
         <strong id="moon-phase-name">Calculating Moon Phase…</strong>
         <span id="moon-phase-meta">Today · local browser date</span>
       </div>
     </div>
-    <p>© 2026 AstroCosmos 3D. All Rights Reserved. Designed for Vedic Astronomy & Astrology.</p>
+    <p id="footer-copy" data-i18n="footer">© 2026 AstroCosmos 3D. All Rights Reserved. Designed for Vedic Astronomy & Astrology.</p>
   </footer>
+
+  <!-- TESTING-ONLY ADMIN PANEL LAUNCHER -->
+  <button class="admin-launch" type="button" onclick="openAdminPanel()">⚙️ Admin Panel</button>
 
   <!-- FLOATING QUICK ASTRO GUIDE BOT WIDGET -->
   <button class="chat-toggle-btn" onclick="toggleChat()">
-    <span>💬</span> Quick Astro Guide
+    <span>💬</span> <span data-i18n="quickGuide">Quick Astro Guide</span>
   </button>
 
   <div class="chat-window" id="chat-window">
     <div class="chat-header">
-      <h4><span class="online-dot"></span> Quick Astro Guide (FAQ Bot)</h4>
+      <h4><span class="online-dot"></span> <span data-i18n="quickGuideTitle">Quick Astro Guide (FAQ Bot)</span></h4>
       <button class="chat-close" onclick="toggleChat()">&times;</button>
     </div>
     <div class="chat-messages" id="chat-msgs">
       <div class="chat-msg bot">
-        నమస్కారం! 🙏 AstroCosmos FAQ గైడ్ కు స్వాగతం. మీ రాశి లేదా గ్రహాల ప్రాథమిక సమాచారం (ఉదా: శని, కుజుడు, రాశి) కోసం కింద టైప్ చేయండి.
+        <span id="chat-welcome">Hello! 🙏 Ask about a rashi or planet for basic AstroCosmos demo information.</span>
       </div>
     </div>
     <div class="chat-input-area">
-      <input type="text" id="chat-input" placeholder="ఉదా: శని, రాశి, కుజుడు..." onkeydown="if(event.key==='Enter') sendChat()" />
-      <button onclick="sendChat()">Send</button>
+      <input type="text" id="chat-input" placeholder="e.g. Saturn, Rashi, Mars..." data-i18n-placeholder="chatPlaceholder" onkeydown="if(event.key==='Enter') sendChat()" />
+      <button onclick="sendChat()" data-i18n="send">Send</button>
     </div>
   </div>
 
-  <!-- Three.js + OrbitControls (Animation & Engine UNTOUCHED) -->
+  <!-- TESTING ADMIN PANEL -->
+  <div class="admin-overlay" id="admin-overlay" hidden>
+    <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+      <div class="admin-header">
+        <div>
+          <span class="section-tag" data-i18n="testingMode">Testing Mode</span>
+          <h2 id="admin-title" data-i18n="adminTitle">AstroCosmos Admin Panel</h2>
+          <p data-i18n="adminNoPassword">No password protection yet · local browser testing only.</p>
+        </div>
+        <button class="admin-close" type="button" onclick="closeAdminPanel()">&times;</button>
+      </div>
+
+      <div class="admin-grid">
+        <section class="admin-card">
+          <h3 data-i18n="rashiPublisher">12 Rashi Publisher</h3>
+          <div class="admin-form-grid">
+            <label><span data-i18n="period">Period</span><select id="admin-rashi-period"><option value="daily">Daily</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></label>
+            <label><span data-i18n="targetDate">Target Date / Month / Year</span><input type="date" id="admin-rashi-date"></label>
+            <label><span data-i18n="rashiSelect">Rashi</span><select id="admin-rashi-select"></select></label>
+          </div>
+          <div class="admin-mini-status" id="admin-rashi-key-help">Daily entry = one date · Monthly = one month · Yearly = one year</div>
+          <label><span data-i18n="englishUpdate">English Update</span><textarea id="admin-rashi-en" rows="3" placeholder="Today's update in English..." data-i18n-placeholder="rashiEnPlaceholder"></textarea></label>
+          <label><span data-i18n="teluguUpdate">Telugu Update</span><textarea id="admin-rashi-te" rows="3" placeholder="ఈ రోజు రాశి సమాచారం..." data-i18n-placeholder="rashiTePlaceholder"></textarea></label>
+          <label><span data-i18n="imageUpload">Image Upload</span><input type="file" id="admin-rashi-image" accept="image/*"></label>
+          <div class="admin-image-preview" id="admin-rashi-preview">No image selected</div>
+          <div class="admin-btn-row">
+            <button type="button" class="admin-primary" onclick="saveRashiUpdate()" data-i18n="saveRashi">Save Rashi Update</button>
+            <button type="button" class="admin-secondary" onclick="clearRashiUpdate()" data-i18n="clearSelected">Clear Selected</button>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <h3 data-i18n="availableDateTiming">Available Date & Timing</h3>
+          <div class="admin-form-grid">
+            <label><span data-i18n="fromDate">From Date</span><input type="date" id="admin-from-date"></label>
+            <label><span data-i18n="toDate">To Date</span><input type="date" id="admin-to-date"></label>
+            <label><span data-i18n="startTime">Start Time</span><input type="time" id="admin-start-time"></label>
+            <label><span data-i18n="endTime">End Time</span><input type="time" id="admin-end-time"></label>
+          </div>
+          <button type="button" class="admin-primary full" onclick="saveAvailability()" data-i18n="saveAvailability">Save Availability</button>
+          <div class="admin-mini-status" id="admin-status" data-i18n="ready">Ready.</div>
+        </section>
+
+        <section class="admin-card admin-note">
+          <h3 data-i18n="testingData">Testing Data</h3>
+          <p data-i18n="adminStorageNote">Rashi text, dates and uploaded images are stored in this browser's localStorage for testing. They do not automatically publish to every visitor's device. Use Export/Import when moving the testing data between devices.</p>
+          <div class="admin-btn-row">
+            <button type="button" class="admin-secondary" onclick="exportAdminData()" data-i18n="exportJson">Export JSON</button>
+            <label class="admin-import-btn"><span data-i18n="importJson">Import JSON</span><input type="file" id="admin-import-file" accept="application/json" onchange="importAdminData(event)"></label>
+            <button type="button" class="admin-danger" onclick="resetAdminData()" data-i18n="resetData">Reset Data</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js + OrbitControls -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
@@ -1510,7 +1970,9 @@
       const [phaseName, phaseIcon] = phaseNames[phaseIndex];
       const illumination = Math.round(0.5 * (1 - Math.cos((age / synodic) * Math.PI * 2)) * 100);
       icon.innerText = phaseIcon;
+      nameEl.setAttribute('data-en-phase', phaseName);
       nameEl.innerText = phaseName;
+      if (typeof currentLanguage !== 'undefined' && currentLanguage === 'te') translateInteractiveLabels();
       metaEl.innerText = `${illumination}% illuminated · ${now.toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' })}`;
     }
 
@@ -1544,75 +2006,411 @@
     updateMoonPhase();
     initScrollReveal();
 
+
+    // =========================================================
+    // LIVE DATE / TIME + LANGUAGE
+    // =========================================================
+    const DEMO_PHONE = '919876543210';
+    let currentLanguage = localStorage.getItem('astrocosmos-language') || 'en';
+    const uiText = {
+      en: {
+        navHome:'Home', navServices:'Services', navRashi:'Rashi Phalalu', navKundali:'Free Kundali', navGallery:'Gallery', navContact:'Location', navAbout:'About Us', navPrivacy:'Privacy', indiaLabel:'🇮🇳 India', worldLabel:'🌍 World · UTC', dateLabel:'📅 Date', focusedPlanet:'Focused Planet', heroWhatsApp:'💬 WhatsApp', heroCall:'📞 Call', planetSystem:'☀️ Solar System', planetSun:'🔥 The Sun', planetEarth:'🌍 Earth (India Outlined)', planetMoon:'🌕 The Moon', planetMars:'🔴 Mars', planetJupiter:'♃ Jupiter', planetSaturn:'🪐 Saturn', scrollDown:'Scroll Down',
+        heroTag:'Live 3D Astrolabe', heroTitle:'Celestial Destiny',
+        aboutTag:'Our Cosmic Heritage', aboutTitle:'About AstroCosmos 3D',
+        about1Title:'Ancient Vedic Astronomy', about1Desc:'We present traditional Vedic astronomy and astrology through a modern, visual approach to planetary cycles and timing.',
+        about2Title:'Real-Time 3D Simulation', about2Desc:'Explore planetary orbits, motion and transit concepts through the site\'s live 3D celestial model.',
+        about3Title:'🇮🇳 Indian Spiritual Heritage', about3Desc:'The experience blends India\'s cultural heritage with a luminous cosmic visual language.',
+        zodiacTitle:'Interactive Rasi Wheel', zodiacSubtitle:'Hover or click a rasi to explore its traditional Vedic sign name.',
+        servicesTag:'Our Services', servicesTitle:'Vedic Astrology Services', servicesSubtitle:'Guidance for every important phase of life — consultations available in Telugu, Hindi, Kannada and English, open every day.',
+        svc1Title:'Kundli Matching', svc1Desc:'Compatibility review of two birth charts using the traditional 36-point Guna Milan approach with dosha review.',
+        svc2Title:'Marriage & Delay Guidance', svc2Desc:'Chart-based review of possible marriage delays, with traditional guidance and suggested remedies.',
+        svc3Title:'Career & Job Guidance', svc3Desc:'Timing-focused guidance for career decisions, job changes and professional growth.',
+        svc4Title:'Business Astrology', svc4Desc:'Guidance on favourable timing, partnerships and growth for entrepreneurs and business owners.',
+        svc5Title:'Muhurtham', svc5Desc:'Auspicious-date guidance for weddings, gruhapravesham and other new beginnings.',
+        svc6Title:'Vastu Consultation', svc6Desc:'Practical home and office space guidance focused on balance, function and thoughtful changes.',
+        svc7Title:'Dosha Remedies', svc7Desc:'Traditional parihara guidance for concerns such as Kaal Sarp, Mangal Dosha and Navagraha-related themes.',
+        svc8Title:'Numerology', svc8Desc:'Insights from birth number and name analysis for reflection, planning and personal clarity.',
+        kundaliTag:'Free Horoscope & Kundali', kundaliTitle:'Generate Your Kundali', kundaliSubtitle:'Enter birth date, time and place to generate an automated Vedic-style birth chart.', kundaliFormTitle:'Birth Details', kundaliNote:'For best results, use the local birth time and a recognised city. Unknown places can use latitude/longitude manually.', kundaliResultTitle:'Your Chart', kundaliName:'Name', birthDate:'Birth Date', birthTime:'Birth Time', kundaliPlace:'Birth Place', latitude:'Latitude', longitude:'Longitude', placeHint:'Built-in coordinates are available for common cities. For other places, enter coordinates below.', generateKundali:'✨ Generate Kundali', demoData:'Use Demo Data', printChart:'🖨️ Print', kundaliFootnote:'Automated calculation uses a lightweight, browser-only astronomical approximation. It is intended for website/demo use and should not replace a professional ephemeris for exact horoscope work.',
+        rashiTag:'Daily Vedic Updates', rashiTitle:"Today's Rashi", rashiSubtitle:'Updates published from the testing admin panel appear here.', publishedFor:'Published for', dailyTab:'Daily', monthlyTab:'Monthly', yearlyTab:'Yearly',
+        galleryTag:'Cosmic Experiences', galleryTitle:'Explore AstroCosmos', gallery1Title:'Interactive Rasi Wheel', gallery1Desc:'Explore all 12 traditional rasi signs and tap any sign for a short description.', gallery1Btn:'Open Rasi Wheel ↑', gallery2Title:'Live Moon Phase', gallery2Desc:'The lunar widget updates from the device date without an external API.', gallery2Btn:'View Contact ↓', gallery3Title:'Daily Rashi', gallery3Desc:'Read the latest 12-rashi content published from the testing admin panel.', gallery3Btn:'Open Daily Rashi ↓', gallery4Title:'Availability', gallery4Desc:'See the current appointment date range and available hours configured by admin.', gallery4Btn:'Check Timing ↓',
+        contactTag:'Reach Our Astro Desk', contactTitle:'Contact & Location', fullName:'Full Name', email:'Email Address', dob:'DOB & Time (Optional)', message:'Message / Question', whatsappSubmit:'💬 Send Message on WhatsApp', formNote:'ℹ️ Testing mode: the message is prepared locally and opened in WhatsApp using the demo number.', whatsappLabel:'WhatsApp', demoNumber:'+91 98765 43210 · Demo', callLabel:'Call', demoNumber2:'+91 98765 43210 · Demo', callNow:'Call Now', locationLabel:'Location', locationValue:'Jubilee Hills, Hyderabad, Telangana', openWhatsApp:'Open WhatsApp', openMaps:'Open Google Maps', availableTiming:'Available Timing',
+        privacyTag:'Data Trust & Integrity', privacyTitle:'Privacy Policy', privacy1Title:'1. Astrological Privacy', privacy1Desc:'Birth details entered on this demo are processed locally in the browser and are not sent to an external server by the site.', privacy2Title:'2. 3D Graphics & Browser Storage', privacy2Desc:'Browser storage is used for local demo preferences and testing data; no external tracking is built into this demo.', privacy3Title:'3. Quick Guide Processing', privacy3Desc:'The FAQ guide operates in the browser and uses a small local keyword response system for demo purposes.',
+        moonLabel:'Live Lunar Status', footer:'© 2026 AstroCosmos 3D. All Rights Reserved. Designed for Vedic Astronomy & Astrology.', quickGuide:'Quick Astro Guide', quickGuideTitle:'Quick Astro Guide (FAQ Bot)', send:'Send', mobileLanguage:'Switch Language',
+        testingMode:'Testing Mode', adminTitle:'AstroCosmos Admin Panel', adminNoPassword:'No password protection yet · local browser testing only.', rashiPublisher:'12 Rashi Publisher', period:'Period', targetDate:'Target Date / Month / Year', rashiSelect:'Rashi', englishUpdate:'English Update', teluguUpdate:'Telugu Update', imageUpload:'Image Upload', saveRashi:'Save Rashi Update', clearSelected:'Clear Selected', availableDateTiming:'Available Date & Timing', fromDate:'From Date', toDate:'To Date', startTime:'Start Time', endTime:'End Time', saveAvailability:'Save Availability', testingData:'Testing Data', adminStorageNote:"Rashi text, dates and uploaded images are stored in this browser's localStorage for testing. They do not automatically publish to every visitor's device. Use Export/Import when moving the testing data between devices.", ready:'Ready.', exportJson:'Export JSON', importJson:'Import JSON', resetData:'Reset Data',
+        yourName:'Your name', placePlaceholder:'Example: Hyderabad', latitudePlaceholder:'17.3850', longitudePlaceholder:'78.4867', contactNamePlaceholder:'Ex: Ramesh Sharma', emailPlaceholder:'name@example.com', dobPlaceholder:'DD/MM/YYYY, HH:MM AM/PM', messagePlaceholder:'Write your question or message here...', chatPlaceholder:'e.g. Saturn, Rashi, Mars...', rashiEnPlaceholder:"Today's update in English...", rashiTePlaceholder:'ఈ రోజు రాశి సమాచారం...'
+      },
+      te: {
+        navHome:'హోమ్', navServices:'సేవలు', navRashi:'రాశి ఫలాలు', navKundali:'ఉచిత కుండలి', navGallery:'గ్యాలరీ', navContact:'లొకేషన్', navAbout:'మా గురించి', navPrivacy:'గోప్యత', indiaLabel:'🇮🇳 భారత్', worldLabel:'🌍 ప్రపంచం · UTC', dateLabel:'📅 తేదీ', focusedPlanet:'ఎంచుకున్న గ్రహం', heroWhatsApp:'💬 వాట్సాప్', heroCall:'📞 కాల్', planetSystem:'☀️ సౌర కుటుంబం', planetSun:'🔥 సూర్యుడు', planetEarth:'🌍 భూమి (భారత హైలైట్)', planetMoon:'🌕 చంద్రుడు', planetMars:'🔴 కుజుడు', planetJupiter:'♃ గురుడు', planetSaturn:'🪐 శని', scrollDown:'కిందకు స్క్రోల్',
+        heroTag:'లైవ్ 3D ఆస్ట్రోలేబ్', heroTitle:'ఖగోళ విధి',
+        aboutTag:'మన ఖగోళ వారసత్వం', aboutTitle:'ఆస్ట్రోకాస్మోస్ 3D గురించి',
+        about1Title:'ప్రాచీన వేద ఖగోళ శాస్త్రం', about1Desc:'వేద ఖగోళ శాస్త్రం మరియు జ్యోతిష్యంలోని గ్రహ చక్రాలు, కాలగమన భావనలను ఆధునిక దృశ్య అనుభవంతో అందిస్తున్నాము.',
+        about2Title:'రియల్-టైమ్ 3D సిమ్యులేషన్', about2Desc:'లైవ్ 3D మోడల్ ద్వారా గ్రహాల కక్ష్యలు, కదలికలు మరియు గోచార భావనలను అన్వేషించండి.',
+        about3Title:'🇮🇳 భారతీయ ఆధ్యాత్మిక వైభవం', about3Desc:'భారతీయ సాంస్కృతిక వారసత్వాన్ని ప్రకాశవంతమైన కాస్మిక్ డిజైన్‌తో కలిపిన అనుభవం.',
+        zodiacTitle:'ఇంటరాక్టివ్ రాశి చక్రం', zodiacSubtitle:'రాశిపై క్లిక్ లేదా హోవర్ చేసి దాని వేద పేరు మరియు వివరణ చూడండి.',
+        servicesTag:'మా సేవలు', servicesTitle:'వేద జ్యోతిష్య సేవలు', servicesSubtitle:'జీవితంలోని ప్రతి ముఖ్య దశకు మార్గదర్శనం — తెలుగు, హిందీ, కన్నడ మరియు ఇంగ్లీష్‌లో సంప్రదింపులు ప్రతిరోజూ అందుబాటులో ఉంటాయి.',
+        svc1Title:'కుండలి జాతక కలయిక', svc1Desc:'వివాహానికి ముందు రెండు జన్మకుండళ్ల అనుకూలతను సంప్రదాయ 36 గుణాల పద్ధతి మరియు దోష పరిశీలనతో చూడటం.',
+        svc2Title:'వివాహం & ఆలస్య మార్గదర్శనం', svc2Desc:'వివాహ ఆలస్యానికి సంబంధించిన జాతక సూచనలను పరిశీలించి సంప్రదాయ పరిహార మార్గదర్శనం అందించడం.',
+        svc3Title:'కెరీర్ & ఉద్యోగ మార్గదర్శనం', svc3Desc:'కెరీర్ నిర్ణయాలు, ఉద్యోగ మార్పులు మరియు వృత్తి అభివృద్ధికి సమయ ఆధారిత మార్గదర్శనం.',
+        svc4Title:'వ్యాపార జ్యోతిష్యం', svc4Desc:'వ్యాపార ప్రారంభం, భాగస్వామ్యాలు మరియు అభివృద్ధికి అనుకూల సమయాలపై మార్గదర్శనం.',
+        svc5Title:'ముహూర్తం', svc5Desc:'వివాహం, గృహప్రవేశం మరియు ఇతర కొత్త ప్రారంభాలకు శుభ తేదీల ఎంపికలో మార్గదర్శనం.',
+        svc6Title:'వాస్తు సంప్రదింపులు', svc6Desc:'ఇల్లు లేదా కార్యాలయ స్థలంలో సమతుల్యత, వినియోగం మరియు ఆచరణాత్మక మార్పులపై సూచనలు.',
+        svc7Title:'దోష పరిహారాలు', svc7Desc:'కాలసర్ప, మంగళ దోషం మరియు నవగ్రహ సంబంధిత ఆందోళనలకు సంప్రదాయ పరిహార మార్గదర్శనం.',
+        svc8Title:'న్యూమరాలజీ', svc8Desc:'జన్మ సంఖ్య మరియు పేరుతో కూడిన సంఖ్యా విశ్లేషణ ద్వారా వ్యక్తిగత స్పష్టతకు ఉపయోగపడే సూచనలు.',
+        kundaliTag:'ఉచిత జాతకం & కుండలి', kundaliTitle:'మీ కుండలి రూపొందించండి', kundaliSubtitle:'పుట్టిన తేదీ, సమయం మరియు స్థలం నమోదు చేస్తే ఆటోమేటెడ్ వేదిక్-స్టైల్ జాతక చక్రం రూపొందుతుంది.', kundaliFormTitle:'పుట్టిన వివరాలు', kundaliNote:'మంచి ఫలితాల కోసం పుట్టిన స్థానిక సమయం మరియు గుర్తింపు ఉన్న నగరాన్ని ఉపయోగించండి. ఇతర ప్రాంతాలకు అక్షాంశం/రేఖాంశం ఇవ్వవచ్చు.', kundaliResultTitle:'మీ జాతక చక్రం', kundaliName:'పేరు', birthDate:'పుట్టిన తేదీ', birthTime:'పుట్టిన సమయం', kundaliPlace:'పుట్టిన స్థలం', latitude:'అక్షాంశం', longitude:'రేఖాంశం', placeHint:'సాధారణ నగరాలకు కోఆర్డినేట్లు అందుబాటులో ఉన్నాయి. ఇతర ప్రాంతాలకు క్రింద కోఆర్డినేట్లు ఇవ్వండి.', generateKundali:'✨ కుండలి రూపొందించండి', demoData:'డెమో డేటా', printChart:'🖨️ ప్రింట్', kundaliFootnote:'ఇది బ్రౌజర్‌లో పనిచేసే తేలికపాటి ఖగోళ గణన. డెమో ఉపయోగం కోసం మాత్రమే; ఖచ్చితమైన జాతకానికి ప్రొఫెషనల్ ఎఫెమెరిస్‌కు ప్రత్యామ్నాయం కాదు.',
+        rashiTag:'రోజువారీ వేద రాశి ఫలాలు', rashiTitle:'ఈ రోజు రాశి ఫలాలు', rashiSubtitle:'టెస్టింగ్ అడ్మిన్ ప్యానల్‌లో ప్రచురించిన సమాచారం ఇక్కడ కనిపిస్తుంది.', publishedFor:'ప్రచురణ తేదీ', dailyTab:'రోజువారీ', monthlyTab:'నెలవారీ', yearlyTab:'వార్షిక',
+        galleryTag:'కాస్మిక్ అనుభవాలు', galleryTitle:'ఆస్ట్రోకాస్మోస్‌ను అన్వేషించండి', gallery1Title:'ఇంటరాక్టివ్ రాశి చక్రం', gallery1Desc:'12 రాశులను అన్వేషించి ఏ రాశినైనా ట్యాప్ చేసి చిన్న వివరణ చూడండి.', gallery1Btn:'రాశి చక్రం తెరవండి ↑', gallery2Title:'లైవ్ చంద్ర దశ', gallery2Desc:'బయటి API లేకుండా పరికరం తేదీ ఆధారంగా చంద్ర దశ విడ్జెట్ నవీకరించబడుతుంది.', gallery2Btn:'సంప్రదింపు చూడండి ↓', gallery3Title:'రోజువారీ రాశి ఫలాలు', gallery3Desc:'టెస్టింగ్ అడ్మిన్ ప్యానల్‌లో ప్రచురించిన 12 రాశుల తాజా సమాచారాన్ని చదవండి.', gallery3Btn:'రాశి ఫలాలు తెరవండి ↓', gallery4Title:'అందుబాటు సమయం', gallery4Desc:'అడ్మిన్ సెట్ చేసిన అపాయింట్‌మెంట్ తేదీ పరిధి మరియు అందుబాటు సమయాలను చూడండి.', gallery4Btn:'సమయం చూడండి ↓',
+        contactTag:'ఆస్ట్రో డెస్క్‌ను సంప్రదించండి', contactTitle:'సంప్రదింపు & లొకేషన్', fullName:'పూర్తి పేరు', email:'ఇమెయిల్ చిరునామా', dob:'పుట్టిన తేదీ & సమయం (ఐచ్చికం)', message:'సందేశం / ప్రశ్న', whatsappSubmit:'💬 వాట్సాప్‌లో సందేశం పంపండి', formNote:'ℹ️ టెస్టింగ్ మోడ్: సందేశం స్థానికంగా సిద్ధమై డెమో వాట్సాప్ నంబర్‌లో తెరవబడుతుంది.', whatsappLabel:'వాట్సాప్', demoNumber:'+91 98765 43210 · డెమో', callLabel:'కాల్', demoNumber2:'+91 98765 43210 · డెమో', callNow:'ఇప్పుడే కాల్', locationLabel:'లొకేషన్', locationValue:'జూబ్లీ హిల్స్, హైదరాబాద్, తెలంగాణ', openWhatsApp:'వాట్సాప్ తెరవండి', openMaps:'గూగుల్ మ్యాప్స్ తెరవండి', availableTiming:'అందుబాటు సమయం',
+        privacyTag:'డేటా విశ్వాసం & సమగ్రత', privacyTitle:'గోప్యతా విధానం', privacy1Title:'1. జాతక గోప్యత', privacy1Desc:'ఈ డెమోలో నమోదు చేసిన పుట్టిన వివరాలు బ్రౌజర్‌లో స్థానికంగా ప్రాసెస్ అవుతాయి; సైట్ వాటిని బాహ్య సర్వర్‌కు పంపదు.', privacy2Title:'2. 3D గ్రాఫిక్స్ & బ్రౌజర్ స్టోరేజ్', privacy2Desc:'లోకల్ డెమో ప్రాధాన్యతలు మరియు టెస్టింగ్ డేటా కోసం బ్రౌజర్ స్టోరేజ్ ఉపయోగించబడుతుంది; ఈ డెమోలో బాహ్య ట్రాకింగ్ లేదు.', privacy3Title:'3. క్విక్ గైడ్ ప్రాసెసింగ్', privacy3Desc:'FAQ గైడ్ బ్రౌజర్‌లోనే చిన్న కీవర్డ్ స్పందన వ్యవస్థతో డెమో కోసం పనిచేస్తుంది.',
+        moonLabel:'ప్రత్యక్ష చంద్ర స్థితి', footer:'© 2026 AstroCosmos 3D. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.', quickGuide:'క్విక్ ఆస్ట్రో గైడ్', quickGuideTitle:'క్విక్ ఆస్ట్రో గైడ్ (FAQ బాట్)', send:'పంపండి', mobileLanguage:'భాష మార్చండి',
+        testingMode:'టెస్టింగ్ మోడ్', adminTitle:'ఆస్ట్రోకాస్మోస్ అడ్మిన్ ప్యానల్', adminNoPassword:'ఇప్పటివరకు పాస్‌వర్డ్ రక్షణ లేదు · బ్రౌజర్ టెస్టింగ్ మాత్రమే.', rashiPublisher:'12 రాశుల ప్రచురణ', period:'కాల వ్యవధి', targetDate:'తేదీ / నెల / సంవత్సరం', rashiSelect:'రాశి', englishUpdate:'ఇంగ్లీష్ సమాచారం', teluguUpdate:'తెలుగు సమాచారం', imageUpload:'చిత్రం అప్లోడ్', saveRashi:'రాశి సమాచారం సేవ్', clearSelected:'ఎంచుకున్నది క్లియర్', availableDateTiming:'అందుబాటు తేదీ & సమయం', fromDate:'ప్రారంభ తేదీ', toDate:'ముగింపు తేదీ', startTime:'ప్రారంభ సమయం', endTime:'ముగింపు సమయం', saveAvailability:'అందుబాటు సమయం సేవ్', testingData:'టెస్టింగ్ డేటా', adminStorageNote:'రాశి సమాచారం, తేదీలు మరియు అప్లోడ్ చేసిన చిత్రాలు టెస్టింగ్ కోసం ఈ బ్రౌజర్ localStorageలో ఉంటాయి. ఇవి ఇతర సందర్శకుల పరికరాల్లో స్వయంగా ప్రచురించబడవు. పరికరాల మధ్య డేటా తరలించడానికి Export/Import ఉపయోగించండి.', ready:'సిద్ధంగా ఉంది.', exportJson:'JSON ఎక్స్‌పోర్ట్', importJson:'JSON ఇంపోర్ట్', resetData:'డేటా రీసెట్',
+        yourName:'మీ పేరు', placePlaceholder:'ఉదాహరణ: హైదరాబాద్', latitudePlaceholder:'17.3850', longitudePlaceholder:'78.4867', contactNamePlaceholder:'ఉదా: రమేష్ శర్మ', emailPlaceholder:'name@example.com', dobPlaceholder:'DD/MM/YYYY, HH:MM AM/PM', messagePlaceholder:'మీ ప్రశ్న లేదా సందేశం ఇక్కడ రాయండి...', chatPlaceholder:'ఉదా: శని, రాశి, కుజుడు...', rashiEnPlaceholder:'ఈ రోజు ఇంగ్లీష్ సమాచారం...', rashiTePlaceholder:'ఈ రోజు రాశి సమాచారం...'
+      }
+    };
+
+    function t(key) { return (uiText[currentLanguage] && uiText[currentLanguage][key]) || uiText.en[key] || key; }
+    function setText(id, value) { const el=document.getElementById(id); if(el) el.textContent=value; }
+    function applyDataTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key) el.textContent = t(key);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (key) el.setAttribute('placeholder', t(key));
+      });
+      document.querySelectorAll('[data-planet-label]').forEach(el => {
+        const key = el.getAttribute('data-planet-label');
+        if (key) el.textContent = t(key);
+      });
+    }
+    function translateInteractiveLabels() {
+      // Zodiac: preserve its existing wheel mechanics; translate only its visible labels.
+      const namesEn=['Mesha','Vrishabha','Mithuna','Karka','Simha','Kanya','Tula','Vrischika','Dhanu','Makara','Kumbha','Meena'];
+      const signsEn=['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+      const namesTe=['మేషం','వృషభం','మిథునం','కర్కాటకం','సింహం','కన్య','తుల','వృశ్చికం','ధనుస్సు','మకరం','కుంభం','మీనం'];
+      const descTe=['అగ్ని తత్త్వం • ఆరంభ శక్తి మరియు చర్య.','భూమి తత్త్వం • స్థిరత్వం మరియు విలువలు.','వాయు తత్త్వం • సంభాషణ మరియు ఆసక్తి.','నీటి తత్త్వం • భావోద్వేగం మరియు సంరక్షణ.','అగ్ని తత్త్వం • ఆత్మవిశ్వాసం మరియు వ్యక్తీకరణ.','భూమి తత్త్వం • విశ్లేషణ మరియు క్రమం.','వాయు తత్త్వం • సమతుల్యత మరియు సంబంధాలు.','నీటి తత్త్వం • లోతు మరియు పరివర్తన.','అగ్ని తత్త్వం • ధైర్యం మరియు అన్వేషణ.','భూమి తత్త్వం • బాధ్యత మరియు లక్ష్యం.','వాయు తత్త్వం • ఆలోచన మరియు భవిష్యత్ దృష్టి.','నీటి తత్త్వం • కరుణ మరియు అంతర్దృష్టి.'];
+      const orbit=document.getElementById('zodiac-orbit');
+      if(orbit){
+        const buttons=orbit.querySelectorAll('.zodiac-item');
+        buttons.forEach((btn,i)=>{ const n=btn.querySelector('.zodiac-name'); if(n) n.textContent=currentLanguage==='te'?namesTe[i]:namesEn[i]; });
+        const active=[...buttons].findIndex(b=>b.classList.contains('active'));
+        const idx=active>=0?active:0;
+        const sym=buttons[idx]?.querySelector('.zodiac-symbol')?.textContent||'♈';
+        setText('zodiac-center-symbol',sym);
+        setText('zodiac-center-title',currentLanguage==='te'?`${namesTe[idx]} · ${signsEn[idx]}`:`${namesEn[idx]} · ${signsEn[idx]}`);
+        if(currentLanguage==='te') setText('zodiac-center-desc',descTe[idx]);
+        else setText('zodiac-center-desc',zodiacData[idx]?.desc||'');
+      }
+      const moonMap={
+        'New Moon':'అమావాస్య','Waxing Crescent':'శుక్ల పక్ష చంద్రకళ','First Quarter':'శుక్ల అష్టమి దశ','Waxing Gibbous':'శుక్ల పౌర్ణమి దశకు చేరువ','Full Moon':'పౌర్ణమి','Waning Gibbous':'కృష్ణ పక్ష చంద్రకళ','Last Quarter':'కృష్ణ అష్టమి దశ','Waning Crescent':'అమావాస్యకు చేరువ'
+      };
+      const moonName=document.getElementById('moon-phase-name');
+      if(moonName && currentLanguage==='te'){
+        const current=moonName.getAttribute('data-en-phase') || moonName.textContent;
+        moonName.setAttribute('data-en-phase', current); moonName.textContent=moonMap[current]||current;
+      } else if(moonName && currentLanguage==='en' && moonName.getAttribute('data-en-phase')) moonName.textContent=moonName.getAttribute('data-en-phase');
+      const chatWelcome=document.getElementById('chat-welcome'); if(chatWelcome) chatWelcome.textContent=currentLanguage==='te'?'నమస్కారం! 🙏 రాశి లేదా గ్రహం గురించి ప్రాథమిక సమాచారం కోసం కింద టైప్ చేయండి.':'Hello! 🙏 Ask about a rashi or planet for basic AstroCosmos demo information.';
+    }
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'en' ? 'te' : 'en';
+      localStorage.setItem('astrocosmos-language', currentLanguage);
+      applyLanguage();
+    }
+    function applyLanguage() {
+      document.documentElement.lang = currentLanguage === 'te' ? 'te' : 'en';
+      applyDataTranslations();
+      const navMap={home:'navHome',services:'navServices',rashi:'navRashi',kundali:'navKundali',gallery:'navGallery',contact:'navContact'};
+      Object.entries(navMap).forEach(([id,key])=>{ const el=document.querySelector(`[data-nav="${id}"]`); if(el) el.textContent=t(key); });
+      setText('language-toggle', currentLanguage === 'en' ? 'తెలుగు' : 'English');
+      setText('target-display', currentLanguage==='te'?'సౌర కుటుంబ సమగ్ర దృశ్యం':'Solar System Overview');
+      translateInteractiveLabels();
+      renderRashiCards();
+      renderAvailability();
+      populateAdminRashiSelect();
+      const periodSelect=document.getElementById('admin-rashi-period');
+      if(periodSelect){ const cur=periodSelect.value; periodSelect.options[0].text=t('dailyTab'); periodSelect.options[1].text=t('monthlyTab'); periodSelect.options[2].text=t('yearlyTab'); periodSelect.value=cur; }
+      updateClocks();
+    }
+
+    // Keep the existing interactive zodiac behavior intact while translating the displayed text after interaction.
+    document.getElementById('zodiac-orbit')?.addEventListener('mouseover', () => setTimeout(translateInteractiveLabels, 0));
+    document.getElementById('zodiac-orbit')?.addEventListener('click', () => setTimeout(translateInteractiveLabels, 0));
+
+    // Translate the existing hero planet status after its original click handlers run.
+    document.querySelector('.planet-bar')?.addEventListener('click',()=>setTimeout(()=>{
+      const el=document.getElementById('target-display');
+      if(!el || currentLanguage!=='te') return;
+      const map={"Solar System Overview":'సౌర కుటుంబ సమగ్ర దృశ్యం',"The Sun • Solar Core":'సూర్యుడు • సౌర కేంద్రం',"Earth • India Highlighted":'భూమి • భారత హైలైట్',"The Moon (Orbiting Earth)":'చంద్రుడు • భూమి చుట్టూ కక్ష్య',"Mars (360° Inspection)":'కుజుడు • 360° పరిశీలన',"Jupiter (360° Inspection)":'గురుడు • 360° పరిశీలన',"Saturn (360° Inspection)":'శని • 360° పరిశీలన'};
+      el.textContent=map[el.textContent]||el.textContent;
+    },0));
+
+    // =========================================================
+    // =========================================================
+    // DAILY / MONTHLY / YEARLY 12 RASHI PUBLISHER
+    // =========================================================
+    const rashiData = [
+      {id:'mesha',symbol:'♈',name:'Mesha',telugu:'మేషం',english:'Aries'},
+      {id:'vrishabha',symbol:'♉',name:'Vrishabha',telugu:'వృషభం',english:'Taurus'},
+      {id:'mithuna',symbol:'♊',name:'Mithuna',telugu:'మిథునం',english:'Gemini'},
+      {id:'karka',symbol:'♋',name:'Karka',telugu:'కర్కాటకం',english:'Cancer'},
+      {id:'simha',symbol:'♌',name:'Simha',telugu:'సింహం',english:'Leo'},
+      {id:'kanya',symbol:'♍',name:'Kanya',telugu:'కన్య',english:'Virgo'},
+      {id:'tula',symbol:'♎',name:'Tula',telugu:'తుల',english:'Libra'},
+      {id:'vrischika',symbol:'♏',name:'Vrischika',telugu:'వృశ్చికం',english:'Scorpio'},
+      {id:'dhanu',symbol:'♐',name:'Dhanu',telugu:'ధనుస్సు',english:'Sagittarius'},
+      {id:'makara',symbol:'♑',name:'Makara',telugu:'మకరం',english:'Capricorn'},
+      {id:'kumbha',symbol:'♒',name:'Kumbha',telugu:'కుంభం',english:'Aquarius'},
+      {id:'meena',symbol:'♓',name:'Meena',telugu:'మీనం',english:'Pisces'}
+    ];
+
+    const RASHI_KEY = 'astrocosmos-rashi-publisher-v2';
+    const AVAIL_KEY = 'astrocosmos-availability-v1';
+    let publicRashiPeriod = 'daily';
+
+    function todayISO() {
+      return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    }
+    function monthISO(){ return todayISO().slice(0,7); }
+    function yearISO(){ return todayISO().slice(0,4); }
+    function rashiKey(period, value, id){ return `${period}|${value}|${id}`; }
+    function currentPeriodValue(period){ if(period==='monthly') return monthISO(); if(period==='yearly') return yearISO(); return todayISO(); }
+    function getStoredRashi() { try { return JSON.parse(localStorage.getItem(RASHI_KEY)||'{}'); } catch { return {}; } }
+    function getRashiEntry(period,value,id) {
+      const data=getStoredRashi()[rashiKey(period,value,id)]||{};
+      return {en:'',te:'',image:'',...data};
+    }
+    function formatPrettyDate(dateStr) {
+      if(!dateStr) return 'Today';
+      const clean = String(dateStr);
+      if(clean.length===7){ const d=new Date(clean+'-01T12:00:00'); return d.toLocaleDateString(currentLanguage==='te'?'te-IN':'en-IN',{month:'long',year:'numeric'}); }
+      if(clean.length===4) return clean;
+      const d=new Date(clean+'T12:00:00');
+      return d.toLocaleDateString(currentLanguage==='te'?'te-IN':'en-IN',{day:'2-digit',month:'short',year:'numeric'});
+    }
+    function rashiFallback(item,period){
+      if(currentLanguage==='te') { const n=item.telugu||item.name; return period==='yearly' ? `${n} రాశికి వార్షిక సమాచారం త్వరలో అడ్మిన్ ప్రచురిస్తారు.` : period==='monthly' ? `${n} రాశికి నెలవారీ సమాచారం త్వరలో అడ్మిన్ ప్రచురిస్తారు.` : `${n} రాశి కోసం ఈ రోజు సమాచారం అడ్మిన్ ఇక్కడ ప్రచురించవచ్చు.`; }
+      return period==='yearly' ? `Yearly ${item.name} guidance will appear here when the admin publishes it.` : period==='monthly' ? `Monthly ${item.name} guidance will appear here when the admin publishes it.` : `Today's ${item.name} update will appear here when the admin publishes it.`;
+    }
+    function renderRashiCards() {
+      const grid=document.getElementById('rashi-grid'); if(!grid) return;
+      const period=publicRashiPeriod; const value=currentPeriodValue(period); const stored=getStoredRashi();
+      grid.innerHTML=rashiData.map(item=>{
+        const entry=getRashiEntry(period,value,item.id);
+        const text=currentLanguage==='te'?(entry.te||rashiFallback(item,period)):(entry.en||rashiFallback(item,period));
+        const displayName=currentLanguage==='te'?(item.telugu||item.name):item.name;
+        const image=entry.image?`<img class="rashi-card-media" src="${entry.image}" alt="${escapeHtml(item.name)} ${escapeHtml(item.english)}">`:'';
+        return `<article class="rashi-card">${image}<div class="rashi-card-top"><span class="rashi-icon">${item.symbol}</span><span class="rashi-date">${formatPrettyDate(value)}</span></div><h4>${displayName} · ${item.english}</h4><p class="${currentLanguage==='te'?'rashi-te':'rashi-en'}">${escapeHtml(text)}</p></article>`;
+      }).join('');
+      const hasAny=rashiData.some(item=>stored[rashiKey(period,value,item.id)]);
+      setText('rashi-publish-date', formatPrettyDate(value));
+      setText('rashi-period-note', hasAny ? (currentLanguage==='te'?`${formatPrettyDate(value)} కోసం ${period==='daily'?'రోజువారీ':period==='monthly'?'నెలవారీ':'వార్షిక'} సమాచారం ప్రచురించబడింది.`:`${period[0].toUpperCase()+period.slice(1)} updates published for ${formatPrettyDate(value)}`) : (currentLanguage==='te'?`${formatPrettyDate(value)} కోసం ${period==='daily'?'రోజువారీ':period==='monthly'?'నెలవారీ':'వార్షిక'} వీక్షణ.`:`Showing ${period} view for ${formatPrettyDate(value)}`));
+      document.querySelectorAll('.rashi-period-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.period===period));
+    }
+    function setPublicRashiPeriod(period){ publicRashiPeriod=period; renderRashiCards(); }
+    function escapeHtml(value) { return String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    function syncAdminPeriodInput(){
+      const period=document.getElementById('admin-rashi-period')?.value||'daily';
+      const input=document.getElementById('admin-rashi-date'); if(!input) return;
+      const current=input.value || todayISO();
+      input.type = period==='daily' ? 'date' : period==='monthly' ? 'month' : 'number';
+      if(period==='monthly') input.placeholder='YYYY-MM';
+      if(period==='yearly') { input.min='2000'; input.max='2100'; input.step='1'; input.placeholder='YYYY'; }
+      if(period==='daily') input.value = current.length===10 ? current : todayISO();
+      if(period==='monthly') input.value = current.length>=7 ? current.slice(0,7) : monthISO();
+      if(period==='yearly') input.value = current.length>=4 ? current.slice(0,4) : yearISO();
+      setText('admin-rashi-key-help', currentLanguage==='te'?(period==='daily'?'రోజువారీ ఎంట్రీ = ఒక తేదీ':period==='monthly'?'నెలవారీ ఎంట్రీ = ఒక నెల':'వార్షిక ఎంట్రీ = ఒక సంవత్సరం'):(period==='daily'?'Daily entry = one date':period==='monthly'?'Monthly entry = one month':'Yearly entry = one year'));
+      loadAdminRashiFields();
+    }
+    function populateAdminRashiSelect() {
+      const select=document.getElementById('admin-rashi-select'); if(!select) return;
+      const old=select.value;
+      select.innerHTML=rashiData.map(x=>`<option value="${x.id}">${currentLanguage==='te'?(x.telugu||x.name):x.name} · ${x.english}</option>`).join('');
+      if(old && rashiData.some(x=>x.id===old)) select.value=old;
+      loadAdminRashiFields();
+    }
+    function loadAdminRashiFields() {
+      const period=document.getElementById('admin-rashi-period')?.value||'daily';
+      const input=document.getElementById('admin-rashi-date');
+      const value=(input?.value||currentPeriodValue(period));
+      const id=document.getElementById('admin-rashi-select')?.value||rashiData[0].id;
+      const entry=getRashiEntry(period,value,id);
+      const en=document.getElementById('admin-rashi-en'), te=document.getElementById('admin-rashi-te'), preview=document.getElementById('admin-rashi-preview');
+      if(en) en.value=entry.en||''; if(te) te.value=entry.te||'';
+      if(preview) preview.innerHTML=entry.image?`<img src="${entry.image}" alt="Preview">`:(currentLanguage==='te'?'చిత్రం ఎంచుకోలేదు':'No image selected');
+    }
+    function prepareImage(file) {
+      return new Promise((resolve,reject)=>{
+        if(!file) return resolve(''); const reader=new FileReader();
+        reader.onload=()=>{ const img=new Image(); img.onload=()=>{ const max=1000, scale=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.max(1,Math.round(img.width*scale)); c.height=Math.max(1,Math.round(img.height*scale)); const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height); resolve(c.toDataURL('image/jpeg',0.72)); }; img.onerror=reject; img.src=reader.result; };
+        reader.onerror=reject; reader.readAsDataURL(file);
+      });
+    }
+    async function saveRashiUpdate() {
+      const period=document.getElementById('admin-rashi-period').value; const value=document.getElementById('admin-rashi-date').value||currentPeriodValue(period); const id=document.getElementById('admin-rashi-select').value;
+      const en=document.getElementById('admin-rashi-en').value.trim(); const te=document.getElementById('admin-rashi-te').value.trim(); const file=document.getElementById('admin-rashi-image').files[0];
+      const all=getStoredRashi(); const key=rashiKey(period,value,id); const old=all[key]||{}; let image=old.image||'';
+      try{ if(file) image=await prepareImage(file); }catch{setAdminStatus(currentLanguage==='te'?'చిత్రాన్ని ప్రాసెస్ చేయలేకపోయాము.':'Image could not be processed.');return;}
+      all[key]={en,te,image,updatedAt:new Date().toISOString()};
+      try{localStorage.setItem(RASHI_KEY,JSON.stringify(all));}catch{setAdminStatus(currentLanguage==='te'?'స్టోరేజ్ నిండింది. చిన్న చిత్రాన్ని ఉపయోగించండి లేదా డేటాను ఎక్స్‌పోర్ట్ చేయండి.':'Storage is full. Use a smaller image or export the data.');return;}
+      renderRashiCards(); setAdminStatus(currentLanguage==='te'?`${formatPrettyDate(value)} కోసం ${rashiData.find(x=>x.id===id)?.telugu||rashiData.find(x=>x.id===id)?.name||id} సమాచారం సేవ్ అయింది.`:`${period[0].toUpperCase()+period.slice(1)} ${rashiData.find(x=>x.id===id)?.name||id} saved for ${formatPrettyDate(value)}.`); loadAdminRashiFields();
+    }
+    function clearRashiUpdate(){ const period=document.getElementById('admin-rashi-period').value; const value=document.getElementById('admin-rashi-date').value||currentPeriodValue(period); const id=document.getElementById('admin-rashi-select').value; const all=getStoredRashi(); delete all[rashiKey(period,value,id)]; localStorage.setItem(RASHI_KEY,JSON.stringify(all)); renderRashiCards(); loadAdminRashiFields(); setAdminStatus(currentLanguage==='te'?'ఎంచుకున్న సమాచారం క్లియర్ అయింది.':'Selected update cleared.'); }
+
+    function getAvailability() { try { return JSON.parse(localStorage.getItem(AVAIL_KEY)||'null'); } catch { return null; } }
+    function saveAvailability() { const data={from:document.getElementById('admin-from-date').value,to:document.getElementById('admin-to-date').value,start:document.getElementById('admin-start-time').value,end:document.getElementById('admin-end-time').value}; if(!data.from||!data.to||!data.start||!data.end){setAdminStatus(currentLanguage==='te'?'అన్ని తేదీ మరియు సమయ ఫీల్డ్స్ నమోదు చేయండి.':'Please set all date and time fields.');return;} localStorage.setItem(AVAIL_KEY,JSON.stringify(data)); renderAvailability(); setAdminStatus(currentLanguage==='te'?'అందుబాటు సమయం సేవ్ అయింది.':'Availability saved.'); }
+    function renderAvailability() { const data=getAvailability(); const summary=document.getElementById('availability-summary'); const status=document.getElementById('availability-status'); if(!summary||!status) return; if(!data){summary.textContent=currentLanguage==='te'?'అడ్మిన్ షెడ్యూల్ ఇంకా సెట్ కాలేదు.':'Testing schedule not configured yet.';status.textContent=currentLanguage==='te'?'● అడ్మిన్ షెడ్యూల్ కోసం వేచి ఉంది':'● Waiting for admin schedule';status.classList.remove('open');return;} const from=formatPrettyDate(data.from),to=formatPrettyDate(data.to);summary.textContent=`${from} → ${to} · ${data.start} – ${data.end} IST`; const now=new Date(),today=todayISO(),time=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(now);const open=today>=data.from&&today<=data.to&&time>=data.start&&time<=data.end;status.textContent=open?(currentLanguage==='te'?'● ప్రస్తుతం అందుబాటులో ఉంది':'● Available now'):(currentLanguage==='te'?'● సెట్ చేసిన సమయం వెలుపల':'● Outside configured hours');status.classList.toggle('open',open); }
+    function setAdminStatus(msg){const el=document.getElementById('admin-status');if(el)el.textContent=msg;}
+    function openAdminPanel(){const o=document.getElementById('admin-overlay');if(!o)return;o.hidden=false;document.body.style.overflow='hidden';const av=getAvailability();if(av){document.getElementById('admin-from-date').value=av.from;document.getElementById('admin-to-date').value=av.to;document.getElementById('admin-start-time').value=av.start;document.getElementById('admin-end-time').value=av.end;} syncAdminPeriodInput();loadAdminRashiFields();}
+    function closeAdminPanel(){const o=document.getElementById('admin-overlay');if(!o)return;o.hidden=true;document.body.style.overflow='';}
+    function exportAdminData(){const payload={rashi:getStoredRashi(),availability:getAvailability()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='astrocosmos-admin-data-v2.json';a.click();URL.revokeObjectURL(a.href);}
+    function importAdminData(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(data.rashi)localStorage.setItem(RASHI_KEY,JSON.stringify(data.rashi));if(data.availability)localStorage.setItem(AVAIL_KEY,JSON.stringify(data.availability));renderRashiCards();renderAvailability();setAdminStatus(currentLanguage==='te'?'టెస్టింగ్ డేటా ఇంపోర్ట్ అయింది.':'Imported testing data.');loadAdminRashiFields();}catch{setAdminStatus(currentLanguage==='te'?'చెల్లని JSON ఫైల్.':'Invalid JSON file.');}};reader.readAsText(file);event.target.value='';}
+    function resetAdminData(){if(!confirm(currentLanguage==='te'?'ఈ బ్రౌజర్‌లోని AstroCosmos టెస్టింగ్ డేటా అంతా రీసెట్ చేయాలా?':'Reset all AstroCosmos testing data on this browser?'))return;localStorage.removeItem(RASHI_KEY);localStorage.removeItem(AVAIL_KEY);renderRashiCards();renderAvailability();setAdminStatus(currentLanguage==='te'?'టెస్టింగ్ డేటా రీసెట్ అయింది.':'Testing data reset.');loadAdminRashiFields();}
+
+    document.getElementById('admin-rashi-period')?.addEventListener('change',syncAdminPeriodInput);
+    document.getElementById('admin-rashi-select')?.addEventListener('change',loadAdminRashiFields);
+    document.getElementById('admin-rashi-date')?.addEventListener('change',loadAdminRashiFields);
+    document.getElementById('admin-rashi-image')?.addEventListener('change',async e=>{const f=e.target.files[0],preview=document.getElementById('admin-rashi-preview');if(!f){loadAdminRashiFields();return;}try{const data=await prepareImage(f);preview.innerHTML=`<img src="${data}" alt="${currentLanguage==='te'?'పరిదృశ్యం':'Preview'}">`;}catch{preview.textContent=currentLanguage==='te'?'పరిదృశ్యం అందుబాటులో లేదు':'Preview unavailable';}});
+
+
+    // =========================================================
+    // FREE HOROSCOPE / KUNDALI GENERATOR (BROWSER ONLY)
+    // =========================================================
+    const cityCoordinates = {
+      'hyderabad':[17.385044,78.486671],'secunderabad':[17.43993,78.49827],'warangal':[17.9689,79.5941],
+      'vijayawada':[16.5062,80.6480],'visakhapatnam':[17.6868,83.2185],'tirupati':[13.6288,79.4192],
+      'bengaluru':[12.9716,77.5946],'bangalore':[12.9716,77.5946],'chennai':[13.0827,80.2707],
+      'mumbai':[19.0760,72.8777],'delhi':[28.6139,77.2090],'new delhi':[28.6139,77.2090],
+      'kolkata':[22.5726,88.3639],'pune':[18.5204,73.8567],'nashik':[19.9975,73.7898],
+      'ahmedabad':[23.0225,72.5714],'jaipur':[26.9124,75.7873],'lucknow':[26.8467,80.9462]
+    };
+    const vedicRashis = [
+      {name:'Mesha',te:'మేషం',en:'Aries',sym:'♈'},{name:'Vrishabha',te:'వృషభం',en:'Taurus',sym:'♉'},{name:'Mithuna',te:'మిథునం',en:'Gemini',sym:'♊'},
+      {name:'Karka',te:'కర్కాటకం',en:'Cancer',sym:'♋'},{name:'Simha',te:'సింహం',en:'Leo',sym:'♌'},{name:'Kanya',te:'కన్య',en:'Virgo',sym:'♍'},
+      {name:'Tula',te:'తుల',en:'Libra',sym:'♎'},{name:'Vrischika',te:'వృశ్చికం',en:'Scorpio',sym:'♏'},{name:'Dhanu',te:'ధనుస్సు',en:'Sagittarius',sym:'♐'},
+      {name:'Makara',te:'మకరం',en:'Capricorn',sym:'♑'},{name:'Kumbha',te:'కుంభం',en:'Aquarius',sym:'♒'},{name:'Meena',te:'మీనం',en:'Pisces',sym:'♓'}
+    ];
+    const nakshatras = ['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'];
+    const PLANETS = [
+      ['Sun','☉'],['Moon','☽'],['Mars','♂'],['Mercury','☿'],['Jupiter','♃'],['Venus','♀'],['Saturn','♄'],['Rahu','☊'],['Ketu','☋']
+    ];
+    const CITY_KEYS = Object.keys(cityCoordinates);
+
+    function normDeg(d){ d%=360; return d<0?d+360:d; }
+    function rad(d){ return d*Math.PI/180; }
+    function deg(r){ return r*180/Math.PI; }
+    function sinD(d){ return Math.sin(rad(d)); }
+    function cosD(d){ return Math.cos(rad(d)); }
+    function kepler(M,e){ let E=rad(M); for(let i=0;i<8;i++) E-= (E-e*Math.sin(E)-rad(M))/(1-e*Math.cos(E)); return deg(E); }
+    function orbitXYZ(d, p){
+      const N=normDeg(p.N0+p.Nd*d), i=p.i0+p.id*d, w=normDeg(p.w0+p.wd*d), a=p.a0+p.ad*d, e=p.e0+p.ed*d, M=normDeg(p.M0+p.Md*d);
+      const E=rad(kepler(M,e)); const xv=a*(Math.cos(E)-e), yv=a*(Math.sqrt(1-e*e)*Math.sin(E));
+      const v=deg(Math.atan2(yv,xv)), r=Math.hypot(xv,yv); const vw=rad(v+w);
+      const xh=r*(cosD(N)*Math.cos(vw)-sinD(N)*Math.sin(vw)*cosD(i));
+      const yh=r*(sinD(N)*Math.cos(vw)+cosD(N)*Math.sin(vw)*cosD(i));
+      const zh=r*(Math.sin(vw)*sinD(i));
+      return {x:xh,y:yh,z:zh,M,N,w};
+    }
+    const ORBITS={
+      Mercury:{N0:48.3313,Nd:3.24587e-5,i0:7.0047,id:5.00e-8,w0:29.1241,wd:1.01444e-5,a0:.387098,ad:0,e0:.205635,ed:5.59e-10,M0:168.6562,Md:4.0923344368},
+      Venus:{N0:76.6799,Nd:2.46590e-5,i0:3.3946,id:2.75e-8,w0:54.8910,wd:1.38374e-5,a0:.72333,ad:0,e0:.006773,ed:-1.302e-9,M0:48.0052,Md:1.6021302244},
+      Mars:{N0:49.5574,Nd:2.11081e-5,i0:1.8497,id:-1.78e-8,w0:286.5016,wd:2.92961e-5,a0:1.523688,ad:0,e0:.093405,ed:2.516e-9,M0:18.6021,Md:.5240207766},
+      Jupiter:{N0:100.4542,Nd:2.76854e-5,i0:1.3030,id:-1.557e-7,w0:273.8777,wd:1.64505e-5,a0:5.20256,ad:0,e0:.048498,ed:4.469e-9,M0:19.8950,Md:.0830853001},
+      Saturn:{N0:113.6634,Nd:2.38980e-5,i0:2.4886,id:-1.081e-7,w0:339.3939,wd:2.97661e-5,a0:9.55475,ad:0,e0:.055546,ed:-9.499e-9,M0:316.9670,Md:.0334442282}
+    };
+    function julianDay(date){ return date.getTime()/86400000+2440587.5; }
+    function moonLongitude(d){
+      const o={N0:125.1228,Nd:-.0529538083,i0:5.1454,id:0,w0:318.0634,wd:.1643573223,a0:60.2666,ad:0,e0:.054900,ed:0,M0:115.3654,Md:13.0649929509};
+      const m=orbitXYZ(d,o); const sunEl={N0:0,Nd:0,i0:0,id:0,w0:282.9404,wd:4.70935e-5,a0:1,ad:0,e0:.016709,ed:-1.151e-9,M0:356.0470,Md:.9856002585};
+      const sm=orbitXYZ(d,sunEl); const Ms=sm.M, Mm=m.M, Nm=m.N, Ls=normDeg(Ms+sm.w), Lm=normDeg(Nm+m.w+Mm), D=normDeg(Lm-Ls), F=normDeg(Lm-Nm);
+      const lon=normDeg(deg(Math.atan2(m.y,m.x)) + (-1.274*sinD(Mm-2*D)+.658*sinD(2*D)-.186*sinD(Ms)-.059*sinD(2*Mm-2*D)-.057*sinD(Mm-2*D+Ms)+.053*sinD(Mm+2*D)+.046*sinD(2*D-Ms)+.041*sinD(Mm-Ms)-.035*sinD(D)-.031*sinD(Mm+Ms)-.015*sinD(2*F-2*D)+.011*sinD(Mm-4*D)));
+      return {lon,lat:0,M:Mm};
+    }
+    function ayanamsa(jd){ return 23.85675 + ((jd-2451545.0)/365.2422)*0.0139693; }
+    function siderealLon(lon,jd){ return normDeg(lon-ayanamsa(jd)); }
+    function gmstDeg(jd){ const T=(jd-2451545)/36525; return normDeg(280.46061837+360.98564736629*(jd-2451545)+0.000387933*T*T-(T*T*T)/38710000); }
+    function ascendantLongitude(jd,lat,lon){
+      const lst=rad(normDeg(gmstDeg(jd)+lon)); const eps=23.439291; const phi=rad(lat);
+      const lam=deg(Math.atan2(-Math.cos(lst), Math.sin(lst)*Math.cos(rad(eps))+Math.tan(phi)*Math.sin(rad(eps))));
+      return normDeg(lam+180);
+    }
+    function parseBirthInputs(){
+      const date=document.getElementById('k-date').value, time=document.getElementById('k-time').value, place=document.getElementById('k-place').value.trim();
+      if(!date||!time||!place) throw new Error(currentLanguage==='te'?'పుట్టిన తేదీ, సమయం, స్థలం నమోదు చేయండి.':'Please enter birth date, time and place.');
+      let lat=parseFloat(document.getElementById('k-lat').value), lon=parseFloat(document.getElementById('k-lon').value);
+      const c=cityCoordinates[place.toLowerCase()]; if(!Number.isFinite(lat)||!Number.isFinite(lon)){ if(c){lat=c[0];lon=c[1]; document.getElementById('k-lat').value=lat;document.getElementById('k-lon').value=lon;} else throw new Error(currentLanguage==='te'?'ఈ స్థలానికి coordinates ఇవ్వండి.':'Enter latitude and longitude for this place.'); }
+      const local=new Date(`${date}T${time}:00+05:30`); if(Number.isNaN(local.getTime())) throw new Error('Invalid date/time.');
+      return {date,time,place,lat,lon,utcDate:local};
+    }
+    function getChartData(input){
+      const jd=julianDay(input.utcDate), d=jd-2451543.5, sid=ayanamsa(jd), asc=siderealLon(ascendantLongitude(jd,input.lat,input.lon),jd);
+      const planets={Sun:null,Moon:null,Mars:null,Mercury:null,Jupiter:null,Venus:null,Saturn:null,Rahu:null,Ketu:null};
+      const sun=orbitXYZ(d,{N0:0,Nd:0,i0:0,id:0,w0:282.9404,wd:4.70935e-5,a0:1,ad:0,e0:.016709,ed:-1.151e-9,M0:356.0470,Md:.9856002585});
+      planets.Sun=siderealLon(normDeg(deg(Math.atan2(sun.y,sun.x))+180),jd);
+      Object.keys(ORBITS).forEach(name=>{ const p=orbitXYZ(d,ORBITS[name]); const earth=sun; const x=p.x-earth.x,y=p.y-earth.y; planets[name]=siderealLon(normDeg(deg(Math.atan2(y,x))),jd); });
+      const ml=moonLongitude(d); planets.Moon=siderealLon(ml.lon,jd);
+      const node=normDeg(125.1228-.0529538083*d); planets.Rahu=siderealLon(node,jd); planets.Ketu=siderealLon(node+180,jd);
+      const signs={Asc:asc}; Object.entries(planets).forEach(([k,v])=>signs[k]=v);
+      return {jd,asc,planets:signs,sid};
+    }
+    function longitudeToRashi(lon){ return Math.floor(normDeg(lon)/30); }
+    function nakshatraOf(lon){ const n=normDeg(lon)/13.3333333333333; const idx=Math.floor(n)%27; const pada=Math.floor((n-idx)*4)+1; return {name:nakshatras[idx],pada}; }
+    function planetLabel(name){ const item=PLANETS.find(p=>p[0]===name); return item?item[1]+' '+name:name; }
+    function renderKundali(input,chart){
+      const ascIdx=longitudeToRashi(chart.asc), moonIdx=longitudeToRashi(chart.planets.Moon), sunIdx=longitudeToRashi(chart.planets.Sun), nak=nakshatraOf(chart.planets.Moon);
+      const rName=(idx)=>currentLanguage==='te'?(vedicRashis[idx].te||vedicRashis[idx].name):vedicRashis[idx].name;
+      setText('ks-name',input.name||'—'); setText('ks-place',input.place); setText('ks-lagna',`${rName(ascIdx)} ${vedicRashis[ascIdx].sym}`); setText('ks-moon',`${rName(moonIdx)} ${vedicRashis[moonIdx].sym}`); setText('ks-sun',`${rName(sunIdx)} ${vedicRashis[sunIdx].sym}`); setText('ks-nak',`${nak.name} · Pada ${nak.pada}`);
+      const houses=Array.from({length:12},()=>({sign:null,planets:[]}));
+      for(let h=0;h<12;h++){const si=(ascIdx+h)%12;houses[h].sign=si;}
+      Object.entries(chart.planets).forEach(([name,lon])=>{ const sign=longitudeToRashi(lon); const h=(sign-ascIdx+12)%12; houses[h].planets.push(planetLabel(name)); });
+      const positions=[0,1,2,3,4,5,6,7,8,9,10,11].map(h=>houses[h]);
+      const cells=[]; for(let h=0;h<12;h++){ cells.push(`<div class="khv${h+1} khouse"><span class="kh-house">${h+1}</span><div class="kh-sign">${vedicRashis[positions[h].sign].sym} ${currentLanguage==='te'?(vedicRashis[positions[h].sign].te||vedicRashis[positions[h].sign].name):vedicRashis[positions[h].sign].name}</div><div class="kh-planets">${positions[h].planets.length?positions[h].planets.join('<br>'):'—'}</div></div>`); }
+      cells.push(`<div class="kh-center"><span>${escapeHtml(input.name||'Kundali')}<br><small>${rName(ascIdx)} ${currentLanguage==='te'?'లగ్నం':'Lagna'}</small></span></div>`);
+      document.getElementById('kundali-chart').innerHTML=cells.join('');
+    }
+    function generateKundali(){
+      try{ const raw={...parseBirthInputs(),name:document.getElementById('k-name').value.trim()}; const chart=getChartData(raw); renderKundali(raw,chart); const dateText=`${raw.date} ${raw.time}`; setText('kundali-status',currentLanguage==='te'?`కుండలి సిద్ధమైంది · ${dateText}`:`Kundali generated · ${dateText}`); }
+      catch(err){ setText('kundali-status',err.message||'Unable to generate Kundali.'); }
+    }
+    function fillKundaliDemo(){ document.getElementById('k-name').value='AstroCosmos Demo';document.getElementById('k-date').value='1995-08-15';document.getElementById('k-time').value='10:30';document.getElementById('k-place').value='Hyderabad';document.getElementById('k-lat').value='17.3850';document.getElementById('k-lon').value='78.4867';generateKundali(); }
+    document.getElementById('k-place')?.addEventListener('change',()=>{const c=cityCoordinates[document.getElementById('k-place').value.trim().toLowerCase()];if(c){document.getElementById('k-lat').value=c[0];document.getElementById('k-lon').value=c[1];}});
+
     // --- UI HELPERS & VALIDATION ---
     function toggleMobileNav() {
       const nav = document.getElementById('mobile-nav');
       nav.classList.toggle('open');
     }
 
-    function viewPlanetIn3D(planetName) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      const focusWhenReady = () => {
-        if (window.scrollY <= 12 && typeof focusTarget === 'function') {
-          focusTarget(planetName);
-        } else {
-          setTimeout(focusWhenReady, 120);
-        }
-      };
-      setTimeout(focusWhenReady, 180);
-    }
 
-    // Explicit Form Validation & Demo Submission
+    // Explicit Form Validation + WhatsApp submission
     function submitMessage(e) {
       e.preventDefault();
 
       const nameInput = document.getElementById('user-name');
       const emailInput = document.getElementById('user-email');
+      const dobInput = document.getElementById('user-dob');
       const msgInput = document.getElementById('user-msg');
       const feedback = document.getElementById('form-feedback');
-
       const nameError = document.getElementById('name-error');
       const emailError = document.getElementById('email-error');
       const msgError = document.getElementById('msg-error');
 
-      // Reset errors
-      nameError.innerText = '';
-      emailError.innerText = '';
-      msgError.innerText = '';
-      feedback.style.display = 'none';
-
+      nameError.innerText = ''; emailError.innerText = ''; msgError.innerText = ''; feedback.style.display = 'none';
       let isValid = true;
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const msg = msgInput.value.trim();
+      const name = nameInput.value.trim(); const email = emailInput.value.trim(); const dob = dobInput.value.trim(); const msg = msgInput.value.trim();
 
-      if (!name) {
-        nameError.innerText = 'దయచేసి మీ పేరు నమోదు చేయండి (Name required)';
-        isValid = false;
-      }
-
-      // Proper email format check
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email) {
-        emailError.innerText = 'దయచేసి ఇమెయిల్ నమోదు చేయండి (Email required)';
-        isValid = false;
-      } else if (!emailPattern.test(email)) {
-        emailError.innerText = 'సరైన ఇమెయిల్ చిరునామాను నమోదు చేయండి (Valid email format required)';
-        isValid = false;
-      }
-
-      if (!msg) {
-        msgError.innerText = 'దయచేసి సందేశం రాయండి (Message required)';
-        isValid = false;
-      }
-
+      if (!name) { nameError.innerText = currentLanguage==='te' ? 'పేరు నమోదు చేయండి' : 'Name required'; isValid=false; }
+      const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email) { emailError.innerText=currentLanguage==='te'?'ఇమెయిల్ నమోదు చేయండి':'Email required'; isValid=false; }
+      else if(!emailPattern.test(email)){ emailError.innerText=currentLanguage==='te'?'సరైన ఇమెయిల్ నమోదు చేయండి':'Valid email required'; isValid=false; }
+      if (!msg) { msgError.innerText=currentLanguage==='te'?'సందేశం రాయండి':'Message required'; isValid=false; }
       if (!isValid) return;
 
-      // Honest Demo Feedback
-      feedback.className = 'form-feedback success';
-      feedback.innerText = `[Demo Submission Verified] ధన్యవాదాలు ${name} గారు! మీ ఇమెయిల్ (${email}) సరిగ్గా ధృవీకరించబడింది. This demo submission was processed locally.`;
-      feedback.style.display = 'block';
-
+      const text = `AstroCosmos Enquiry\nName: ${name}\nEmail: ${email}\nDOB/Time: ${dob||'Not provided'}\nMessage: ${msg}`;
+      const url = `https://wa.me/${DEMO_PHONE}?text=${encodeURIComponent(text)}`;
+      const opened = window.open(url,'_blank','noopener');
+      if(!opened) window.location.href=url;
+      feedback.className='form-feedback success'; feedback.innerText=currentLanguage==='te'?'వాట్సాప్ తెరవబడుతోంది…':'Opening WhatsApp…'; feedback.style.display='block';
       document.getElementById('contact-form').reset();
     }
 
@@ -1646,16 +2444,16 @@
         botDiv.className = 'chat-msg bot';
 
         const q = text.toLowerCase();
-        let reply = "మీ సందేహం నమోదైంది. ప్రస్తుత గోచారంలో గురు, శని గ్రహాల బలం అనుకూలంగా ఉంది. మరింత సమాచారం కోసం సంప్రదింపుల ఫారమ్ ఉపయోగించండి.";
+        let reply = currentLanguage==='te' ? "మీ సందేహం నమోదైంది. ఇది డెమో FAQ సహాయకుడు; మరింత సమాచారం కోసం సంప్రదింపు విభాగాన్ని ఉపయోగించండి." : "Your question was noted. This is a demo FAQ assistant; use the contact section for more information.";
 
         if (q.includes('శని') || q.includes('saturn')) {
-          reply = "శని భగవానుడు న్యాయాధిపతి. శని అనుగ్రహం కోసం శనివారం నల్ల నువ్వుల దీపం వెలిగించడం మరియు హనుమాన్ చాలీసా పారాయణం శ్రేయస్కరం.";
+          reply = currentLanguage==='te' ? "శని గురించి ఇది ప్రాథమిక డెమో సమాచారం. వ్యక్తిగత జాతక వ్యాఖ్యానానికి కుండలి రూపొందించండి." : "This is basic demo information about Saturn. Generate a Kundali for personalised chart context.";
         } else if (q.includes('కుజ') || q.includes('mars')) {
-          reply = "కుజుడు ధైర్యానికి, స్థిరాస్తులకు కారకుడు. కుజ దోష నివారణకు సుబ్రహ్మణ్యేశ్వర స్వామి ఆరాధన చేయండి.";
+          reply = currentLanguage==='te' ? "కుజుడు గురించి ప్రాథమిక సమాచారం కోసం కుండలి లేదా రాశి విభాగాలను చూడండి." : "For basic Mars information, explore the Kundali or Rashi sections.";
         } else if (q.includes('రాశి') || q.includes('rasi') || q.includes('horoscope')) {
-          reply = "ఈ రోజు చంద్రుడి సంచారం ప్రకారం మేష, సింహ, ధనుస్సు రాశుల వారికి ప్రత్యేక ధనలాభం మరియు శుభకార్య చర్చలు ఫలించే అవకాశాలు ఉన్నాయి.";
+          reply = currentLanguage==='te' ? "రాశి ఫలాల విభాగంలో రోజువారీ, నెలవారీ మరియు వార్షిక 12 రాశుల సమాచారాన్ని చూడండి." : "Use the Rashi section for daily, monthly and yearly updates for all 12 signs.";
         } else if (q.includes('నమస్కారం') || q.includes('hi') || q.includes('hello')) {
-          reply = "నమస్కారం! నేను మీ ఆస్ట్రో గైడ్ అసిస్టెంట్‌ని. ఏదైనా గ్రహం లేదా రాశికి సంబంధించిన ప్రాథమిక సమాచారం అడగండి.";
+          reply = currentLanguage==='te' ? "నమస్కారం! 🙏 రాశి, గ్రహం లేదా కుండలి గురించి ప్రాథమిక ప్రశ్న అడగండి." : "Hello! 🙏 Ask a basic question about a rashi, planet or Kundali.";
         }
 
         // Safe via innerText
@@ -1666,7 +2464,38 @@
     }
 
     // =========================================================
-    // 3D GRAPHICS ENGINE & ANIMATIONS (PRESERVED INTACT)
+    // PAGE INIT
+    // =========================================================
+    applyLanguage();
+    updateClocks();
+    setInterval(updateClocks, 1000);
+    renderRashiCards();
+    renderAvailability();
+    populateAdminRashiSelect();
+    syncAdminPeriodInput();
+
+    window.addEventListener('keydown', e => { if(e.key==='Escape') closeAdminPanel(); });
+
+
+    // =========================================================
+    // PWA INSTALL / SERVICE WORKER
+    // =========================================================
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault(); deferredInstallPrompt = event;
+      document.getElementById('install-app-btn')?.classList.add('show');
+      const mobile=document.getElementById('mobile-install-app-btn'); if(mobile) mobile.style.display='block';
+    });
+    async function installPWA(){
+      if(!deferredInstallPrompt){ setText('kundali-status', currentLanguage==='te'?'బ్రౌజర్ మెనులో Install App / Add to Home Screen ఎంచుకోండి.':'Use your browser menu → Install App / Add to Home Screen.'); return; }
+      deferredInstallPrompt.prompt(); await deferredInstallPrompt.userChoice; deferredInstallPrompt=null;
+      document.getElementById('install-app-btn')?.classList.remove('show'); const mobile=document.getElementById('mobile-install-app-btn'); if(mobile) mobile.style.display='none';
+    }
+    window.addEventListener('appinstalled',()=>{ deferredInstallPrompt=null; document.getElementById('install-app-btn')?.classList.remove('show'); const mobile=document.getElementById('mobile-install-app-btn'); if(mobile) mobile.style.display='none'; });
+    if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+
+    // =========================================================
+    // 3D GRAPHICS ENGINE & ANIMATIONS
     // =========================================================
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x010106, 0.002);
