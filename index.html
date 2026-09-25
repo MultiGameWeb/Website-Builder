@@ -965,6 +965,10 @@
     @media (max-width: 900px) {
       #webgl-canvas {
         transform: none;
+        /* Let the browser own vertical finger scrolling on phones/tablets.
+           Three.js touch gestures are disabled in JS on these viewports. */
+        pointer-events: none;
+        touch-action: pan-y;
       }
     }
 
@@ -3667,10 +3671,20 @@
       startAnimation();
     }
 
+    function syncMobileTouchMode() {
+      const isMobileViewport = window.matchMedia('(max-width: 900px)').matches;
+      controls.enabled = !isMobileViewport;
+      renderer.domElement.style.pointerEvents = isMobileViewport ? 'none' : 'auto';
+      renderer.domElement.style.touchAction = isMobileViewport ? 'pan-y' : 'none';
+    }
+
+    syncMobileTouchMode();
+
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight, false);
+      syncMobileTouchMode();
     });
     if (solarFallback) solarFallback.style.opacity = '0';
     } catch (threeError) {
