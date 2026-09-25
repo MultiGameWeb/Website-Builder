@@ -1558,13 +1558,13 @@
 
     <!-- Quick Switch Planetary Ribbon -->
     <div class="planet-bar">
-      <button class="planet-btn active" onclick="focusTarget('system')"><span class="planet-label" data-planet-label="planetSystem">☀️ Solar System</span><span class="planet-key">Solar System</span></button>
-      <button class="planet-btn" onclick="focusTarget('Sun')"><span class="planet-label" data-planet-label="planetSun">🔥 The Sun</span><span class="planet-key">The Sun</span></button>
-      <button class="planet-btn" onclick="focusTarget('Earth')"><span class="planet-label" data-planet-label="planetEarth">🌍 Earth (India Outlined)</span><span class="planet-key">Earth (India Outlined)</span></button>
-      <button class="planet-btn" onclick="focusTarget('Moon')"><span class="planet-label" data-planet-label="planetMoon">🌕 The Moon</span><span class="planet-key">The Moon</span></button>
-      <button class="planet-btn" onclick="focusTarget('Mars')"><span class="planet-label" data-planet-label="planetMars">🔴 Mars</span><span class="planet-key">Mars</span></button>
-      <button class="planet-btn" onclick="focusTarget('Jupiter')"><span class="planet-label" data-planet-label="planetJupiter">♃ Jupiter</span><span class="planet-key">Jupiter</span></button>
-      <button class="planet-btn" onclick="focusTarget('Saturn')"><span class="planet-label" data-planet-label="planetSaturn">🪐 Saturn</span><span class="planet-key">Saturn</span></button>
+      <button class="planet-btn active" data-planet-key="system" onclick="focusTarget('system')"><span class="planet-label" data-planet-label="planetSystem">☀️ Solar System</span><span class="planet-key">Solar System</span></button>
+      <button class="planet-btn" data-planet-key="Sun" onclick="focusTarget('Sun')"><span class="planet-label" data-planet-label="planetSun">🔥 The Sun</span><span class="planet-key">The Sun</span></button>
+      <button class="planet-btn" data-planet-key="Earth" onclick="focusTarget('Earth')"><span class="planet-label" data-planet-label="planetEarth">🌍 Earth (India Outlined)</span><span class="planet-key">Earth (India Outlined)</span></button>
+      <button class="planet-btn" data-planet-key="Moon" onclick="focusTarget('Moon')"><span class="planet-label" data-planet-label="planetMoon">🌕 The Moon</span><span class="planet-key">The Moon</span></button>
+      <button class="planet-btn" data-planet-key="Mars" onclick="focusTarget('Mars')"><span class="planet-label" data-planet-label="planetMars">🔴 Mars</span><span class="planet-key">Mars</span></button>
+      <button class="planet-btn" data-planet-key="Jupiter" onclick="focusTarget('Jupiter')"><span class="planet-label" data-planet-label="planetJupiter">♃ Jupiter</span><span class="planet-key">Jupiter</span></button>
+      <button class="planet-btn" data-planet-key="Saturn" onclick="focusTarget('Saturn')"><span class="planet-label" data-planet-label="planetSaturn">🪐 Saturn</span><span class="planet-key">Saturn</span></button>
     </div>
 
     <a href="#about" class="scroll-down-hint">
@@ -1966,6 +1966,13 @@
   <script>
 
     // =========================================================
+    // EARLY GLOBAL STATE — MUST EXIST BEFORE ANY PAGE-INIT CALL
+    // =========================================================
+    let currentLanguage = 'en';
+    try { currentLanguage = localStorage.getItem('astrocosmos-language') || 'en'; } catch (err) {}
+    const DEMO_PHONE = '919876543210';
+
+    // =========================================================
     // WOW FACTOR: LIGHTWEIGHT NON-WEBGL EFFECTS
     // =========================================================
     const zodiacData = [
@@ -2171,8 +2178,6 @@
     // =========================================================
     // LIVE DATE / TIME + LANGUAGE
     // =========================================================
-    const DEMO_PHONE = '919876543210';
-    let currentLanguage = localStorage.getItem('astrocosmos-language') || 'en';
     const uiText = {
       en: {
         navHome:'Home', navServices:'Services', navRashi:'Rashi Phalalu', navKundali:'Free Kundali', navGallery:'Gallery', navContact:'Location', navAbout:'About Us', navPrivacy:'Privacy', indiaLabel:'🇮🇳 India', worldLabel:'🌍 World · UTC', dateLabel:'📅 Date', focusedPlanet:'Focused Planet', heroWhatsApp:'💬 WhatsApp', heroCall:'📞 Call', planetSystem:'☀️ Solar System', planetSun:'🔥 The Sun', planetEarth:'🌍 Earth (India Outlined)', planetMoon:'🌕 The Moon', planetMars:'🔴 Mars', planetJupiter:'♃ Jupiter', planetSaturn:'🪐 Saturn', scrollDown:'Scroll Down',
@@ -2722,6 +2727,32 @@
     if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 
     // =========================================================
+    // 3D PLANET BUTTON FALLBACK
+    // =========================================================
+    // Defined before the WebGL try-block so inline onclick handlers never crash
+    // when Three.js/OrbitControls are unavailable. The real 3D implementation
+    // replaces this function only after the engine initializes successfully.
+    function focusTarget(name) {
+      document.querySelectorAll('.planet-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-planet-key') === name);
+      });
+      const display = document.getElementById('target-display');
+      if (display) {
+        const labels = {
+          system: 'Solar System Overview',
+          Sun: 'The Sun',
+          Earth: 'Earth • India Highlighted',
+          Moon: 'The Moon (Orbiting Earth)',
+          Mars: 'Mars',
+          Jupiter: 'Jupiter',
+          Saturn: 'Saturn'
+        };
+        display.innerText = labels[name] || labels.system;
+      }
+    }
+    window.focusTarget = focusTarget;
+
+    // =========================================================
     // 3D GRAPHICS ENGINE & ANIMATIONS
     // =========================================================
     const solarFallback = document.getElementById('solar-fallback');
@@ -3058,12 +3089,9 @@
     let targetDistance = 130;
     const targetLookAt = new THREE.Vector3(0, 0, 0);
 
-    function focusTarget(name) {
+    window.focusTarget = function(name) {
       document.querySelectorAll('.planet-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.innerText.includes(name) || (name === 'system' && btn.innerText.includes('Solar System'))) {
-          btn.classList.add('active');
-        }
+        btn.classList.toggle('active', btn.getAttribute('data-planet-key') === name);
       });
 
       const display = document.getElementById('target-display');
@@ -3087,7 +3115,7 @@
           display.innerText = `${found.name} (360° Inspection)`;
         }
       }
-    }
+    };
 
     // Direct Click on 3D Objects in Hero
     const raycaster = new THREE.Raycaster();
