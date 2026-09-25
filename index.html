@@ -754,6 +754,20 @@
     }
     .mobile-language-toggle { width:100%; text-align:left; border-radius:8px; padding:10px 0; background:transparent; border-color:rgba(226,183,106,.16); }
 
+    .theme-toggle {
+      border:1px solid rgba(226,183,106,.34);
+      background:rgba(226,183,106,.08);
+      color:#ffdfa4;
+      border-radius:20px;
+      padding:7px 12px;
+      cursor:pointer;
+      font:600 .72rem 'Space Grotesk',sans-serif;
+      letter-spacing:.7px;
+      white-space:nowrap;
+      transition:.25s ease;
+    }
+    .theme-toggle:hover { border-color:#ffe6b2; box-shadow:0 0 14px rgba(226,183,106,.18); transform:translateY(-1px); }
+
     .hero-desc { display:none; }
     .hero-actions { display:flex; gap:10px; margin-top:16px; pointer-events:auto; }
     .hero-contact-btn { text-decoration:none; display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:24px; border:1px solid rgba(226,183,106,.32); background:rgba(8,6,16,.7); color:#f7e7ce; font-size:.72rem; letter-spacing:.7px; transition:.25s ease; }
@@ -808,6 +822,9 @@
     .admin-card h3 { font-family:'Cinzel',serif; color:#ffdfa4; font-size:1rem; margin-bottom:12px; }
     .admin-card label { display:block; color:#9f917e; font-size:.66rem; margin-bottom:10px; }
     .admin-card input,.admin-card select,.admin-card textarea { width:100%; margin-top:5px; border:1px solid rgba(226,183,106,.22); border-radius:8px; background:rgba(255,255,255,.04); color:#f7e7ce; padding:9px 10px; outline:none; font:500 .75rem 'Space Grotesk',sans-serif; }
+    .admin-card select[size] { min-height:174px; }
+    .admin-card select[size] option { padding:7px 8px; background:#121126; color:#f6dfb9; }
+    .admin-card select[size] option:checked { background:#e2b76a; color:#1e170c; }
     .admin-card textarea { resize:vertical; }
     .admin-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .admin-btn-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
@@ -857,7 +874,8 @@
 
     /* Rashi period selector */
     .rashi-period-tabs { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin:18px 0 6px; }
-    .rashi-period-btn { border:1px solid rgba(226,183,106,.25); background:rgba(255,255,255,.035); color:#a99b88; border-radius:18px; padding:7px 12px; font:700 .65rem 'Space Grotesk',sans-serif; cursor:pointer; }
+    .rashi-period-btn { border:1px solid rgba(226,183,106,.34); background:rgba(24,22,43,.96); color:#f5dfb6; border-radius:20px; padding:9px 15px; font:700 .7rem 'Space Grotesk',sans-serif; cursor:pointer; min-width:96px; text-align:center; box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 5px 16px rgba(0,0,0,.16); transition:.2s ease; }
+    .rashi-period-btn:hover { border-color:#ffe3a8; transform:translateY(-1px); }
     .rashi-period-btn.active { background:linear-gradient(135deg,#e2b76a,#aa782e); color:#05030a; border-color:#ffdfa4; }
     .rashi-period-note { text-align:center; color:#7e7162; font-size:.62rem; margin-top:7px; }
 
@@ -1249,6 +1267,25 @@
         radial-gradient(circle at 85% 76%, rgba(176,105,213,0.08), transparent 25%);
     }
 
+
+    #kundali::after {
+      content:"";
+      position:absolute;
+      inset:18px 0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.82;
+      background-image:
+        radial-gradient(circle at 12% 20%, rgba(255,232,176,.85) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 28% 68%, rgba(195,214,255,.7) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 43% 34%, rgba(255,255,255,.65) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 58% 74%, rgba(255,224,154,.72) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 77% 26%, rgba(204,218,255,.7) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 90% 62%, rgba(255,255,255,.72) 0 1px, transparent 1.7px);
+      background-size: 170px 150px, 210px 180px, 240px 200px, 190px 170px, 220px 180px, 180px 160px;
+      mask-image:linear-gradient(180deg,transparent 0%,#000 16%,#000 84%,transparent 100%);
+    }
+
     /* Keep navigation directly visible on the page; hamburger stays hidden. */
     header {
       padding: 13px 30px;
@@ -1311,6 +1348,96 @@
       background: linear-gradient(180deg, rgba(10,18,40,.94), rgba(15,12,34,.98));
     }
 
+
+    /* =========================================================
+       LIGHT / DARK THEME
+       ========================================================= */
+    body.light-theme {
+      background:
+        radial-gradient(circle at 8% 10%, rgba(123,151,211,.13), transparent 27%),
+        radial-gradient(circle at 92% 18%, rgba(198,150,218,.11), transparent 26%),
+        linear-gradient(180deg,#f7f3ec 0%,#eef3f8 48%,#f4eef7 100%);
+      color:#2b2830;
+    }
+    body.light-theme::before {
+      background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,.08));
+    }
+    body.light-theme .time-strip,
+    body.light-theme header {
+      background:rgba(255,255,255,.92);
+      color:#4e463d;
+      border-color:rgba(122,93,45,.16);
+    }
+    body.light-theme .clock-chip span { color:#766c61; }
+    body.light-theme .clock-chip strong { color:#6d4b16; }
+    body.light-theme nav a { color:#554d43; }
+    body.light-theme nav a:hover { color:#986b18; }
+    body.light-theme .logo {
+      background:linear-gradient(135deg,#6b4b16,#b17b1f,#7c5a21);
+      -webkit-background-clip:text;
+      background-clip:text;
+    }
+    body.light-theme .language-toggle,
+    body.light-theme .theme-toggle {
+      color:#6d4b16;
+      background:rgba(177,123,31,.08);
+      border-color:rgba(177,123,31,.28);
+    }
+    body.light-theme .section-title { color:#2e2a31; }
+    body.light-theme .section-tag { color:#936819; }
+    body.light-theme .about-card,
+    body.light-theme .gallery-card,
+    body.light-theme .kundali-card,
+    body.light-theme .kundali-result,
+    body.light-theme .rashi-card,
+    body.light-theme .privacy-card,
+    body.light-theme .contact-layout {
+      background:rgba(255,255,255,.78);
+      border-color:rgba(131,99,46,.22);
+      box-shadow:0 14px 34px rgba(73,71,82,.08);
+    }
+    body.light-theme .service-card { background:rgba(255,255,255,.84); border-color:rgba(131,99,46,.22); color:#302b31; }
+    body.light-theme .about-card h3,
+    body.light-theme .gallery-card h4,
+    body.light-theme .kundali-card h3,
+    body.light-theme .kundali-result h3,
+    body.light-theme .rashi-card h4,
+    body.light-theme .service-card h3 { color:#7a5317; }
+    body.light-theme .about-card p,
+    body.light-theme .gallery-card p,
+    body.light-theme .service-card p,
+    body.light-theme .section-subtitle,
+    body.light-theme .rashi-card .rashi-en,
+    body.light-theme .rashi-card .rashi-te,
+    body.light-theme .kundali-note,
+    body.light-theme .kundali-footnote,
+    body.light-theme .rashi-period-note,
+    body.light-theme .privacy-card,
+    body.light-theme .form-disclaimer { color:#665f58; }
+    body.light-theme .kundali-card input,
+    body.light-theme .admin-card input,
+    body.light-theme .admin-card select,
+    body.light-theme .admin-card textarea,
+    body.light-theme .contact-form input,
+    body.light-theme .contact-form textarea { background:rgba(255,255,255,.9); color:#2d2930; }
+    body.light-theme .rashi-period-btn { background:#fff; color:#6b6259; border-color:rgba(131,99,46,.22); }
+    body.light-theme .rashi-period-btn.active { background:linear-gradient(135deg,#e2b76a,#aa782e); color:#241b0c; }
+    body.light-theme .publish-date-pill { background:rgba(177,123,31,.08); }
+    body.light-theme .contact-action-card { background:rgba(255,255,255,.84); }
+    body.light-theme .contact-action-card small { color:#72685f; }
+    body.light-theme .availability-card { background:linear-gradient(135deg,rgba(247,240,218,.92),rgba(255,255,255,.82)); }
+    body.light-theme footer { background:rgba(247,244,238,.95); }
+    body.light-theme footer p { color:#766f67; }
+    body.light-theme .chat-window { background:rgba(255,255,255,.97); border-color:rgba(131,99,46,.25); }
+    body.light-theme .chat-msg.bot { color:#3a3330; background:rgba(177,123,31,.08); }
+    body.light-theme .chat-input-area { background:rgba(247,244,238,.95); }
+    body.light-theme .chat-input-area input { color:#2d2930; background:rgba(255,255,255,.92); }
+    body.light-theme .admin-card select[size] option { background:#fff; color:#3a342f; }
+    body.light-theme .admin-card select[size] option:checked { background:#e2b76a; color:#241b0c; }
+    body.light-theme .admin-overlay { background:rgba(255,255,255,.76); }
+    body.light-theme .admin-modal { background:rgba(251,249,245,.98); color:#332f2b; }
+    body.light-theme .admin-card { background:rgba(255,255,255,.84); }
+
     @media (max-width: 1180px) {
       header { padding-inline: 20px; }
       header .logo { font-size: 1.18rem; letter-spacing: 2.7px; }
@@ -1368,7 +1495,8 @@
 
     <div class="header-actions">
       <button class="language-toggle" id="language-toggle" type="button" onclick="toggleLanguage()" aria-label="Switch language">తెలుగు</button>
-      <button class="install-app-btn" id="install-app-btn" type="button" onclick="installPWA()">📲 Install</button>
+      <button class="theme-toggle" id="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle dark and white mode">☀️ Light</button>
+      <button class="install-app-btn" id="install-app-btn" type="button" onclick="installPWA()" data-i18n="installApp">📲 Install</button>
       <button class="hamburger-btn" aria-label="Toggle Navigation" onclick="toggleMobileNav()">☰</button>
     </div>
   </header>
@@ -1760,7 +1888,7 @@
           <div class="admin-form-grid">
             <label><span data-i18n="period">Period</span><select id="admin-rashi-period"><option value="daily">Daily</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></label>
             <label><span data-i18n="targetDate">Target Date / Month / Year</span><input type="date" id="admin-rashi-date"></label>
-            <label><span data-i18n="rashiSelect">Rashi</span><select id="admin-rashi-select"></select></label>
+            <label><span data-i18n="rashiSelect">Rashi (12 options)</span><select id="admin-rashi-select" size="6" aria-label="Select one of 12 Rashis"></select></label>
           </div>
           <div class="admin-mini-status" id="admin-rashi-key-help">Daily entry = one date · Monthly = one month · Yearly = one year</div>
           <label><span data-i18n="englishUpdate">English Update</span><textarea id="admin-rashi-en" rows="3" placeholder="Today's update in English..." data-i18n-placeholder="rashiEnPlaceholder"></textarea></label>
@@ -2036,7 +2164,7 @@
         contactTag:'Reach Our Astro Desk', contactTitle:'Contact & Location', fullName:'Full Name', email:'Email Address', dob:'DOB & Time (Optional)', message:'Message / Question', whatsappSubmit:'💬 Send Message on WhatsApp', formNote:'ℹ️ Testing mode: the message is prepared locally and opened in WhatsApp using the demo number.', whatsappLabel:'WhatsApp', demoNumber:'+91 98765 43210 · Demo', callLabel:'Call', demoNumber2:'+91 98765 43210 · Demo', callNow:'Call Now', locationLabel:'Location', locationValue:'Jubilee Hills, Hyderabad, Telangana', openWhatsApp:'Open WhatsApp', openMaps:'Open Google Maps', availableTiming:'Available Timing',
         privacyTag:'Data Trust & Integrity', privacyTitle:'Privacy Policy', privacy1Title:'1. Astrological Privacy', privacy1Desc:'Birth details entered on this demo are processed locally in the browser and are not sent to an external server by the site.', privacy2Title:'2. 3D Graphics & Browser Storage', privacy2Desc:'Browser storage is used for local demo preferences and testing data; no external tracking is built into this demo.', privacy3Title:'3. Quick Guide Processing', privacy3Desc:'The FAQ guide operates in the browser and uses a small local keyword response system for demo purposes.',
         moonLabel:'Live Lunar Status', footer:'© 2026 AstroCosmos 3D. All Rights Reserved. Designed for Vedic Astronomy & Astrology.', quickGuide:'Quick Astro Guide', quickGuideTitle:'Quick Astro Guide (FAQ Bot)', send:'Send', mobileLanguage:'Switch Language',
-        testingMode:'Testing Mode', adminTitle:'AstroCosmos Admin Panel', adminNoPassword:'No password protection yet · local browser testing only.', rashiPublisher:'12 Rashi Publisher', period:'Period', targetDate:'Target Date / Month / Year', rashiSelect:'Rashi', englishUpdate:'English Update', teluguUpdate:'Telugu Update', imageUpload:'Image Upload', saveRashi:'Save Rashi Update', clearSelected:'Clear Selected', availableDateTiming:'Available Date & Timing', fromDate:'From Date', toDate:'To Date', startTime:'Start Time', endTime:'End Time', saveAvailability:'Save Availability', testingData:'Testing Data', adminStorageNote:"Rashi text, dates and uploaded images are stored in this browser's localStorage for testing. They do not automatically publish to every visitor's device. Use Export/Import when moving the testing data between devices.", ready:'Ready.', exportJson:'Export JSON', importJson:'Import JSON', resetData:'Reset Data',
+        testingMode:'Testing Mode', adminTitle:'AstroCosmos Admin Panel', adminNoPassword:'No password protection yet · local browser testing only.', rashiPublisher:'12 Rashi Publisher', period:'Period', targetDate:'Target Date / Month / Year', rashiSelect:'Rashi (12 options)', englishUpdate:'English Update', teluguUpdate:'Telugu Update', imageUpload:'Image Upload', saveRashi:'Save Rashi Update', clearSelected:'Clear Selected', availableDateTiming:'Available Date & Timing', fromDate:'From Date', toDate:'To Date', startTime:'Start Time', endTime:'End Time', saveAvailability:'Save Availability', testingData:'Testing Data', adminStorageNote:"Rashi text, dates and uploaded images are stored in this browser's localStorage for testing. They do not automatically publish to every visitor's device. Use Export/Import when moving the testing data between devices.", ready:'Ready.', exportJson:'Export JSON', importJson:'Import JSON', resetData:'Reset Data',
         yourName:'Your name', placePlaceholder:'Example: Hyderabad', latitudePlaceholder:'17.3850', longitudePlaceholder:'78.4867', contactNamePlaceholder:'Ex: Ramesh Sharma', emailPlaceholder:'name@example.com', dobPlaceholder:'DD/MM/YYYY, HH:MM AM/PM', messagePlaceholder:'Write your question or message here...', chatPlaceholder:'e.g. Saturn, Rashi, Mars...', rashiEnPlaceholder:"Today's update in English...", rashiTePlaceholder:'ఈ రోజు రాశి సమాచారం...'
       },
       te: {
@@ -2061,8 +2189,8 @@
         galleryTag:'కాస్మిక్ అనుభవాలు', galleryTitle:'ఆస్ట్రోకాస్మోస్‌ను అన్వేషించండి', gallery1Title:'ఇంటరాక్టివ్ రాశి చక్రం', gallery1Desc:'12 రాశులను అన్వేషించి ఏ రాశినైనా ట్యాప్ చేసి చిన్న వివరణ చూడండి.', gallery1Btn:'రాశి చక్రం తెరవండి ↑', gallery2Title:'లైవ్ చంద్ర దశ', gallery2Desc:'బయటి API లేకుండా పరికరం తేదీ ఆధారంగా చంద్ర దశ విడ్జెట్ నవీకరించబడుతుంది.', gallery2Btn:'సంప్రదింపు చూడండి ↓', gallery3Title:'రోజువారీ రాశి ఫలాలు', gallery3Desc:'టెస్టింగ్ అడ్మిన్ ప్యానల్‌లో ప్రచురించిన 12 రాశుల తాజా సమాచారాన్ని చదవండి.', gallery3Btn:'రాశి ఫలాలు తెరవండి ↓', gallery4Title:'అందుబాటు సమయం', gallery4Desc:'అడ్మిన్ సెట్ చేసిన అపాయింట్‌మెంట్ తేదీ పరిధి మరియు అందుబాటు సమయాలను చూడండి.', gallery4Btn:'సమయం చూడండి ↓',
         contactTag:'ఆస్ట్రో డెస్క్‌ను సంప్రదించండి', contactTitle:'సంప్రదింపు & లొకేషన్', fullName:'పూర్తి పేరు', email:'ఇమెయిల్ చిరునామా', dob:'పుట్టిన తేదీ & సమయం (ఐచ్చికం)', message:'సందేశం / ప్రశ్న', whatsappSubmit:'💬 వాట్సాప్‌లో సందేశం పంపండి', formNote:'ℹ️ టెస్టింగ్ మోడ్: సందేశం స్థానికంగా సిద్ధమై డెమో వాట్సాప్ నంబర్‌లో తెరవబడుతుంది.', whatsappLabel:'వాట్సాప్', demoNumber:'+91 98765 43210 · డెమో', callLabel:'కాల్', demoNumber2:'+91 98765 43210 · డెమో', callNow:'ఇప్పుడే కాల్', locationLabel:'లొకేషన్', locationValue:'జూబ్లీ హిల్స్, హైదరాబాద్, తెలంగాణ', openWhatsApp:'వాట్సాప్ తెరవండి', openMaps:'గూగుల్ మ్యాప్స్ తెరవండి', availableTiming:'అందుబాటు సమయం',
         privacyTag:'డేటా విశ్వాసం & సమగ్రత', privacyTitle:'గోప్యతా విధానం', privacy1Title:'1. జాతక గోప్యత', privacy1Desc:'ఈ డెమోలో నమోదు చేసిన పుట్టిన వివరాలు బ్రౌజర్‌లో స్థానికంగా ప్రాసెస్ అవుతాయి; సైట్ వాటిని బాహ్య సర్వర్‌కు పంపదు.', privacy2Title:'2. 3D గ్రాఫిక్స్ & బ్రౌజర్ స్టోరేజ్', privacy2Desc:'లోకల్ డెమో ప్రాధాన్యతలు మరియు టెస్టింగ్ డేటా కోసం బ్రౌజర్ స్టోరేజ్ ఉపయోగించబడుతుంది; ఈ డెమోలో బాహ్య ట్రాకింగ్ లేదు.', privacy3Title:'3. క్విక్ గైడ్ ప్రాసెసింగ్', privacy3Desc:'FAQ గైడ్ బ్రౌజర్‌లోనే చిన్న కీవర్డ్ స్పందన వ్యవస్థతో డెమో కోసం పనిచేస్తుంది.',
-        moonLabel:'ప్రత్యక్ష చంద్ర స్థితి', footer:'© 2026 AstroCosmos 3D. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.', quickGuide:'క్విక్ ఆస్ట్రో గైడ్', quickGuideTitle:'క్విక్ ఆస్ట్రో గైడ్ (FAQ బాట్)', send:'పంపండి', mobileLanguage:'భాష మార్చండి',
-        testingMode:'టెస్టింగ్ మోడ్', adminTitle:'ఆస్ట్రోకాస్మోస్ అడ్మిన్ ప్యానల్', adminNoPassword:'ఇప్పటివరకు పాస్‌వర్డ్ రక్షణ లేదు · బ్రౌజర్ టెస్టింగ్ మాత్రమే.', rashiPublisher:'12 రాశుల ప్రచురణ', period:'కాల వ్యవధి', targetDate:'తేదీ / నెల / సంవత్సరం', rashiSelect:'రాశి', englishUpdate:'ఇంగ్లీష్ సమాచారం', teluguUpdate:'తెలుగు సమాచారం', imageUpload:'చిత్రం అప్లోడ్', saveRashi:'రాశి సమాచారం సేవ్', clearSelected:'ఎంచుకున్నది క్లియర్', availableDateTiming:'అందుబాటు తేదీ & సమయం', fromDate:'ప్రారంభ తేదీ', toDate:'ముగింపు తేదీ', startTime:'ప్రారంభ సమయం', endTime:'ముగింపు సమయం', saveAvailability:'అందుబాటు సమయం సేవ్', testingData:'టెస్టింగ్ డేటా', adminStorageNote:'రాశి సమాచారం, తేదీలు మరియు అప్లోడ్ చేసిన చిత్రాలు టెస్టింగ్ కోసం ఈ బ్రౌజర్ localStorageలో ఉంటాయి. ఇవి ఇతర సందర్శకుల పరికరాల్లో స్వయంగా ప్రచురించబడవు. పరికరాల మధ్య డేటా తరలించడానికి Export/Import ఉపయోగించండి.', ready:'సిద్ధంగా ఉంది.', exportJson:'JSON ఎక్స్‌పోర్ట్', importJson:'JSON ఇంపోర్ట్', resetData:'డేటా రీసెట్',
+        moonLabel:'ప్రత్యక్ష చంద్ర స్థితి', footer:'© 2026 AstroCosmos 3D. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.', quickGuide:'క్విక్ ఆస్ట్రో గైడ్', quickGuideTitle:'క్విక్ ఆస్ట్రో గైడ్ (FAQ బాట్)', send:'పంపండి', mobileLanguage:'భాష మార్చండి', installApp:'📲 ఇన్‌స్టాల్', adminLaunch:'⚙️ అడ్మిన్ ప్యానల్', themeLight:'☀️ లైట్', themeDark:'🌙 డార్క్',
+        testingMode:'టెస్టింగ్ మోడ్', adminTitle:'ఆస్ట్రోకాస్మోస్ అడ్మిన్ ప్యానల్', adminNoPassword:'ఇప్పటివరకు పాస్‌వర్డ్ రక్షణ లేదు · బ్రౌజర్ టెస్టింగ్ మాత్రమే.', rashiPublisher:'12 రాశుల ప్రచురణ', period:'కాల వ్యవధి', targetDate:'తేదీ / నెల / సంవత్సరం', rashiSelect:'రాశి (12 ఎంపికలు)', englishUpdate:'ఇంగ్లీష్ సమాచారం', teluguUpdate:'తెలుగు సమాచారం', imageUpload:'చిత్రం అప్లోడ్', saveRashi:'రాశి సమాచారం సేవ్', clearSelected:'ఎంచుకున్నది క్లియర్', availableDateTiming:'అందుబాటు తేదీ & సమయం', fromDate:'ప్రారంభ తేదీ', toDate:'ముగింపు తేదీ', startTime:'ప్రారంభ సమయం', endTime:'ముగింపు సమయం', saveAvailability:'అందుబాటు సమయం సేవ్', testingData:'టెస్టింగ్ డేటా', adminStorageNote:'రాశి సమాచారం, తేదీలు మరియు అప్లోడ్ చేసిన చిత్రాలు టెస్టింగ్ కోసం ఈ బ్రౌజర్ localStorageలో ఉంటాయి. ఇవి ఇతర సందర్శకుల పరికరాల్లో స్వయంగా ప్రచురించబడవు. పరికరాల మధ్య డేటా తరలించడానికి Export/Import ఉపయోగించండి.', ready:'సిద్ధంగా ఉంది.', exportJson:'JSON ఎక్స్‌పోర్ట్', importJson:'JSON ఇంపోర్ట్', resetData:'డేటా రీసెట్',
         yourName:'మీ పేరు', placePlaceholder:'ఉదాహరణ: హైదరాబాద్', latitudePlaceholder:'17.3850', longitudePlaceholder:'78.4867', contactNamePlaceholder:'ఉదా: రమేష్ శర్మ', emailPlaceholder:'name@example.com', dobPlaceholder:'DD/MM/YYYY, HH:MM AM/PM', messagePlaceholder:'మీ ప్రశ్న లేదా సందేశం ఇక్కడ రాయండి...', chatPlaceholder:'ఉదా: శని, రాశి, కుజుడు...', rashiEnPlaceholder:'ఈ రోజు ఇంగ్లీష్ సమాచారం...', rashiTePlaceholder:'ఈ రోజు రాశి సమాచారం...'
       }
     };
@@ -2111,6 +2239,43 @@
       } else if(moonName && currentLanguage==='en' && moonName.getAttribute('data-en-phase')) moonName.textContent=moonName.getAttribute('data-en-phase');
       const chatWelcome=document.getElementById('chat-welcome'); if(chatWelcome) chatWelcome.textContent=currentLanguage==='te'?'నమస్కారం! 🙏 రాశి లేదా గ్రహం గురించి ప్రాథమిక సమాచారం కోసం కింద టైప్ చేయండి.':'Hello! 🙏 Ask about a rashi or planet for basic AstroCosmos demo information.';
     }
+
+    function updateClocks() {
+      const now = new Date();
+      const timeIndia = new Intl.DateTimeFormat(currentLanguage === 'te' ? 'te-IN' : 'en-IN', {
+        timeZone:'Asia/Kolkata', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true
+      }).format(now);
+      const timeUTC = new Intl.DateTimeFormat(currentLanguage === 'te' ? 'te-IN' : 'en-IN', {
+        timeZone:'UTC', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true
+      }).format(now);
+      const dateNow = new Intl.DateTimeFormat(currentLanguage === 'te' ? 'te-IN' : 'en-IN', {
+        timeZone:'Asia/Kolkata', weekday:'short', day:'2-digit', month:'short', year:'numeric'
+      }).format(now);
+      setText('india-time', timeIndia);
+      setText('world-time', timeUTC);
+      setText('live-date', dateNow);
+    }
+
+    function toggleTheme() {
+      const next = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+      document.body.classList.toggle('light-theme', next === 'light');
+      localStorage.setItem('astrocosmos-theme', next);
+      applyThemeButton();
+    }
+    function applyThemeButton() {
+      const btn=document.getElementById('theme-toggle');
+      if(!btn) return;
+      const light=document.body.classList.contains('light-theme');
+      btn.textContent = light ? t('themeDark') : t('themeLight');
+      btn.setAttribute('aria-pressed', light ? 'true':'false');
+      btn.title = light ? t('themeDark') : t('themeLight');
+    }
+    function initTheme() {
+      const saved=localStorage.getItem('astrocosmos-theme');
+      document.body.classList.toggle('light-theme', saved === 'light');
+      applyThemeButton();
+    }
+
     function toggleLanguage() {
       currentLanguage = currentLanguage === 'en' ? 'te' : 'en';
       localStorage.setItem('astrocosmos-language', currentLanguage);
@@ -2130,6 +2295,7 @@
       const periodSelect=document.getElementById('admin-rashi-period');
       if(periodSelect){ const cur=periodSelect.value; periodSelect.options[0].text=t('dailyTab'); periodSelect.options[1].text=t('monthlyTab'); periodSelect.options[2].text=t('yearlyTab'); periodSelect.value=cur; }
       updateClocks();
+      applyThemeButton();
     }
 
     // Keep the existing interactive zodiac behavior intact while translating the displayed text after interaction.
@@ -2466,6 +2632,7 @@
     // =========================================================
     // PAGE INIT
     // =========================================================
+    initTheme();
     applyLanguage();
     updateClocks();
     setInterval(updateClocks, 1000);
